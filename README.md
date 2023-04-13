@@ -1,2 +1,2 @@
-# pdm_aulas_2023_1
-Projeto com o que está sendo trabalhado em sala de aula.
+# Farmanage
+Projeto de conclusão de curso, utilizando React Native para o front-end e o Firebase como back-end as service.
