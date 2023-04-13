@@ -2,11 +2,6 @@ import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 
-<<<<<<< HEAD
-=======
-import {COLORS} from '../assets/colors';
-
->>>>>>> 069b065aebb480c38b0d03f7e934e55b231fc405
 export const LoadingArea = styled.View`
   position: absolute;
   left: 0;

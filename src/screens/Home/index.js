@@ -39,27 +39,8 @@ const Home = ({navigation}) => {
       }),
     );
   };
-
-  const animais = () => {
-    navigation.navigate('Animais');
-  };
-
-
-  const incrementar = () => {
-    setCont(cont + 1);
-  };
-
-  const decrementar = () => {
-    setCont(cont - 1);
-  };
-
-
   return (
     <View>
-      <Text>Contador: {cont}</Text>
-      <MyButtom text="Incrementar" onClick={incrementar} />
-      <MyButtom text="Decrementar" onClick={decrementar} />
-      <MyButtom text="Animais" onClick={animais} />
       <MyButtom text="SignOut" onClick={signOut} />
     </View>
   );

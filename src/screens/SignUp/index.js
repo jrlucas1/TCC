@@ -7,7 +7,6 @@ import { AuthContext } from '../../context/AuthProvider';
 import Loading from '../../components/Loading';
 
 
-<<<<<<< HEAD
 const SignUp = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -53,14 +52,5 @@ return (
   </View>
 );
   };
-=======
-const SignUp = () => {
-  return (
-    <View>
-      <Text>SignUp</Text>
-    </View>
-  );
-};
->>>>>>> 069b065aebb480c38b0d03f7e934e55b231fc405
 
 export default SignUp;

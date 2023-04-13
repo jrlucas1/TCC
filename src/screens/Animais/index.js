@@ -1,81 +1,49 @@
-import React, { useState, useContext } from 'react';
-import { View} from 'react-native';
-import MyButtom from '../../components/MyButtom';
-import {TextInput } from './styles';
-import {Text} from './styles';
+import React, { useEffect, useState, useContext } from 'react';
+import { CommonActions } from '@react-navigation/native';
 import { AnimaisContext } from '../../context/AnimaisProvider';
-import Loading from '../../components/Loading';
+import Item from './Item';
+import {Container, FlatList} from './styles';
 
 
 const Animais = ({ navigation }) => {
-    const [uid, setUid] = useState('');
-    const [nome, setNome] = useState('');
-    const [sexo, setSexo] = useState('');
-    const [idade, setIdade] = useState('');
-    const [peso, setPeso] = useState('');
-    const [situacao, setSituacao] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+    const {animais} = useContext(AnimaisContext);
+    useEffect(() => {
+        setData(animais); 
+    }, [animais]);
 
-    const {saveAnimais} = useContext(AnimaisContext);
-
-
-    const salvar = async () => {
-        if(nome && sexo && idade && peso && situacao){
-            let animal = {}
-            animal.uid = uid;
-            animal.nome = nome;
-            animal.sexo = sexo;
-            animal.idade = idade;
-            animal.peso = peso;
-            animal.situacao = situacao;
-            console.log(animal)
-            if(await saveAnimais(animal)){
-                Alert.alert('O animal foi inserido com sucesso!')
-            }
-
-        }
-    }
-
-    const voltar = () =>{
-        navigation.navigate('Home');
+    const routeCourse = (item) => {
+        console.log(item)
+        navigation.dispatch(
+            CommonActions.navigate({
+                name: 'Animal',
+                params: { animal: item },
+            }),
+        );
     };
-    return (
-        <View>
-            <TextInput
-                placeholder="Nome"
-                keyboardType="default"
-                returnKeyType="next"
-                onChangeText={t => setNome(t)}
-            />
-            <TextInput
-                placeholder="Sexo"
-                keyboardType="default"
-                returnKeyType="next"
-                onChangeText={t => setSexo(t)}
-            />
-            <TextInput
-                placeholder="Idade"
-                keyboardType="default"
-                returnKeyType="next"
-                onChangeText={t => setIdade(t)}
-            />
-            <TextInput
-                placeholder="Peso"
-                keyboardType="default"
-                returnKeyType="next"
-                onChangeText={t => setPeso(t)}
-            />
-            <TextInput
-                placeholder="Situação"
-                keyboardType="default"
-                returnKeyType="next"
-                onChangeText={t => setSituacao(t)}
-            />
-            <MyButtom text="Cadastrar animal" onClick={salvar} />
-            <MyButtom text="Voltar" onClick={voltar} />
 
-        </View>
+    const routeAddAnimal = () => {
+        console.log("Olá")
+        navigation.dispatch(
+            CommonActions.navigate({
+                name: 'Animal',
+                params: { Animal: null },
+            }),
+        );
+    };
+
+    const renderItem = ({ item }) => (
+        <Item item={item} onPress={() => routeCourse(item)} />
+    );
+
+    return (
+        <Container>
+            <FlatList
+                data={data}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.uid}
+            />
+        </Container>
     );
 };
-
 export default Animais;
