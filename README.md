@@ -1,5 +1,5 @@
 # Farmanage
-Farmanage é um aplicativo de gerenciamento de fazendas, desenvolvido em React Native e integrado com o Firebase. O aplicativo é focado na plataforma Android e permite que os usuários monitorem e gerenciem suas fazendas, rastreiem atividades agrícolas, gerenciem animais e façam o acompanhamento de produção de forma eficiente.
+Farmanage é um aplicativo de gerenciamento de fazendas, desenvolvido em React Native e integrado com o Firebase. O aplicativo é focado na plataforma Android e permite que os usuários monitorem e gerenciem suas fazendas, rastreiem atividades pecuárias, gerenciem animais e façam o acompanhamento de produção de forma eficiente.
 
 ## Recursos Principais
 Cadastro e autenticação de usuários com integração ao Firebase Authentication.
