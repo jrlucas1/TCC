@@ -4,9 +4,9 @@ Farmanage é um aplicativo de gerenciamento de fazendas, desenvolvido em React N
 ## Recursos Principais
 Cadastro e autenticação de usuários com integração ao Firebase Authentication.
 Gerenciamento de fazendas, com criação, edição e exclusão de fazendas.
-Rastreamento de atividades agrícolas, como plantio, colheita, adubação, entre outros.
+Rastreamento de atividades pecuárias.
 Gerenciamento de animais, com registro de informações sobre animais presentes na fazenda.
-Acompanhamento de produção, com registro de quantidade de produtos colhidos ou produzidos.
+Acompanhamento de produção.
 Interface de usuário intuitiva e amigável, com navegação fluida e fácil.
 ## Instalação
 Siga os passos abaixo para configurar e executar o aplicativo Farmanage em seu ambiente de desenvolvimento:
