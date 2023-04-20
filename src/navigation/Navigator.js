@@ -28,9 +28,7 @@ const AppStack = () => {
     return (
         <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
             <Tab.Screen component={Home} name="Home" options={{
-                tabBarIcon: () => {
-                    <Icon name="home-sharp" color="#000"/>
-                }
+                tabBarIcon: () => <Icon name="home-sharp" color="#000"/>
             }} />
             <Tab.Screen component={Animal} name="Animal" />
             <Tab.Screen component={Animais} name="Animais" />
