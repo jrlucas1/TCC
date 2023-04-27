@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Alert } from 'react-native';
+import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButtom from '../../components/MyButtom';
 import { TextInput } from './styles';
@@ -50,7 +50,7 @@ const Animal = ({ route, navigation }) => {
             animal.situacao = situacao;
             console.log(animal)
             if (await saveAnimais(animal)) {
-                Alert.alert('O animal foi inserido com sucesso!')
+                ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
             }
 

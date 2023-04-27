@@ -53,9 +53,10 @@ export const AnimaisProvider = ({ children }) => {
                 },
                 { merge: true },
             )
-                showToast('Dados salvos.');
+                return true;
         }catch(error){
             console.log("AnimaisProvider, saveAnimais:" + error);
+            return false;
         }
     };
 

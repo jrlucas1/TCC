@@ -30,7 +30,7 @@ const AppStack = () => {
             <Tab.Screen component={Home} name="Home" options={{
                 tabBarIcon: () => <Icon name="home-sharp" color="#000"/>
             }} />
-            <Tab.Screen component={Animal} name="Animal" />
+            
             <Tab.Screen component={Animais} name="Animais" />
         </Tab.Navigator >
     );
@@ -44,6 +44,7 @@ const Navigator = () => {
                         screenOptions={{ headerShown: false }}>
                         <Stack.Screen component={AuthStack} name="AuthStack" />
                         <Stack.Screen component={AppStack} name="AppStack" />
+                        <Stack.Screen component={Animal} name="Animal" />
                     </Stack.Navigator>
                 </NavigationContainer>
     );
