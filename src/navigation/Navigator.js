@@ -8,6 +8,8 @@ import Preload from '../screens/Preload';
 import SignUp from '../screens/SignUp';
 import Animal from '../screens/Animal';
 import Animais from '../screens/Animais';
+import Atividade from '../screens/Atividade';
+import Atividades from '../screens/Atividades';
 import ResetPassWord from '../screens/ResetPassWord';
 import Icon from 'react-native-vector-icons/Ionicons'
 const Tab = createBottomTabNavigator();
@@ -32,6 +34,7 @@ const AppStack = () => {
             }} />
             
             <Tab.Screen component={Animais} name="Animais" />
+            <Tab.Screen component={Atividades} name="Atividades" />
         </Tab.Navigator >
     );
 };
@@ -45,6 +48,7 @@ const Navigator = () => {
                         <Stack.Screen component={AuthStack} name="AuthStack" />
                         <Stack.Screen component={AppStack} name="AppStack" />
                         <Stack.Screen component={Animal} name="Animal" />
+                        <Stack.Screen component={Atividade} name="Atividade" />
                     </Stack.Navigator>
                 </NavigationContainer>
     );
