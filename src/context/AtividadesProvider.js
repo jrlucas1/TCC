@@ -33,8 +33,6 @@ export const AtividadeProvider = ({ children }) => {
                     let k = d.name.split(
                         'projects/farmanage-4c4c8/databases/(default)/documents/atividades/',
                     );
-                    console.log(d.fields);
-                    console.log(k);
                     data.push({
                         desc: d.fields.desc.stringValue,
                         valor: d.fields.valor.stringValue,
@@ -51,34 +49,6 @@ export const AtividadeProvider = ({ children }) => {
             console.log(response);
         }
     };
-
-    // const getCompanies = async () => {
-    //   const unsubscribe = firestore()
-    //     .collection('companies')
-    //     .orderBy('nome')
-    //     .onSnapshot(
-    //       //inscrevendo um listener
-    //       (querySnapshot) => {
-    //         let d = [];
-    //         querySnapshot.forEach((doc) => {
-    //           // doc.data() is never undefined for query doc snapshots
-    //           //console.log(doc.id, ' => ', doc.data());
-    //           const val = {
-    //             uid: doc.id,
-    //             nome: doc.data().nome,
-    //             tecnologias: doc.data().tecnologias,
-    //           };
-    //           d.push(val);
-    //         });
-    //         //console.log(d);
-    //         setCompanies(d);
-    //       },
-    //       (e) => {
-    //         console.error('CompanyProvider, getCompanies: ' + e);
-    //       },
-    //     );
-    //   return unsubscribe;
-    // };
 
     const saveAtividade = async (val) => {
         try {
@@ -102,24 +72,6 @@ export const AtividadeProvider = ({ children }) => {
         }
     };
 
-    // const saveCompany = async (val) => {
-    //   await firestore()
-    //     .collection('companies')
-    //     .doc(val.uid)
-    //     .set(
-    //       {
-    //         nome: val.nome,
-    //         tecnologias: val.tecnologias,
-    //       },
-    //       {merge: true},
-    //     )
-    //     .then(() => {
-    //       showToast('Dados salvos.');
-    //     })
-    //     .catch((e) => {
-    //       console.error('CompanyProvider, saveCourse: ' + e);
-    //     });
-    // };
 
     const updateAtividade = async (val) => {
         //console.log(val);
@@ -137,8 +89,8 @@ export const AtividadeProvider = ({ children }) => {
             getAtividades();
         } catch (response) {
             setErrorMessage(response);
-            console.log('Erro ao updateCompany via API.');
-            console.log(response);
+            console.error('Erro ao updateAtividade via API.');
+            console.error(response);
         }
     };
 
@@ -153,20 +105,6 @@ export const AtividadeProvider = ({ children }) => {
             console.log(response);
         }
     };
-
-    // const deleteCompany = async (val) => {
-    //   firestore()
-    //     .collection('companies')
-    //     .doc(val)
-    //     .delete()
-    //     .then(() => {
-    //       showToast('Empresa excluída.');
-    //     })
-    //     .catch((e) => {
-    //       console.error('CompanyProvider, deleteCompany: ', e);
-    //     });
-    // };
-
 
     return (
         <AtividadeContext.Provider

@@ -19,8 +19,6 @@ export const ApiProvider = ({ children }) => {
                             headers: { Authorization: 'Bearer ' + idToken },
                         });
 
-                        //console.log(apiLocal);
-                        //utiliza o middleware para lançar um exceção (usa try-catch no consumidor)
                         apiLocal.addResponseTransform(response => {
                             if (!response.ok) {
                                 throw response;

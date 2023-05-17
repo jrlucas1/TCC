@@ -9,11 +9,13 @@ export default function Providers() {
     return (
         <AuthProvider>
             <ApiProvider>
-            <AnimaisProvider>
-                <AtividadeProvider>
-                <Navigator />
-                </AtividadeProvider>
-            </AnimaisProvider>
+                <AnimaisProvider>
+                    <AtividadeProvider>
+                        <PropiedadesProvider>
+                            <Navigator />
+                        </PropiedadesProvider>
+                    </AtividadeProvider>
+                </AnimaisProvider>
             </ApiProvider>
         </AuthProvider>
     )

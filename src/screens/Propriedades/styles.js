@@ -30,10 +30,10 @@ export const Div = styled.View`
 `;
 
 export const TextInput = styled.TextInput`
-  width: 80%;
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid;
-  margin-bottom: 10px;
-  border-radius: 25px;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid;
+    margin-bottom: 10px;
+    border-radius: 25px;
 `;

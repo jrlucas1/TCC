@@ -85,10 +85,6 @@ export const AuthProvider = ({ children }) => {
             });
     };
 
-    const sendEmailVerification = async () => {
-        // implemente aqui a função de envio de email de verificação
-    };
-
     return (
         <AuthContext.Provider
             value={{
@@ -97,7 +93,6 @@ export const AuthProvider = ({ children }) => {
                 signOut,
                 user,
                 resetPassword,
-                sendEmailVerification,
             }}
         >
             {children}

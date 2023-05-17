@@ -17,6 +17,7 @@ const Atividade = ({ route, navigation }) => {
 
     const { saveAtividade } = useContext(AtividadeContext);
     const { deleteAtividade } = useContext(AtividadeContext);
+    const { updateAtividade } = useContext(AtividadeContext);
 
     useEffect(() => {
         setDesc('');
@@ -45,11 +46,18 @@ const Atividade = ({ route, navigation }) => {
             atividade.valor = valor;
             atividade.dataSolicitacao = dataSolicitacao;
             atividade.dataFim = dataFim;
-            atividade.status = dataFim;
+            atividade.status = status;
             console.log(atividade)
-            if (await saveAtividade(atividade)) {
+            if (!uid){
+                if(await saveAtividade(atividade)){
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
+                }
+            }else{
+                if(await updateAtividade(atividade)){
+                    ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
+                    navigation.goBack();
+                }
             }
 
         }

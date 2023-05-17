@@ -3,10 +3,10 @@ import { create } from 'apisauce';
 import firestore from '@react-native-firebase/firestore'
 import { ToastAndroid } from 'react-native';
 
-export const AnimaisContext = createContext({});
+export const PropriedadesContext = createContext({});
 
-export const AnimaisProvider = ({ children }) => {
-    const [animais, setAnimais] = useState([]);
+export const PropriedadesProvider = ({ children }) => {
+    const [propriedades, setPropriedades] = useState([]);
     const showToast = (message) => {
         ToastAndroid.show(message, ToastAndroid.SHORT);
     };
@@ -14,7 +14,7 @@ export const AnimaisProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = 
             firestore()
-            .collection('animais')
+            .collection('propriedades')
             .orderBy('nome')
             .onSnapshot(
                 snapShot => {
@@ -23,65 +23,63 @@ export const AnimaisProvider = ({ children }) => {
                         const val = ({
                             uid: doc.id,
                             nome: doc.data().nome,
-                            sexo: doc.data().sexo,
-                            idade: doc.data().idade,
-                            peso: doc.data().peso,
-                            situacao: doc.data().situacao
+                            latitude: doc.data().latitude,
+                            longitude: doc.data().longitude,
+                            descricao: doc.data().descricao,
                         });
                         data.push(val)
                     });
-                    setAnimais(data);
+                    setPropriedades(data);
                 },
                 (e) => {
-                    console.error('AnimaisProvider, getAnimais: ' + e);
+                    console.error('PropriedadesProvider, getPropriedades: ' + e);
                 },
             );
         return unsubscribe;
     });
-    const saveAnimais = async (val) => {        
+    const savePropriedade = async (val) => {        
         try{
         await firestore()
-            .collection('animais')
+            .collection('propriedades')
             .doc(val.uid)
             .set(
                 {
                     nome: val.nome,
-                    sexo: val.sexo,
-                    idade: val.idade,
-                    peso: val.peso,
-                    situacao: val.situacao
+                    latitude: val.latitude,
+                    longitude: val.longitude,
+                    descricao: val.descricao,
                 },
                 { merge: true },
             )
                 return true;
         }catch(error){
-            console.log("AnimaisProvider, saveAnimais:" + error);
+            console.log("PropriedadesProvider, savePropriedades:" + error);
             return false;
         }
     };
 
-    const deleteAnimais = async (val) => {
+    const deletePropriedade = async (val) => {
         firestore()
-            .collection('animais')
+            .collection('propriedades')
             .doc(val)
             .delete()
             .then(() => {
-                showToast('Animal excluído.');
+                showToast('Propriedade excluída.');
             })
             .catch((e) => {
-                console.error('AnimalProvider, deleteAnimais: ', e);
+                console.error('PropriedadesProvider, deletePropriedades: ', e);
             });
     };
 
     return (
-        <AnimaisContext.Provider
+        <PropriedadesContext.Provider
             value={{
-                animais,
-                saveAnimais,
-                deleteAnimais
+                propriedades,
+                savePropriedade,
+                deletePropriedade
             }}
         >
             {children}
-        </AnimaisContext.Provider>
+        </PropriedadesContext.Provider>
     );
 }

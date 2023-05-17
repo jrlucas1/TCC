@@ -35,6 +35,7 @@ const AppStack = () => {
             
             <Tab.Screen component={Animais} name="Animais" />
             <Tab.Screen component={Atividades} name="Atividades" />
+            <Tab.Screen component={Propriedades} name ="Propriedades"/>
         </Tab.Navigator >
     );
 };
@@ -49,6 +50,7 @@ const Navigator = () => {
                         <Stack.Screen component={AppStack} name="AppStack" />
                         <Stack.Screen component={Animal} name="Animal" />
                         <Stack.Screen component={Atividade} name="Atividade" />
+                        <Stack.Screen component={Propiedade} name="Propiedade"/>
                     </Stack.Navigator>
                 </NavigationContainer>
     );
