@@ -45,11 +45,10 @@ const MapProprideadesTap = () => {
                     );
                 }}
                 initialRegion={{
-                    //região onde deve focar o mapa na inicialização
                     latitude: -31.766108372781073,
                     longitude: -52.35215652734042,
-                    latitudeDelta: 0.015, //baseado na documentação
-                    longitudeDelta: 0.0121, //baseado na documentação
+                    latitudeDelta: 0.015, 
+                    longitudeDelta: 0.0121, 
                 }}>
                 {markers.map((marker) => {
                     return (

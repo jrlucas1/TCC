@@ -58,7 +58,7 @@ const Animais = ({ navigation }) => {
 
     return (
         <Container>
-            <TextInput placeholder="search"
+            <TextInput placeholder="Search"
                 onChangeText={filterByName} />
             <FlatList
                 data={animaisTemp.length > 0 ? animaisTemp : data}

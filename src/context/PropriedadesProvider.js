@@ -3,6 +3,7 @@ import { create } from 'apisauce';
 import firestore from '@react-native-firebase/firestore'
 import { ToastAndroid } from 'react-native';
 
+
 export const PropriedadesContext = createContext({});
 
 export const PropriedadesProvider = ({ children }) => {
@@ -10,6 +11,7 @@ export const PropriedadesProvider = ({ children }) => {
     const showToast = (message) => {
         ToastAndroid.show(message, ToastAndroid.SHORT);
     };
+
 
     useEffect(() => {
         const unsubscribe = 

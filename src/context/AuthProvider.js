@@ -1,15 +1,14 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore'
 import { CommonActions } from '@react-navigation/native';
-
+import messaging from '@react-native-firebase/messaging'
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    
     const storeUserSession = async (email, pass) => {
         try {
             await EncryptedStorage.setItem(
@@ -24,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    
+
     const signIn = async (email, pass) => {
         try {
             await auth().signInWithEmailAndPassword(email, pass)
@@ -33,6 +32,7 @@ export const AuthProvider = ({ children }) => {
                 auth.signOut();
                 return false;
             } else {
+
                 setUser(auth().currentUser);
                 return true;
             }

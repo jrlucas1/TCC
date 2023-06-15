@@ -4,24 +4,23 @@ import { CommonActions } from '@react-navigation/native';
 import { Container, FlatList } from './styles';
 import Item from './Item';
 import AddFloatButton from '../../components/AddFloatButton';
-import { PropiedadesContext } from '../../context/PropiedadesProvider';
+import { PropriedadesContext } from '../../context/PropriedadesProvider';
 
 const PropriedadesTab = ({ navigation }) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const { propriedade } = useContext(PropiedadesContext);
+    const { propriedades } = useContext(PropriedadesContext);
 
     useEffect(() => {
-        setData(propiedades); //pega os cursos que estão cacheados no FirebaseContext (Preload os carregou)
-        setLoading(false);
-    }, [propiedades]);
+        setData(propriedades);
+    
+    }, [propriedades]);
 
     const routePropriedade = (item) => {
         //console.log(item);
         navigation.dispatch(
             CommonActions.navigate({
-                name: 'propriedade',
-                params: { propiedade: item },
+                name: 'Propriedade',
+                params: { propriedade: item },
             }),
         );
     };
@@ -29,8 +28,8 @@ const PropriedadesTab = ({ navigation }) => {
     const routeAddPropriedade = () => {
         navigation.dispatch(
             CommonActions.navigate({
-                name: 'Propiedade',
-                params: { propiedade: null },
+                name: 'Propriedade',
+                params: { propriedade: null },
             }),
         );
     };
@@ -47,7 +46,6 @@ const PropriedadesTab = ({ navigation }) => {
                 keyExtractor={(item) => item.uid}
             />
             <AddFloatButton onClick={routeAddPropriedade} />
-            {loading && <Loading />}
         </Container>
     );
 };

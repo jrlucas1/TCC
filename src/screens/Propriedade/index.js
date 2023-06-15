@@ -13,13 +13,12 @@ const Propriedade = ({ route, navigation }) => {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [loading, setLoading] = useState(true);
+
 
     const {savePropriedade} = useContext(PropriedadesContext);
     const {deletePropriedade} = useContext(PropriedadesContext);
 
     useEffect(() => {
-        console.log(peso);
         setNome('');
         setLatitude('');
         setLongitude('');
@@ -47,7 +46,7 @@ const Propriedade = ({ route, navigation }) => {
             propriedade.descricao = descricao;
 
             console.log(propriedade)
-            if (await saveAnimais(propriedade)) {
+            if (await savePropriedade(propriedade)) {
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
             }
@@ -82,21 +81,21 @@ const Propriedade = ({ route, navigation }) => {
                 onChangeText={t => setNome(t)}
             />
             <TextInput
-                placeholder="Sexo"
+                placeholder="Latitude"
                 keyboardType="default"
                 returnKeyType="next"
                 value={latitude}
                 onChangeText={t => setLatitude(t)}
             />
             <TextInput
-                placeholder="Idade"
+                placeholder="Longitude"
                 keyboardType="default"
                 returnKeyType="next"
                 value={longitude}
                 onChangeText={t => setLongitude(t)}
             />
             <TextInput
-                placeholder="Idade"
+                placeholder="Descricao"
                 keyboardType="default"
                 returnKeyType="next"
                 value={descricao}

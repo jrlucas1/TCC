@@ -7,9 +7,11 @@ import app from '@react-native-firebase/app';
 import { CommonActions } from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage'
 
+
 const Home = ({navigation}) => {
   const [cont, setCont] = useState(0);
 
+ 
   async function removeUserSession() {
     try {
         await EncryptedStorage.removeItem("user_session");

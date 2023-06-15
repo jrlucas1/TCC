@@ -11,7 +11,10 @@ import Animais from '../screens/Animais';
 import Atividade from '../screens/Atividade';
 import Atividades from '../screens/Atividades';
 import ResetPassWord from '../screens/ResetPassWord';
+import Propriedade from '../screens/Propriedade';
+import Propriedades from '../screens/Propriedades'
 import Icon from 'react-native-vector-icons/Ionicons'
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -33,9 +36,15 @@ const AppStack = () => {
                 tabBarIcon: () => <Icon name="home-sharp" color="#000"/>
             }} />
             
-            <Tab.Screen component={Animais} name="Animais" />
-            <Tab.Screen component={Atividades} name="Atividades" />
-            <Tab.Screen component={Propriedades} name ="Propriedades"/>
+            <Tab.Screen component={Animais} name="Animais" options={{
+                tabBarIcon: () => <Icon2 name="cow" color="#000"/>
+            }}/>
+            <Tab.Screen component={Atividades} name="Atividades" options={{
+                tabBarIcon: () => <Icon2 name="playlist-plus" color="#000"/>
+            }}/>
+            <Tab.Screen component={Propriedades} name ="Propriedades" options={{
+                tabBarIcon: () => <Icon2 name="home-group" color="#000"/>
+            }}/>
         </Tab.Navigator >
     );
 };
@@ -50,10 +59,12 @@ const Navigator = () => {
                         <Stack.Screen component={AppStack} name="AppStack" />
                         <Stack.Screen component={Animal} name="Animal" />
                         <Stack.Screen component={Atividade} name="Atividade" />
-                        <Stack.Screen component={Propiedade} name="Propiedade"/>
+                        <Stack.Screen component={Propriedade} name="Propriedade"/>
                     </Stack.Navigator>
                 </NavigationContainer>
     );
 };
+
+
 
 export default Navigator;

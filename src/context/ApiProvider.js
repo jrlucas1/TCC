@@ -6,7 +6,7 @@ export const ApiContext = createContext({});
 
 export const ApiProvider = ({ children }) => {
     const [api, setApi] = useState(null);
-
+   
     const getApi = async () => {
         if (auth().currentUser) {
             auth()
