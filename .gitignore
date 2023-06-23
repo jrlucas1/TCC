@@ -70,3 +70,4 @@ yarn-error.log
 google-services.json
 AndroidManifest.xml
 GoogleService-Info.plist
+/android/src/main/AndroidManifest.xml
