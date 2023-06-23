@@ -21,21 +21,12 @@ export const MessagingProvider = ({ children }) => {
                 messaging().subscribeToTopic('peao');
                 messaging().unsubscribeFromTopic('proprietario');
             }
-            else if (documentSnapshot.data().perfil === "proprietario") {
+            else if (documentSnapshot.data().perfil === "proprietário") {
                 messaging().subscribeToTopic('proprietario');
                 messaging().unsubscribeFromTopic('peao');
             }
         });
 
-    useEffect(() => {
-        messaging().onMessage(async remoteMessage => {
-            Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-            if(remoteMessage){
-                setNav(remoteMessage.data.route)
-            }
-        });
-
-    }, []);
 
 
     async function saveTokenToDatabase(token) {
@@ -75,8 +66,7 @@ export const MessagingProvider = ({ children }) => {
             setNav(remoteMessage.data.route);
     });
 
-
-    useEffect(() => {
+    function onMessage(navigation){
         messaging().onMessage(async remoteMessage => {
             console.log(
                 'Notification recebida com o app aberto (activity na tela): ',
@@ -84,27 +74,28 @@ export const MessagingProvider = ({ children }) => {
             );
             if (remoteMessage) {
                 switch (remoteMessage.data.route) {
-                    case '1':
+                    case 'proprietario':
                         Alert.alert('admin', 'Tópico: ' + remoteMessage.data.route, [
-                            { text: 'ir', onPress: () => { setNav(remoteMessage.data.route) } },
+                            { text: 'ir', onPress: () => { navigation.navigate("Animais")}},
                             { text: 'não', onPress: () => { } },
                         ]);
                         break;
-                    case '2':
+                    case 'peao':
                         Alert.alert('user', 'Tópico: ' + remoteMessage.data.route, [
-                            { text: 'ir', onPress: () => { setNav(remoteMessage.data.route) } },
+                            { text: 'ir', onPress: () => { navigation.navigate("Atividades") } },
                             { text: 'não', onPress: () => { } },
                         ]);
                         break;
                 }
             }
         });
-    })
+    }
 
     return (
         <MessagingContext.Provider
             value={{
                 nav,
+                onMessage
             }}
         >
             {children}

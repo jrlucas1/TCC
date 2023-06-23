@@ -31,7 +31,7 @@ const AuthStack = () => {
 
 const AppStack = () => {
     return (
-        <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+        <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen component={Home} name="Home" options={{
                 tabBarIcon: () => <Icon name="home-sharp" color="#000"/>
             }} />

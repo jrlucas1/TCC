@@ -11,6 +11,11 @@ import { TabActions } from '@react-navigation/native';
 const Preload = ({ navigation }) => {
 
   const { nav } = useContext(MessagingContext);
+  const {onMessage} = useContext(MessagingContext);
+
+  useEffect(()=>{
+    onMessage(navigation);
+  }, [onMessage])
 
   PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS)
 
@@ -33,11 +38,16 @@ const Preload = ({ navigation }) => {
           userSession.pass,
         );
         switch (nav) {
-          case '1':
+          case 'peao':
             navigation.navigate('AppStack',
               { screen: 'Atividades' }
             );
             break;
+          
+          case 'proprietario':
+            navigation.navigate('AppStack', 
+            {screen: 'Propriedades'});
+            break
 
           default:
             console.log("Default")
