@@ -5,8 +5,9 @@ const Item = ({ item, onPress }) => {
     return (
         <Button onPress={onPress} underlayColor="transparent">
             <>
-                <Text>{item.nome}</Text>
+                
                 <Div>
+                    <Text>{item.nome}</Text>
                     <TextMenor>{item.idade} meses</TextMenor>
                     <TextMenor>{item.sexo}</TextMenor>
                     <TextMenor>{item.peso} Kg </TextMenor>

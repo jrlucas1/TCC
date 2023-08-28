@@ -17,16 +17,16 @@ export const Button = styled.TouchableHighlight`
     border-radius: 10px;
 `;
 export const Text = styled.Text`
-    font-size: 32px;
+    font-size: 16px;
 `;
 export const TextMenor = styled.Text`
     font-size: 16px;
-
 `
 export const Div = styled.View`
-    width: 100%;
-    height: 50px;
     flex-direction: column;
+    backgroundColor: #C5D8A4
+    border-radius: 10%;
+
 `;
 
 export const TextInput = styled.TextInput`

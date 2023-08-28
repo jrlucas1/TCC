@@ -11,7 +11,6 @@ export const MessagingProvider = ({ children }) => {
 
     const [nav, setNav] = useState("");
 
-
     firestore()
         .collection('users')
         .doc(auth().currentUser.uid)
@@ -26,7 +25,6 @@ export const MessagingProvider = ({ children }) => {
                 messaging().unsubscribeFromTopic('peao');
             }
         });
-
 
 
     async function saveTokenToDatabase(token) {

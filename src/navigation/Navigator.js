@@ -31,19 +31,25 @@ const AuthStack = () => {
 
 const AppStack = () => {
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator 
+        screenOptions={{ headerShown: false, 
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: 'black',
+        tabBarStyle:{
+            backgroundColor: '#C5D8A4'
+        }}}>
             <Tab.Screen component={Home} name="Home" options={{
-                tabBarIcon: () => <Icon name="home-sharp" color="#000"/>
+                tabBarIcon: () => <Icon name="home-sharp" color="#FFF" size ={25}/>
             }} />
             
             <Tab.Screen component={Animais} name="Animais" options={{
-                tabBarIcon: () => <Icon2 name="cow" color="#000"/>
+                tabBarIcon: () => <Icon2 name="cow" color="#FFF" size ={25} />
             }}/>
             <Tab.Screen component={Atividades} name="Atividades" options={{
-                tabBarIcon: () => <Icon2 name="playlist-plus" color="#000"/>
+                tabBarIcon: () => <Icon2 name="playlist-plus" color="#FFF" size ={25}/>
             }}/>
             <Tab.Screen component={Propriedades} name ="Propriedades" options={{
-                tabBarIcon: () => <Icon2 name="home-group" color="#000"/>
+                tabBarIcon: () => <Icon2 name="home-group" color="#FFF" size ={25}/>
             }}/>
         </Tab.Navigator >
     );
