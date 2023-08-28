@@ -16,16 +16,16 @@ export const Button = styled.TouchableHighlight`
     margin-top: 10px;
     border-radius: 10px;
 `;
-export const Text = styled.Text`
-    font-size: 16px;
-`;
 export const TextMenor = styled.Text`
     font-size: 16px;
+    margin-left: 10px;
+    color: #000;
 `
 export const Div = styled.View`
     flex-direction: column;
-    backgroundColor: #C5D8A4
-    border-radius: 10%;
+    backgroundColor: #C5D8A4;
+    border-radius: 10px;
+    padding: 5px;
 
 `;
 

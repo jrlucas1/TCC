@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Text, Div, TextMenor } from './styles';
+import { Button, Div, TextMenor } from './styles';
 
 const Item = ({ item, onPress }) => {
     return (
@@ -7,7 +7,7 @@ const Item = ({ item, onPress }) => {
             <>
                 
                 <Div>
-                    <Text>{item.nome}</Text>
+                    <TextMenor>{item.nome}</TextMenor>
                     <TextMenor>{item.idade} meses</TextMenor>
                     <TextMenor>{item.sexo}</TextMenor>
                     <TextMenor>{item.peso} Kg </TextMenor>

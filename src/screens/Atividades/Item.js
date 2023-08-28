@@ -1,11 +1,10 @@
 import React from 'react';
-import { Button, Text, Div, TextMenor } from './styles';
+import { Button, Div, TextMenor } from './styles';
 
 const Item = ({ item, onPress }) => {
     return (
         <Button onPress={onPress} underlayColor="transparent">
             <>
-                <Text>{item.desc}</Text>
                 <Div>
                 <TextMenor>{item.desc} </TextMenor>
                 <TextMenor>R$ {item.valor}</TextMenor>

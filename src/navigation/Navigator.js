@@ -36,7 +36,7 @@ const AppStack = () => {
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'black',
         tabBarStyle:{
-            backgroundColor: '#C5D8A4'
+            backgroundColor: '#7B8C5D'
         }}}>
             <Tab.Screen component={Home} name="Home" options={{
                 tabBarIcon: () => <Icon name="home-sharp" color="#FFF" size ={25}/>
