@@ -22,6 +22,7 @@ export const AnimaisProvider = ({ children }) => {
             .collection("propriedades")
             .doc(propriedade)
             .collection("animais")
+            .orderBy("nome")
             .onSnapshot(
                 snapShot => {
                     let data = [];
@@ -48,6 +49,8 @@ export const AnimaisProvider = ({ children }) => {
     const saveAnimais = async (val) => {        
         try{
         await firestore()
+            .collection('propriedades')
+            .doc(propriedade)
             .collection('animais')
             .doc(val.uid)
             .set(
@@ -69,6 +72,8 @@ export const AnimaisProvider = ({ children }) => {
 
     const deleteAnimais = async (val) => {
         firestore()
+            .collection('propriedades')
+            .doc(propriedade)
             .collection('animais')
             .doc(val)
             .delete()

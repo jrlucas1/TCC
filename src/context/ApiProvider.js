@@ -1,12 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { create } from 'apisauce';
 import auth from '@react-native-firebase/auth';
+import { AuthContext } from './AuthProvider';
 
 export const ApiContext = createContext({});
 
 export const ApiProvider = ({ children }) => {
     const [api, setApi] = useState(null);
-   
+    const {propriedade} = useContext(AuthContext)
     const getApi = async () => {
         if (auth().currentUser) {
             auth()
@@ -15,7 +16,7 @@ export const ApiProvider = ({ children }) => {
                     if (idToken) {
                         const apiLocal = create({
                             baseURL:
-                                'https://firestore.googleapis.com/v1/projects/farmanage1/databases/(default)/documents/',
+                                `https://firestore.googleapis.com/v1/projects/farmanage1/databases/(default)/documents/propriedades/${propriedade}/`,
                             headers: { Authorization: 'Bearer ' + idToken },
                         });
 

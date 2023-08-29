@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { ToastAndroid } from 'react-native';
 
 import { ApiContext } from '../context/ApiProvider';
-import { createLogger } from 'vite';
+import { AuthContext } from './AuthProvider';
 
 import messaging from '@react-native-firebase/messaging';
 
@@ -12,7 +12,7 @@ export const AtividadeProvider = ({ children }) => {
     const [atividades, setAtividades] = useState([]);
     const [errorMessage, setErrorMessage] = useState({});
     const { api } = useContext(ApiContext);
-
+    const {propriedade} = useContext(AuthContext);
 
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export const AtividadeProvider = ({ children }) => {
             let data = [];
             response.data.documents.map((d) => {
                 let k = d.name.split(
-                    'projects/farmanage1/databases/(default)/documents/atividades/',
+                    `projects/farmanage1/databases/(default)/documents/propriedades/${propriedade}/atividades`,
                 );
                 data.push({
                     desc: d.fields.desc.stringValue,

@@ -26,7 +26,7 @@ export const Div = styled.View`
     backgroundColor: #C5D8A4;
     border-radius: 10px;
     padding: 5px;
-
+    align-itens: justify;
 `;
 
 export const TextInput = styled.TextInput`
