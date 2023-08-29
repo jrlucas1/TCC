@@ -9,6 +9,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [propriedade, setPropriedade] = useState('');
     const storeUserSession = async (email, pass) => {
         try {
             await EncryptedStorage.setItem(
@@ -25,17 +26,13 @@ export const AuthProvider = ({ children }) => {
 
     const getPropriedadesUser = async() => {
         try{
-           let propriedadeID =  await firestore()
+           
+            let documento =  await firestore()
             .collection('users')
            .doc(auth().currentUser.uid)
-           .get().then(documentSnapshot => {
-                if(documentSnapshot.data().propriedades){
-                    propriedadeID = documentSnapshot.data().propriedades;
-                }
-           }
-
-           );
-           console.log(propriedadeID);
+           .get();
+           
+           setPropriedade(documento.data().propriedade);
         }
         catch(error){
             console.error("AuthProvider: " + error);
@@ -105,6 +102,8 @@ export const AuthProvider = ({ children }) => {
             });
     };
 
+    getPropriedadesUser();
+
     return (
         <AuthContext.Provider
             value={{
@@ -113,7 +112,7 @@ export const AuthProvider = ({ children }) => {
                 signOut,
                 user,
                 resetPassword,
-                getPropriedadesUser
+                propriedade
             }}
         >
             {children}

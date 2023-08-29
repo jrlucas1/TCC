@@ -14,9 +14,8 @@ const Preload = ({ navigation }) => {
   const { nav } = useContext(MessagingContext);
   const {onMessage} = useContext(MessagingContext);
 
-  const{getPropriedadesUser} = useContext(AuthContext);
 
-  getPropriedadesUser();
+
 
   useEffect(()=>{
     onMessage(navigation);

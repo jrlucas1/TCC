@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { create } from 'apisauce';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import firestore from '@react-native-firebase/firestore'
+import { AuthContext } from './AuthProvider';
 import { ToastAndroid } from 'react-native';
 
 export const AnimaisContext = createContext({});
@@ -10,12 +10,18 @@ export const AnimaisProvider = ({ children }) => {
     const showToast = (message) => {
         ToastAndroid.show(message, ToastAndroid.SHORT);
     };
+    const {propriedade} = useContext(AuthContext);
+
+    
+ 
 
     useEffect(() => {
+       
         const unsubscribe = 
             firestore()
-            .collection('animais')
-            .orderBy('nome')
+            .collection("propriedades")
+            .doc(propriedade)
+            .collection("animais")
             .onSnapshot(
                 snapShot => {
                     let data = [];
@@ -36,6 +42,7 @@ export const AnimaisProvider = ({ children }) => {
                     console.error('AnimaisProvider, getAnimais: ' + e);
                 },
             );
+
         return unsubscribe;
     });
     const saveAnimais = async (val) => {        
