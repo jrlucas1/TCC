@@ -36,20 +36,22 @@ const AppStack = () => {
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'black',
         tabBarStyle:{
-            backgroundColor: '#7B8C5D'
+            backgroundColor: '#7B8C5D',
+            height: 60,
+            alignContent: 'center'
         }}}>
             <Tab.Screen component={Home} name="Home" options={{
-                tabBarIcon: () => <Icon name="home-sharp" color="#FFF" size ={25}/>
+                tabBarIcon: () => <Icon name="home-sharp" color="#FFF" size ={30}/>
             }} />
             
             <Tab.Screen component={Animais} name="Animais" options={{
-                tabBarIcon: () => <Icon2 name="cow" color="#FFF" size ={25} />
+                tabBarIcon: () => <Icon2 name="cow" color="#FFF" size ={30} align="center"/>
             }}/>
             <Tab.Screen component={Atividades} name="Atividades" options={{
-                tabBarIcon: () => <Icon2 name="playlist-plus" color="#FFF" size ={25}/>
+                tabBarIcon: () => <Icon2 name="playlist-plus" color="#FFF" size ={30}/>
             }}/>
             <Tab.Screen component={Propriedades} name ="Propriedades" options={{
-                tabBarIcon: () => <Icon2 name="home-group" color="#FFF" size ={25}/>
+                tabBarIcon: () => <Icon2 name="home-group" color="#FFF" size ={30}/>
             }}/>
         </Tab.Navigator >
     );

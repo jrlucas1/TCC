@@ -15,7 +15,7 @@ export const ApiProvider = ({ children }) => {
                     if (idToken) {
                         const apiLocal = create({
                             baseURL:
-                                'https://firestore.googleapis.com/v1/projects/farmanage-4c4c8/databases/(default)/documents/',
+                                'https://firestore.googleapis.com/v1/projects/farmanage1/databases/(default)/documents/',
                             headers: { Authorization: 'Bearer ' + idToken },
                         });
 

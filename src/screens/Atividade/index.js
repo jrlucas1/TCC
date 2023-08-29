@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButtom from '../../components/MyButtom';
-import { TextInput } from './styles';
+import { TextInput, Div} from './styles';
 import { Text } from './styles';
 import { AtividadeContext } from '../../context/AtividadesProvider';
 
@@ -82,8 +82,10 @@ const Atividade = ({ route, navigation }) => {
 
     return (
         <View>
+            <Div>
             <TextInput
                 placeholder="Descrição"
+                placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
                 value={desc}
@@ -91,6 +93,7 @@ const Atividade = ({ route, navigation }) => {
             />
             <TextInput
                 placeholder="Valor"
+                placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
                 value={valor}
@@ -98,6 +101,7 @@ const Atividade = ({ route, navigation }) => {
             />
             <TextInput
                 placeholder="Data da solicitação"
+                placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
                 value={dataSolicitacao}
@@ -105,6 +109,7 @@ const Atividade = ({ route, navigation }) => {
             />
             <TextInput
                 placeholder="Data do fim da atividade"
+                placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
                 value={dataFim}
@@ -112,6 +117,7 @@ const Atividade = ({ route, navigation }) => {
             />
             <TextInput
                 placeholder="Status"
+                placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
                 value={status}
@@ -119,6 +125,7 @@ const Atividade = ({ route, navigation }) => {
             />
             <MyButtom text="Salvar" onClick={salvar} />
             {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
+            </Div>
         </View>
     );
 };

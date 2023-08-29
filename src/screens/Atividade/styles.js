@@ -28,15 +28,20 @@ export const Div = styled.View`
     flex-direction: column;
     backgroundColor: #C5D8A4;
     border-radius: 10px;
-    padding: 5px;
-
+    padding: 10px;
+    margin: 10px;
+    justify-content: center;
+    align-itens: center;
 `;
 
 export const TextInput = styled.TextInput`
-  width: 80%;
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid;
-  margin-bottom: 10px;
-  border-radius: 25px;
+    width: 80%;
+    margin: 15px auto;
+    padding: 10px;
+    border: 1px solid;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    backgroundColor: white;
+    color: #206A5D;
+    textAlign: center;
 `;

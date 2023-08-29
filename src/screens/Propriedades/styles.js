@@ -19,7 +19,7 @@ export const Button = styled.TouchableHighlight`
 export const TextMenor = styled.Text`
     font-size: 16px;
     margin-left: 10px;
-    color: #fff;
+    color: #000;
 `
 export const Div = styled.View`
     flex-direction: column;

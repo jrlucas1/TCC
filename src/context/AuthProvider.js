@@ -23,6 +23,26 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const getPropriedadesUser = async() => {
+        try{
+           let propriedadeID =  await firestore()
+            .collection('users')
+           .doc(auth().currentUser.uid)
+           .get().then(documentSnapshot => {
+                if(documentSnapshot.data().propriedades){
+                    propriedadeID = documentSnapshot.data().propriedades;
+                }
+           }
+
+           );
+           console.log(propriedadeID);
+        }
+        catch(error){
+            console.error("AuthProvider: " + error);
+        }
+
+
+    }
 
     const signIn = async (email, pass) => {
         try {
@@ -93,6 +113,7 @@ export const AuthProvider = ({ children }) => {
                 signOut,
                 user,
                 resetPassword,
+                getPropriedadesUser
             }}
         >
             {children}

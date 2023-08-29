@@ -6,12 +6,17 @@ import auth from '@react-native-firebase/auth';
 import { PermissionsAndroid } from 'react-native';
 import { MessagingContext } from '../../context/MessagingProvider'
 import { TabActions } from '@react-navigation/native';
+import { AuthContext } from '../../context/AuthProvider';
 
 
 const Preload = ({ navigation }) => {
 
   const { nav } = useContext(MessagingContext);
   const {onMessage} = useContext(MessagingContext);
+
+  const{getPropriedadesUser} = useContext(AuthContext);
+
+  getPropriedadesUser();
 
   useEffect(()=>{
     onMessage(navigation);
