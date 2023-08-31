@@ -4,7 +4,6 @@ import { ToastAndroid } from 'react-native';
 import { ApiContext } from '../context/ApiProvider';
 import { AuthContext } from './AuthProvider';
 
-import messaging from '@react-native-firebase/messaging';
 
 export const AtividadeContext = createContext({});
 
@@ -13,7 +12,6 @@ export const AtividadeProvider = ({ children }) => {
     const [errorMessage, setErrorMessage] = useState({});
     const { api } = useContext(ApiContext);
     const {propriedade} = useContext(AuthContext);
-
 
     useEffect(() => {
         if (api) {
@@ -27,8 +25,7 @@ export const AtividadeProvider = ({ children }) => {
 
     const getAtividades = async () => {
         try {
-            const response = await api.get('/atividades');
-            //console.log('Dados buscados via API');
+            const response = await api.get('/atividades/');
             let data = [];
             response.data.documents.map((d) => {
                 let k = d.name.split(
@@ -97,7 +94,7 @@ export const AtividadeProvider = ({ children }) => {
 
     const deleteAtividade = async (val) => {
         try {
-            await api.delete('/atividades/' + val);
+            await api.delete('/atividades' + val);
             showToast('Atividade excluída.');
             getAtividades();
         } catch (response) {
