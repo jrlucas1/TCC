@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Alert } from 'react-native';
 import MyButtom from '../../components/MyButtom';
-import { Text, TextInput } from './styles';
+import { Div, Text, TextInput } from './styles';
 import { CommonActions } from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage'
 import { AuthContext } from '../../context/AuthProvider';
@@ -53,7 +53,8 @@ const SignIn = ({ navigation }) => {
     navigation.navigate('ResetPassWord');
   };
   return (
-    <View>
+    <Div>
+
       <TextInput
         placeholder="Email"
         keyboardType="email-address"
@@ -72,9 +73,9 @@ const SignIn = ({ navigation }) => {
       />
       <MyButtom text="Entrar" onClick={entrar} />
 
-      <Text onPress={cadastrar}> Cadastrar </Text>
-      <Text onPress={reset}> Resetar senha </Text>
-    </View>
+      <Text onPress={cadastrar}> Ainda não possui uma conta? </Text>
+      <Text onPress={reset}> Esqueceu sua senha? Clique aqui para recupera-lá </Text>
+    </Div>
   );
 };
 

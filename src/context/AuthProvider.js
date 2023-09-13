@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }) => {
 
     const getPropriedadesUser = async() => {
         try{
-           
             let documento =  await firestore()
             .collection('users')
            .doc(auth().currentUser.uid)
@@ -102,7 +101,12 @@ export const AuthProvider = ({ children }) => {
             });
     };
 
-    getPropriedadesUser();
+    useEffect(() => {
+    if(auth().currentUser){
+      getPropriedadesUser();
+    }
+    }, [auth().currentUser]);
+
 
     return (
         <AuthContext.Provider

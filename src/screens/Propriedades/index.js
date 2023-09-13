@@ -15,6 +15,7 @@ const Propriedades = () => {
       screenOptions={{
         initialRouteName: 'PropriedadesTab',
         activeTintColor: COLORS.primary,
+        headerShown: false,
         labelStyle: {
           height: 18,
           fontSize: 12,

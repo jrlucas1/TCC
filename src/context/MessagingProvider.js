@@ -11,21 +11,25 @@ export const MessagingProvider = ({ children }) => {
 
     const [nav, setNav] = useState("");
 
+    useEffect(() => {
+        if(auth().currentUser){
+            firestore()
+                 .collection('users')
+                 .doc(auth().currentUser.uid)
+                 .get()
+                 .then(documentSnapshot => {
+                     if (documentSnapshot.data().perfil === "peão") {
+                         messaging().subscribeToTopic('peao');
+                         messaging().unsubscribeFromTopic('proprietario');
+                     }
+                     else if (documentSnapshot.data().perfil === "proprietário") {
+                         messaging().subscribeToTopic('proprietario');
+                         messaging().unsubscribeFromTopic('peao');
+                     }
+                 });
+         }
+    }, [auth().currentUser]);
 
-    firestore()
-        .collection('users')
-        .doc(auth().currentUser.uid)
-        .get()
-        .then(documentSnapshot => {
-            if (documentSnapshot.data().perfil === "peão") {
-                messaging().subscribeToTopic('peao');
-                messaging().unsubscribeFromTopic('proprietario');
-            }
-            else if (documentSnapshot.data().perfil === "proprietário") {
-                messaging().subscribeToTopic('proprietario');
-                messaging().unsubscribeFromTopic('peao');
-            }
-        });
 
 
     async function saveTokenToDatabase(token) {
