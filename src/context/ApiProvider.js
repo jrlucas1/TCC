@@ -38,7 +38,7 @@ export const ApiProvider = ({ children }) => {
 
     useEffect(() => {
         getApi();
-    }, []);
+    }, [auth().currentUser]);
 
     return (
         <ApiContext.Provider

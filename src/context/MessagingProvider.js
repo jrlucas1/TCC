@@ -33,8 +33,8 @@ export const MessagingProvider = ({ children }) => {
 
 
     async function saveTokenToDatabase(token) {
+        
         const userId = auth().currentUser.uid;
-
         await firestore()
             .collection('users')
             .doc(userId)
@@ -44,14 +44,15 @@ export const MessagingProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        // Get the device token
+       if(auth().currentUser){
         messaging()
             .getToken()
             .then(token => {
                 return saveTokenToDatabase(token);
             });
         console.log("Token renovado!")
-    });
+    }
+    }, [auth().currentUser]);
 
     useEffect(() => {
         messaging()

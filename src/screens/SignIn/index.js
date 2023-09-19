@@ -57,6 +57,8 @@ const SignIn = ({ navigation }) => {
 
       <TextInput
         placeholder="Email"
+        accessible={true}
+        accessibilityLabel="email"
         keyboardType="email-address"
         returnKeyType="next"
         onChangeText={t => setEmail(t)}
@@ -65,6 +67,8 @@ const SignIn = ({ navigation }) => {
         ref={ref => {
           this.passTextInput = ref;
         }}
+        accessible={true}
+        accessibilityLabel="senha"
         secureTextEntry={true}
         placeholder="Senha"
         keyboardType="default"
