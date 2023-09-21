@@ -66,10 +66,10 @@ const SignIn = ({ navigation }) => {
   <Image 
   source={require('../../img/Logo.png')}
   style={styles.container}/>
-  <TextLogin>Login</TextLogin>
    <Div>
       <TextInput
         placeholder="email@example.com"
+        placeholderTextColor = "#206A5D"
         accessible={true}
         accessibilityLabel="email"
         keyboardType="email-address"
@@ -84,6 +84,7 @@ const SignIn = ({ navigation }) => {
         accessibilityLabel="senha"
         secureTextEntry={true}
         placeholder="password"
+        placeholderTextColor = "#206A5D"
         keyboardType="default"
         returnKeyType="go"
         onChangeText={t => setPass(t)}

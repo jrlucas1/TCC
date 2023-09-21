@@ -11,8 +11,9 @@ export const Div = styled.View`
 
 export const Text = styled.Text`
   font-size: 18px;
-  color: #000;
+  color: #206A5D;
   align-self: center;
+  text-align:center;
 `;
 
 export const TextLogin = styled.Text`
@@ -30,5 +31,6 @@ export const TextInput = styled.TextInput`
   border-radius: 25px;
   background-color: white;
   text-align:center;
+  color: #206A5D;
   `;
 
