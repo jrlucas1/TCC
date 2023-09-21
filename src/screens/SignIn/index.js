@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { View, Alert } from 'react-native';
+import { View, Alert, Image, StyleSheet} from 'react-native';
 import MyButtom from '../../components/MyButtom';
-import { Div, Text, TextInput } from './styles';
+import { Div, Text, TextInput, TextLogin } from './styles';
 import { CommonActions } from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage'
 import { AuthContext } from '../../context/AuthProvider';
@@ -13,6 +13,18 @@ const SignIn = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const {signIn} = useContext(AuthContext)
 
+  
+  const styles = StyleSheet.create({
+    container: {
+      paddingTop: 50,
+      alignSelf: "center",
+      marginTop: 50
+    },
+  });
+  
+  
+  
+  
   async function storeUserSession(email, pass) {
     try {
       await EncryptedStorage.setItem(
@@ -53,10 +65,14 @@ const SignIn = ({ navigation }) => {
     navigation.navigate('ResetPassWord');
   };
   return (
-    <Div>
-
+   <View>
+  <Image 
+  source={require('../../img/Logo.png')}
+  style={styles.container}/>
+  <TextLogin>Login</TextLogin>
+   <Div>
       <TextInput
-        placeholder="Email"
+        placeholder="email@example.com"
         accessible={true}
         accessibilityLabel="email"
         keyboardType="email-address"
@@ -70,16 +86,16 @@ const SignIn = ({ navigation }) => {
         accessible={true}
         accessibilityLabel="senha"
         secureTextEntry={true}
-        placeholder="Senha"
+        placeholder="password"
         keyboardType="default"
         returnKeyType="go"
         onChangeText={t => setPass(t)}
       />
       <MyButtom text="Entrar" onClick={entrar} />
 
-      <Text onPress={cadastrar}> Ainda não possui uma conta? </Text>
-      <Text onPress={reset}> Esqueceu sua senha? Clique aqui para recupera-lá </Text>
     </Div>
+    <Text onPress={reset}> Esqueceu sua senha? Clique aqui para recupera-lá </Text>
+    </View>
   );
 };
 

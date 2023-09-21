@@ -77,18 +77,6 @@ const Home = ({navigation}) => {
     } catch (error) {
     }
 }
-  useEffect(() => {
-    console.log('chamou na criação do componente');
-
-    return () => {
-      console.log('chamou ao destruir o componente');
-    };
-  }, []);
-
-  //na atualização do componente
-  useEffect(() => {
-    console.log('chamou na atualização do componente');
-  }, [cont]);
 
   const signOut = () => {
     auth().signOut();
