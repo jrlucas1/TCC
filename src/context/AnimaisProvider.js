@@ -12,8 +12,6 @@ export const AnimaisProvider = ({ children }) => {
     };
     const {propriedade} = useContext(AuthContext);
 
-    
- 
 
     useEffect(() => {
        
@@ -27,14 +25,14 @@ export const AnimaisProvider = ({ children }) => {
                 snapShot => {
                     let data = [];
                     snapShot.forEach((doc) => {
-                        const val = ({
+                        const val = {
                             uid: doc.id,
                             nome: doc.data().nome,
                             sexo: doc.data().sexo,
                             idade: doc.data().idade,
                             peso: doc.data().peso,
                             situacao: doc.data().situacao
-                        });
+                        };
                         data.push(val)
                     });
                     setAnimais(data);
