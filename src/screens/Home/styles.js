@@ -27,8 +27,7 @@ export const Div = styled.View`
     border-radius: 10px;
     padding: 5px;
     align-self: center;
-    margin: 30px;
-
+    margin-top: 20px;
 
 `;
 

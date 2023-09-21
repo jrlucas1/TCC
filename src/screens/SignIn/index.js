@@ -22,9 +22,6 @@ const SignIn = ({ navigation }) => {
     },
   });
   
-  
-  
-  
   async function storeUserSession(email, pass) {
     try {
       await EncryptedStorage.setItem(

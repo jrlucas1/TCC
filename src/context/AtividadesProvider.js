@@ -12,12 +12,13 @@ export const AtividadeProvider = ({ children }) => {
     const [errorMessage, setErrorMessage] = useState({});
     const { api } = useContext(ApiContext);
     const {propriedade} = useContext(AuthContext);
+    useEffect(() =>{
+            if(propriedade)      
+                if (api) {
+                    getAtividades();
+            }
 
-    useEffect(() => {
-        if (api) {
-            getAtividades();
-        }
-    }, [api]);
+    }, [api, propriedade]);
 
     const showToast = (message) => {
         ToastAndroid.show(message, ToastAndroid.SHORT);
@@ -25,21 +26,21 @@ export const AtividadeProvider = ({ children }) => {
 
     const getAtividades = async () => {
         try {
-            const response = await api.get('/atividades/');
-            let data = [];
-            response.data.documents.map((d) => {
-                let k = d.name.split(
-                    `projects/farmanage1/databases/(default)/documents/propriedades/${propriedade}/atividades`,
-                );
-                data.push({
-                    desc: d.fields.desc.stringValue,
-                    valor: d.fields.valor.stringValue,
-                    dataSolicitacao: d.fields.dataSolicitacao.stringValue,
-                    dataFim: d.fields.dataFim.stringValue,
-                    status: d.fields.status.StringValue,
-                    uid: k[1],
+                const response = await api.get('/atividades/');
+                let data = [];
+                response.data.documents.map((d) => {
+                    let k = d.name.split(
+                        `projects/farmanage1/databases/(default)/documents/propriedades/${propriedade}/atividades`
+                    );
+                    data.push({
+                        desc: d.fields.desc.stringValue,
+                        valor: d.fields.valor.stringValue,
+                        dataSolicitacao: d.fields.dataSolicitacao.stringValue,
+                        dataFim: d.fields.dataFim.stringValue,
+                        status: d.fields.status.StringValue,
+                        uid: k[1],
+                    });
                 });
-            });
             setAtividades(data);
         } catch (response) {
             setErrorMessage(response);

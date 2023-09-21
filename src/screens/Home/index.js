@@ -93,7 +93,7 @@ const Home = ({navigation}) => {
       <Div>
         <BarChart
         data={data}
-        width={screenWidth}
+        width={screenWidth - 50}
         height={220}
         yAxisLabel="$"
         chartConfig={chartConfig}
@@ -102,8 +102,8 @@ const Home = ({navigation}) => {
       </Div>
       <PieChart
       data={dataPie}
-      width={screenWidth}
-      height={220}
+      width={screenWidth - 55}
+      height={150}
       chartConfig={chartConfig}
       accessor={"population"}
       backgroundColor={"transparent"}
