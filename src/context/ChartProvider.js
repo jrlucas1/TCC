@@ -7,10 +7,10 @@ export const ChartContext = createContext({});
 
 export const ChartProvider = ({ children }) => {
 
-    const {propriedade} = useContext(AuthContext);
+    const { propriedade } = useContext(AuthContext);
     const [dataPie, setDataPie] = useState([])
 
-    const  getAnimalsState = () => {
+    const getAnimalsState = () => {
         firestore()
             .collection("propriedades")
             .doc(propriedade)
@@ -23,11 +23,11 @@ export const ChartProvider = ({ children }) => {
                     let vazia = 0;
                     snapShot.forEach((doc) => {
                         switch (doc.data().situacao) {
-                            case (doc.data().situacao = "Prenha"):
-                               console.log("prenha")
+                            case doc.data().situacao = "Prenha":
+                                console.log("prenha")
                                 prenha++;
                                 break;
-                            case(doc.data().situacao = "Vazia"):
+                            case doc.data().situacao = "Vazia":
                                 console.log("Vazia")
                                 vazia++;
                                 break;
@@ -43,13 +43,13 @@ export const ChartProvider = ({ children }) => {
                         legendFontSize: 15
 
                     },
-                    {
-                        name: "Vazia",
-                        population: vazia,
-                        color: "#0ff",
-                        legendFontColor: "#7F7F7F",
-                        legendFontSize: 15
-                    }
+                        {
+                            name: "Vazia",
+                            population: vazia,
+                            color: "#0ff",
+                            legendFontColor: "#7F7F7F",
+                            legendFontSize: 15
+                        }
                     )
                     setDataPie(data);
                     console.log(data);
@@ -58,10 +58,31 @@ export const ChartProvider = ({ children }) => {
                     console.error('AnimaisProvider, getAnimais: ' + e);
                 },
             );
+        }
+
+    const getTotalExpenses = () => {
+        firestore()
+        .collection("propriedades")
+        .doc(propriedade)
+        .collection("atividades")
+        .orderBy("descricao")
+        .onSnapshot(
+            snapShot => {
+                snapShot.forEach((doc) => {
+                    console.log(doc.data().valor)
+                })
+            },
+        )
     }
+
+    useEffect(() => {
+        getAnimalsState();
+    }, [propriedade])
+
     return (
         <ChartContext.Provider
             value={{
+                dataPie,
             }}>
             {children}
         </ChartContext.Provider>

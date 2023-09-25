@@ -16,7 +16,7 @@ export default function Providers() {
                             <PropriedadesProvider>
                                 <MessagingProvider>
                                     <ChartProvider>
-                                    <Navigator />
+                                        <Navigator />
                                     </ChartProvider>
                                 </MessagingProvider>
                             </PropriedadesProvider>

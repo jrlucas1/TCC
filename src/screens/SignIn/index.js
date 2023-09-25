@@ -68,7 +68,7 @@ const SignIn = ({ navigation }) => {
   style={styles.container}/>
    <Div>
       <TextInput
-        placeholder="email@example.com"
+        placeholder="email@exemplo.com"
         placeholderTextColor = "#206A5D"
         accessible={true}
         accessibilityLabel="email"
@@ -83,7 +83,7 @@ const SignIn = ({ navigation }) => {
         accessible={true}
         accessibilityLabel="senha"
         secureTextEntry={true}
-        placeholder="password"
+        placeholder="senha"
         placeholderTextColor = "#206A5D"
         keyboardType="default"
         returnKeyType="go"
