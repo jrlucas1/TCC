@@ -51,7 +51,7 @@ export const AtividadeProvider = ({ children }) => {
 
     const saveAtividade = async (val) => {
         try {
-            await api.post('/atividades/', {
+            await api.post('/atividades', {
                 fields: {
                     desc: { stringValue: val.desc },
                     valor: { stringValue: val.valor },
@@ -73,9 +73,8 @@ export const AtividadeProvider = ({ children }) => {
 
 
     const updateAtividade = async (val) => {
-        //console.log(val);
         try {
-            await api.patch('/atividades/' + val.uid, {
+            await api.patch('/atividades' + val.uid, {
                 fields: {
                     desc: { stringValue: val.desc },
                     valor: { stringValue: val.valor },
