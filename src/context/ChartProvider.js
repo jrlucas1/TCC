@@ -24,11 +24,9 @@ export const ChartProvider = ({ children }) => {
                     snapShot.forEach((doc) => {
                         switch (doc.data().situacao) {
                             case doc.data().situacao = "Prenha":
-                                console.log("prenha")
                                 prenha++;
                                 break;
                             case doc.data().situacao = "Vazia":
-                                console.log("Vazia")
                                 vazia++;
                                 break;
                             default:
@@ -52,10 +50,9 @@ export const ChartProvider = ({ children }) => {
                         }
                     )
                     setDataPie(data);
-                    console.log(data);
                 },
                 (e) => {
-                    console.error('AnimaisProvider, getAnimais: ' + e);
+                    console.error('ChartProviders, getAnimalsState: ' + e);
                 },
             );
         }
@@ -65,7 +62,7 @@ export const ChartProvider = ({ children }) => {
         .collection("propriedades")
         .doc(propriedade)
         .collection("atividades")
-        .orderBy("descricao")
+        .orderBy("valor")
         .onSnapshot(
             snapShot => {
                 snapShot.forEach((doc) => {
@@ -75,8 +72,45 @@ export const ChartProvider = ({ children }) => {
         )
     }
 
+    const getAverageWeight = () => {
+        firestore()
+        .collection("propriedades")
+        .doc(propriedade)
+        .collection("animais")
+        .orderBy("nome")
+        .onSnapshot(snapShot => {
+            let soma = 0;
+            let animais = 0;
+            snapShot.forEach((doc) => {
+                soma = parseFloat(soma) + parseFloat(doc.data().peso);
+                animais++;
+                console.log("The average weight is: " + soma/animais)
+            })
+        })
+    }
+
+    const getAverageAge = () => {
+        firestore()
+        .collection("propriedades")
+        .doc(propriedade)
+        .collection("animais")
+        .orderBy("nome")
+        .onSnapshot(snapShot => {
+            let soma = 0;
+            let animais = 0;
+            snapShot.forEach((doc) => {
+                soma = parseFloat(soma) + parseFloat(doc.data().idade);
+                animais++;
+                console.log("The average age is: " + soma/animais)
+            })
+        })
+    }
+
     useEffect(() => {
         getAnimalsState();
+        getTotalExpenses();
+        getAverageWeight();
+        getAverageAge();
     }, [propriedade])
 
     return (
