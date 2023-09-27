@@ -19,6 +19,7 @@ const Animal = ({ route, navigation }) => {
     const { saveAnimais } = useContext(AnimaisContext);
     const {deleteAnimais} = useContext(AnimaisContext);
 
+    const styles = { backgroundColor: '#fff', borderWidth: 1, borderColor: '#000', margin: 30}
     useEffect(() => {
         setNome('');
         setSexo('');
@@ -86,8 +87,8 @@ const Animal = ({ route, navigation }) => {
             <Picker 
                 selectedValue={sexo}
                 onValueChange={(itemValue, itemIndex) => setSexo(itemValue)}
-                style={{ backgroundColor: '#fff', borderRadius: 5, borderWidth: 1, borderColor: '#000', paddingHorizontal: 10 }}
-                itemStyle={{ fontSize: 16, color: '#000', textAlign: 'center' }}
+                style={styles}
+                itemStyle={{ fontSize: 12, color: '#000', textAlign: 'center' }}
             >
                 <Picker.Item label="Feminino" value="F" />
                 <Picker.Item label="Masculino" value="M" />
@@ -110,7 +111,9 @@ const Animal = ({ route, navigation }) => {
             
 
             <Picker selectedValue={situacao}
-            onValueChange={(itemValue, itemIndex) => setSituacao(itemValue)} >
+            onValueChange={(itemValue, itemIndex) => setSituacao(itemValue)}
+            style={styles}
+            itemStyle={{ fontSize: 16, color: '#000', textAlign: 'center' }}>
                 <Picker.Item label="Prenha" value="Prenha" />
                 <Picker.Item label="Vazia" value="Vazia" />
             </Picker>
