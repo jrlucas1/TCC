@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Alert, ToastAndroid } from 'react-native';
+import { Alert, DatePickerIOSComponent, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButtom from '../../components/MyButtom';
 import { TextInput } from './styles';
@@ -107,14 +107,16 @@ const Animal = ({ route, navigation }) => {
                 value={peso}
                 onChangeText={t => setPeso(t)}
             />
-            <TextInput
-                placeholder="Situação"
-                keyboardType="default"
-                returnKeyType="next"
-                value={situacao}
-                onChangeText={t => setSituacao(t)}
-            />
+            
+
+            <Picker selectedValue={situacao}
+            onValueChange={(itemValue, itemIndex) => setSituacao(itemValue)} >
+                <Picker.Item label="Prenha" value="Prenha" />
+                <Picker.Item label="Vazia" value="Vazia" />
+            </Picker>
+
             <MyButtom text="Salvar" onClick={salvar} />
+            <MyButtom text="Voltar" onClick={() => navigation.goBack()} />
             {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
         </View>
     );
