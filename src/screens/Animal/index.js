@@ -5,6 +5,7 @@ import MyButtom from '../../components/MyButtom';
 import { TextInput } from './styles';
 import { Text } from './styles';
 import { AnimaisContext } from '../../context/AnimaisProvider';
+import {Picker} from '@react-native-picker/picker';
 
 
 const Animal = ({ route, navigation }) => {
@@ -14,13 +15,11 @@ const Animal = ({ route, navigation }) => {
     const [idade, setIdade] = useState('');
     const [peso, setPeso] = useState('');
     const [situacao, setSituacao] = useState('');
-    const [loading, setLoading] = useState(true);
 
     const { saveAnimais } = useContext(AnimaisContext);
     const {deleteAnimais} = useContext(AnimaisContext);
 
     useEffect(() => {
-        console.log(peso);
         setNome('');
         setSexo('');
         setIdade('');
@@ -48,7 +47,7 @@ const Animal = ({ route, navigation }) => {
             animal.idade = idade;
             animal.peso = peso;
             animal.situacao = situacao;
-            console.log(animal)
+            console.log(sexo)
             if (await saveAnimais(animal)) {
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
@@ -83,13 +82,17 @@ const Animal = ({ route, navigation }) => {
                 value={nome}
                 onChangeText={t => setNome(t)}
             />
-            <TextInput
-                placeholder="Sexo"
-                keyboardType="default"
-                returnKeyType="next"
-                value={sexo}
-                onChangeText={t => setSexo(t)}
-            />
+            
+            <Picker 
+                selectedValue={sexo}
+                onValueChange={(itemValue, itemIndex) => setSexo(itemValue)}
+                style={{ backgroundColor: '#fff', borderRadius: 5, borderWidth: 1, borderColor: '#000', paddingHorizontal: 10 }}
+                itemStyle={{ fontSize: 16, color: '#000', textAlign: 'center' }}
+            >
+                <Picker.Item label="Feminino" value="F" />
+                <Picker.Item label="Masculino" value="M" />
+            </Picker>
+            
             <TextInput
                 placeholder="Idade"
                 keyboardType="default"
