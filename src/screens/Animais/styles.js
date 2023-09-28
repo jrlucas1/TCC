@@ -7,14 +7,11 @@ export const Container = styled.SafeAreaView`
 `;
 export const FlatList = styled.FlatList`
     width: 95%;
-    height: 100%;
 `;
 export const Button = styled.TouchableHighlight`
     width: 100%;
-    height: 120px;
+    height: 140px;
     padding: 20px;
-    margin-top: 10px;
-    border-radius: 10px;
 `;
 export const TextMenor = styled.Text`
     font-size: 16px;

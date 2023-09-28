@@ -72,6 +72,7 @@ const SignIn = ({ navigation }) => {
         placeholderTextColor = "#206A5D"
         accessible={true}
         accessibilityLabel="email"
+        testID = "email"
         keyboardType="email-address"
         returnKeyType="next"
         onChangeText={t => setEmail(t)}
@@ -82,6 +83,7 @@ const SignIn = ({ navigation }) => {
         }}
         accessible={true}
         accessibilityLabel="senha"
+        testID = "senha"
         secureTextEntry={true}
         placeholder="senha"
         placeholderTextColor = "#206A5D"

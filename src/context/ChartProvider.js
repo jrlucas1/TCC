@@ -106,6 +106,7 @@ export const ChartProvider = ({ children }) => {
         })
     }
 
+    
     useEffect(() => {
         getAnimalsState();
         getTotalExpenses();
