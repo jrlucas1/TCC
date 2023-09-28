@@ -16,7 +16,7 @@ export const Button = styled.TouchableHighlight`
     margin-top: 10px;
     border-radius: 10px;
 `;
-export const TextMenor = styled.Text`
+export const Text = styled.Text`
     font-size: 16px;
     margin-left: 10px;
     color: #000;

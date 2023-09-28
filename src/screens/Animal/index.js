@@ -11,12 +11,13 @@ import {Picker} from '@react-native-picker/picker';
 const Animal = ({ route, navigation }) => {
     const [uid, setUid] = useState('');
     const [nome, setNome] = useState('');
-    const [sexo, setSexo] = useState('');
+    const [sexo, setSexo] = useState('F');
     const [idade, setIdade] = useState('');
     const [peso, setPeso] = useState('');
-    const [situacao, setSituacao] = useState('');
+    const [situacao, setSituacao] = useState('Prenha');
 
-    const { saveAnimais, deleteAnimais } = useContext(AnimaisContext);
+    const { saveAnimais } = useContext(AnimaisContext);
+    const { deleteAnimais } = useContext(AnimaisContext);
     
     const styles = {borderWidth: 4, borderColor: '#000', margin: 30}
 
@@ -40,7 +41,8 @@ const Animal = ({ route, navigation }) => {
     }, [route]);
 
     const salvar = async () => {
-        if (nome && sexo && idade && peso && situacao) {
+        console.log(nome, sexo, idade, peso, situacao)
+        if (nome && sexo && idade && peso) {
             let animal = {}
             animal.uid = uid;
             animal.nome = nome;
@@ -92,6 +94,7 @@ const Animal = ({ route, navigation }) => {
             >
                 <Picker.Item label="Feminino" value="F" />
                 <Picker.Item label="Masculino" value="M" />
+            
             </Picker>
             
             <TextInput
@@ -109,14 +112,15 @@ const Animal = ({ route, navigation }) => {
                 onChangeText={t => setPeso(t)}
             />
             
-
-            <Picker selectedValue={situacao}
+            
+           {sexo == 'F' ? <Picker selectedValue={situacao} 
             onValueChange={(itemValue, itemIndex) => setSituacao(itemValue)}
             style={styles}
             itemStyle={{ fontSize: 16, color: '#000', textAlign: 'center' }}>
                 <Picker.Item label="Prenha" value="Prenha" />
                 <Picker.Item label="Vazia" value="Vazia" />
             </Picker>
+            : null}
 
             <MyButtom text="Salvar" onClick={salvar} />
             <MyButtom text="Voltar" onClick={() => navigation.goBack()} />

@@ -69,17 +69,23 @@ const Home = ({navigation}) => {
         verticalLabelRotation={30}
         />
       </Div>
+      <Div>
       <PieChart
       data={dataPie}
-      width={screenWidth - 55}
-      height={220}
+      width={screenWidth - 50}
+      height={230}
       chartConfig={chartConfig}
       accessor={"population"}
       backgroundColor={"transparent"}
-      paddingLeft={"15"}
-      center={[10, 50]}
-      absolute
+      center={[5, 10]}
       />
+      
+      </Div>
+     
+      <Div>
+      <Text> O peso medio do rebanho foi de {averageWeight} kg  </Text>
+      <Text> A idade media do rebanho é de {averageAge} meses </Text>
+      </Div>
       <MyButtom text="SignOut" onClick={signOut} />
     </View>
   );
