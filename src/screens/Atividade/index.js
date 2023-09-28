@@ -15,9 +15,7 @@ const Atividade = ({ route, navigation }) => {
     const [dataFim, setDataFim] = useState('');
     const [status, setStatus] = useState('');
 
-    const { saveAtividade } = useContext(AtividadeContext);
-    const { deleteAtividade } = useContext(AtividadeContext);
-    const { updateAtividade } = useContext(AtividadeContext);
+    const { saveAtividade, deleteAtividade, updateAtividade } = useContext(AtividadeContext);
 
     useEffect(() => {
         setDesc('');

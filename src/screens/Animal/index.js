@@ -16,10 +16,10 @@ const Animal = ({ route, navigation }) => {
     const [peso, setPeso] = useState('');
     const [situacao, setSituacao] = useState('');
 
-    const { saveAnimais } = useContext(AnimaisContext);
-    const {deleteAnimais} = useContext(AnimaisContext);
+    const { saveAnimais, deleteAnimais } = useContext(AnimaisContext);
+    
+    const styles = {borderWidth: 4, borderColor: '#000', margin: 30}
 
-    const styles = { backgroundColor: '#fff', borderWidth: 1, borderColor: '#000', margin: 30}
     useEffect(() => {
         setNome('');
         setSexo('');

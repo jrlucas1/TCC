@@ -8,7 +8,11 @@ export const ChartContext = createContext({});
 export const ChartProvider = ({ children }) => {
 
     const { propriedade } = useContext(AuthContext);
-    const [dataPie, setDataPie] = useState([])
+    const [dataPie, setDataPie] = useState([]);
+    const [dataBar, setDataBar] = useState([]);
+    const [averageWeight, setAverageWeight] = useState();
+    const [averageAge, setAverageAge] = useState();
+
 
     const getAnimalsState = () => {
         firestore()
@@ -86,6 +90,7 @@ export const ChartProvider = ({ children }) => {
                 animais++;
                 console.log("The average weight is: " + soma/animais)
             })
+            setAverageWeight(soma/animais);
         })
     }
 
@@ -103,6 +108,7 @@ export const ChartProvider = ({ children }) => {
                 animais++;
                 console.log("The average age is: " + soma/animais)
             })
+            setAverageAge(soma/animais);
         })
     }
 
@@ -118,6 +124,9 @@ export const ChartProvider = ({ children }) => {
         <ChartContext.Provider
             value={{
                 dataPie,
+                dataBar,
+                averageWeight,
+                averageAge
             }}>
             {children}
         </ChartContext.Provider>

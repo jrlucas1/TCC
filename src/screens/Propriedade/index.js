@@ -15,8 +15,7 @@ const Propriedade = ({ route, navigation }) => {
     const [descricao, setDescricao] = useState('');
 
 
-    const {savePropriedade} = useContext(PropriedadesContext);
-    const {deletePropriedade} = useContext(PropriedadesContext);
+    const {savePropriedade, deletePropriedade} = useContext(PropriedadesContext);
 
     useEffect(() => {
         setNome('');

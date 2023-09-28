@@ -13,7 +13,10 @@ import { ChartContext } from '../../context/ChartProvider';
 
 const Home = ({navigation}) => {
 
-  const {dataPie} = useContext(ChartContext)
+  const {dataPie, dataBar, averageAge, averageWeight} = useContext(ChartContext);
+
+  console.log(averageAge, averageWeight);
+
 
   const data = {
     labels: ["January", "February", "March", "April", "May", "June"],
