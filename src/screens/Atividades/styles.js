@@ -10,11 +10,9 @@ export const FlatList = styled.FlatList`
     height: 100%;
 `;
 export const Button = styled.TouchableHighlight`
-    width: 100%;
-    height: 120px;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 10px;
+width: 100%;
+height: 140px;
+padding: 20px;
 `;
 export const TextMenor = styled.Text`
     font-size: 16px;

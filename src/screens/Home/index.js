@@ -15,17 +15,8 @@ const Home = ({navigation}) => {
 
   const {dataPie, dataBar, averageAge, averageWeight} = useContext(ChartContext);
 
-  console.log(averageAge, averageWeight);
 
 
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        data: [20, 45, 28, 80, 99, 43]
-      }
-    ]
-  }
 
 
   const chartConfig = {
@@ -34,7 +25,7 @@ const Home = ({navigation}) => {
     backgroundGradientToOpacity: 0.5,
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     strokeWidth: 2, // optional, default 3
-    barPercentage: 0.5,
+    barPercentage:1,
     useShadowColorFromDataset: false // optional
   };
  
@@ -61,14 +52,16 @@ const Home = ({navigation}) => {
     <View>
       <Div>
         <BarChart
-        data={data}
+        data={dataBar}
         width={screenWidth - 50}
         height={220}
         yAxisLabel="$"
         chartConfig={chartConfig}
         verticalLabelRotation={30}
+        fromZero={true}
         />
       </Div>
+
       <Div>
       <PieChart
       data={dataPie}

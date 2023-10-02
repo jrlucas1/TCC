@@ -11,10 +11,10 @@ import {Picker} from '@react-native-picker/picker';
 const Animal = ({ route, navigation }) => {
     const [uid, setUid] = useState('');
     const [nome, setNome] = useState('');
-    const [sexo, setSexo] = useState('F');
+    const [sexo, setSexo] = useState('');
     const [idade, setIdade] = useState('');
     const [peso, setPeso] = useState('');
-    const [situacao, setSituacao] = useState('Prenha');
+    const [situacao, setSituacao] = useState('');
 
     const { saveAnimais } = useContext(AnimaisContext);
     const { deleteAnimais } = useContext(AnimaisContext);
@@ -113,7 +113,8 @@ const Animal = ({ route, navigation }) => {
             />
             
             
-           {sexo == 'F' ? <Picker selectedValue={situacao} 
+           {sexo == 'F' ? 
+           <Picker selectedValue={sexo} 
             onValueChange={(itemValue, itemIndex) => setSituacao(itemValue)}
             style={styles}
             itemStyle={{ fontSize: 16, color: '#000', textAlign: 'center' }}>
