@@ -112,12 +112,47 @@ export const ChartProvider = ({ children }) => {
         })
     }
 
+    const getAnimalsPerGender = () => {
+        firestore()
+        .collection("propriedades")
+        .doc(propriedade)
+        .collection("animais")
+        .orderBy("nome")
+        .onSnapshot(snapShot => {
+            let macho = 0;
+            let femea = 0;
+            snapShot.forEach((doc) => {
+                switch (doc.data().sexo){
+                    case doc.data().sexo = "M":
+                        macho++;
+                        break;
+                    case doc.data().sexo ="F":
+                        femea++;
+                        break;
+                    default:
+                        break;
+                }
+            console.log("Macho: " + macho + " Femea: " + femea)
+        })
+        setDataBar({
+            labels: ["Macho", "Fêmea"],
+            datasets: [
+                {
+                    data: [macho, femea]
+                }
+            ]
+        })
+    });
+}
+
+
     
     useEffect(() => {
         getAnimalsState();
         getTotalExpenses();
         getAverageWeight();
         getAverageAge();
+        getAnimalsPerGender();
     }, [propriedade])
 
     return (
