@@ -10,7 +10,10 @@ const Item = ({ item, onPress }) => {
                     <TextMenor>{item.idade} meses</TextMenor>
                     <TextMenor>{item.sexo}</TextMenor>
                     <TextMenor>{item.peso} Kg </TextMenor>
-                    <TextMenor>{item.situacao} </TextMenor>
+                    {item.sexo === 'M' ?
+                        <TextMenor>{item.situacao} </TextMenor>
+                        : <TextMenor> </TextMenor>
+                    }
                 </Div>
                 </>
         </Button>

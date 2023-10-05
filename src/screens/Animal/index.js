@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Alert, DatePickerIOSComponent, ToastAndroid } from 'react-native';
+import { Alert, DatePickerIOSComponent, Modal, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButtom from '../../components/MyButtom';
 import { TextInput } from './styles';
 import { Text } from './styles';
 import { AnimaisContext } from '../../context/AnimaisProvider';
-import {Picker} from '@react-native-picker/picker';
+import ModalSelector from 'react-native-modal-selector'
 
 
 const Animal = ({ route, navigation }) => {
@@ -15,11 +15,33 @@ const Animal = ({ route, navigation }) => {
     const [idade, setIdade] = useState('');
     const [peso, setPeso] = useState('');
     const [situacao, setSituacao] = useState('');
-
     const { saveAnimais } = useContext(AnimaisContext);
     const { deleteAnimais } = useContext(AnimaisContext);
     
-    const styles = {borderWidth: 4, borderColor: '#000', margin: 30}
+    
+    let index = 0;
+
+    const dataGender = [
+        { key: index++, label: 'M' },
+        { key: index++, label: 'F' }
+    ];
+    
+    const dataStatus = [
+        { key: index++, label: 'Prenha' },
+        { key: index++, label: 'Vazia' }
+    ];
+
+    const modalStyle = {
+        borderWidth: 2, 
+        borderColor: '#000', 
+        margin: 40,
+        borderRadius: 10,
+        marginRight: 40,
+    }
+
+
+
+    
 
     useEffect(() => {
         setNome('');
@@ -50,7 +72,7 @@ const Animal = ({ route, navigation }) => {
             animal.idade = idade;
             animal.peso = peso;
             animal.situacao = situacao;
-            console.log(sexo)
+            console.log(animal)
             if (await saveAnimais(animal)) {
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
@@ -86,16 +108,14 @@ const Animal = ({ route, navigation }) => {
                 onChangeText={t => setNome(t)}
             />
             
-            <Picker 
-                selectedValue={sexo}
-                onValueChange={(itemValue, itemIndex) => setSexo(itemValue)}
-                style={styles}
-                itemStyle={{ fontSize: 12, color: '#000', textAlign: 'center' }}
-            >
-                <Picker.Item label="Feminino" value="F" />
-                <Picker.Item label="Masculino" value="M" />
-            
-            </Picker>
+            <ModalSelector
+                    data={dataGender}
+                    initValue="Sexo"
+                    style = {modalStyle}
+                    onChange={(option)=>{setSexo(option.label) 
+                    console.log(sexo)}
+                    } />
+
             
             <TextInput
                 placeholder="Idade"
@@ -112,16 +132,15 @@ const Animal = ({ route, navigation }) => {
                 onChangeText={t => setPeso(t)}
             />
             
+            {sexo === 'F' ? <ModalSelector
+                    data={dataStatus}
+                    initValue="Situação"
+                    style = {modalStyle}
+                    onChange={(option)=>{setSituacao(option.label) 
+                    console.log(situacao)}} />
+                    : null
+            }
             
-           {sexo == 'F' ? 
-           <Picker selectedValue={sexo} 
-            onValueChange={(itemValue, itemIndex) => setSituacao(itemValue)}
-            style={styles}
-            itemStyle={{ fontSize: 16, color: '#000', textAlign: 'center' }}>
-                <Picker.Item label="Prenha" value="Prenha" />
-                <Picker.Item label="Vazia" value="Vazia" />
-            </Picker>
-            : null}
 
             <MyButtom text="Salvar" onClick={salvar} />
             <MyButtom text="Voltar" onClick={() => navigation.goBack()} />

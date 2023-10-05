@@ -47,7 +47,7 @@ const Animais = ({ navigation }) => {
         navigation.dispatch(
             CommonActions.navigate({
                 name: 'Animal',
-                params: { animal: {"sexo": 'F', "situacao": "Prenha"} },
+                params: { animal: null },
             }),
         );
     };
