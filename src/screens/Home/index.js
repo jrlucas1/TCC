@@ -14,11 +14,17 @@ import { ChartContext } from '../../context/ChartProvider';
 const Home = ({navigation}) => {
 
   const {dataPie, dataBar, averageAge, averageWeight} = useContext(ChartContext);
+  const [dataA, setDataA] = useState({
+      labels: ["Macho", "Femea"],
+      datasets: [
+        {
+          data: [0, 0]
+        }
+      ]
+    });
 
-
-
-
-
+ 
+ 
   const chartConfig = {
     backgroundGradientFromOpacity: 0.1,
     backgroundGradientTo: "#FFF",
@@ -52,7 +58,8 @@ const Home = ({navigation}) => {
     <View>
       <Div>
         <BarChart
-        data={dataBar}
+        data=
+          {dataBar === undefined ? dataA : dataBar}
         width={screenWidth - 50}
         height={220}
         yAxisLabel="$"

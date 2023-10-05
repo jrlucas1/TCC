@@ -9,7 +9,7 @@ export const ChartProvider = ({ children }) => {
 
     const { propriedade } = useContext(AuthContext);
     const [dataPie, setDataPie] = useState([]);
-    const [dataBar, setDataBar] = useState([]);
+    const [dataBar, setDataBar] = useState();
     const [averageWeight, setAverageWeight] = useState();
     const [averageAge, setAverageAge] = useState();
 
@@ -119,6 +119,7 @@ export const ChartProvider = ({ children }) => {
         .collection("animais")
         .orderBy("nome")
         .onSnapshot(snapShot => {
+            let data = {};
             let macho = 0;
             let femea = 0;
             snapShot.forEach((doc) => {
@@ -126,33 +127,41 @@ export const ChartProvider = ({ children }) => {
                     case doc.data().sexo = "M":
                         macho++;
                         break;
-                    case doc.data().sexo ="F":
+                    case doc.data().sexo = "F":
                         femea++;
                         break;
                     default:
                         break;
                 }
+            })
+           
+            setDataBar({
+                labels: ["Macho", "Fêmea"],
+                datasets: [
+                    {
+                        data: [macho, femea]
+                    }
+                ]
+            })
+            
             console.log("Macho: " + macho + " Femea: " + femea)
-        })
-        setDataBar({
-            labels: ["Macho", "Fêmea"],
-            datasets: [
-                {
-                    data: [macho, femea]
-                }
-            ]
-        })
-    });
+            
+        }, (e) => {
+            console.log(e);
+        }
+    );
 }
 
 
     
     useEffect(() => {
+    
         getAnimalsState();
         getTotalExpenses();
         getAverageWeight();
         getAverageAge();
         getAnimalsPerGender();
+
     }, [propriedade])
 
     return (
