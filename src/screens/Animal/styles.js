@@ -10,10 +10,18 @@ export const TextInput = styled.TextInput`
   border: 1px solid;
   margin-bottom: 10px;
   border-radius: 25px;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
 `;
 
-const Div = styled.View`
-  width: 100%;
-  height: 50px;
-  flex-direction: row;
+
+export const Div = styled.View`
+flex-direction: column;
+backgroundColor: #C5D8A4;
+border-radius: 10px;
+padding: 10px;
+margin: 10px;
+justify-content: center;
+align-itens: center;
 `;

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Alert, DatePickerIOSComponent, Modal, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButtom from '../../components/MyButtom';
-import { TextInput } from './styles';
+import { TextInput, Div } from './styles';
 import { Text } from './styles';
 import { AnimaisContext } from '../../context/AnimaisProvider';
 import ModalSelector from 'react-native-modal-selector'
@@ -34,9 +34,11 @@ const Animal = ({ route, navigation }) => {
     const modalStyle = {
         borderWidth: 2, 
         borderColor: '#000', 
-        margin: 40,
         borderRadius: 10,
         marginRight: 40,
+        marginLeft: 40,
+        backgroundColor: '#FFF',
+        color: '#000',
     }
 
 
@@ -100,6 +102,7 @@ const Animal = ({ route, navigation }) => {
 
     return (
         <View>
+            <Div>
             <TextInput
                 placeholder="Nome"
                 keyboardType="default"
@@ -140,11 +143,10 @@ const Animal = ({ route, navigation }) => {
                     console.log(situacao)}} />
                     : null
             }
-            
-
             <MyButtom text="Salvar" onClick={salvar} />
             <MyButtom text="Voltar" onClick={() => navigation.goBack()} />
             {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
+            </Div>
         </View>
     );
 };

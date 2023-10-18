@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Alert } from 'react-native';
 import MyButtom from '../../components/MyButtom';
-import { Text, TextInput } from './styles';
+import { Text, TextInput, Div } from './styles';
 import { CommonActions } from '@react-navigation/native';
 import { AuthContext } from '../../context/AuthProvider';
 import Loading from '../../components/Loading';
@@ -32,6 +32,7 @@ const SignUp = ({navigation}) => {
 
 return (
   <View>
+    <Div>
     <TextInput
       placeholder="Email"
       keyboardType="email-address"
@@ -49,7 +50,8 @@ return (
       onChangeText={t => setPass(t)}
     />
     <MyButtom text="Cadastrar" onClick={cadastrar} />
-  </View>
+    </Div>
+</View>
 );
   };
 

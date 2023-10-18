@@ -1,32 +1,47 @@
 import styled from 'styled-components/native';
-import {COLORS} from '../../assets/colors';
 
 export const Container = styled.SafeAreaView`
     flex: 1;
     align-items: center;
-    padding-top: 20px;
+    justify-content: center;
+`;
+export const FlatList = styled.FlatList`
+    width: 95%;
+    height: 100%;
+`;
+export const Button = styled.TouchableHighlight`
+    width: 100%;
+    height: 120px;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+`;
+export const Text = styled.Text`
+    font-size: 16px;
+    margin-left: 10px;
+`;
+export const TextMenor = styled.Text`
+    font-size: 16px;
+    margin-left: 10px;
+`
+export const Div = styled.View`
+    flex-direction: column;
+    backgroundColor: #C5D8A4;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    justify-content: center;
+    align-itens: center;
 `;
 
 export const TextInput = styled.TextInput`
-    width: 95%;
-    height: 50px;
-    border-bottom-color: ${COLORS.grey};
-    border-bottom-width: 2px;
-    font-size: 16px;
-    padding-left: 2px;
-    padding-bottom: 1px;
+    width: 80%;
+    margin: 15px auto;
+    padding: 10px;
+    border: 1px solid;
     margin-bottom: 10px;
-`;
-
-export const Text = styled.Text`
-    width: 95%;
-    height: 26px;
-    font-size: 16px;
-    color: ${COLORS.black};
-    border: 0px solid ${COLORS.grey};
-    border-bottom-width: 2px;
-    padding-left: 2px;
-    padding-bottom: 1px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    border-radius: 25px;
+    backgroundColor: white;
+    color: #206A5D;
+    textAlign: center;
 `;

@@ -6,6 +6,7 @@ import { CommonActions } from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage'
 import { AuthContext } from '../../context/AuthProvider';
 import Loading from '../../components/Loading';
+import { Button } from '../Home/styles';
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -92,6 +93,7 @@ const SignIn = ({ navigation }) => {
         onChangeText={t => setPass(t)}
       />
       <MyButtom text="Entrar" onClick={entrar} />
+      <MyButtom text="Cadastrar novo usuario" onClick={cadastrar}/>
 
     </Div>
     <Text onPress={reset}> Esqueceu sua senha? Clique aqui para recupera-lá </Text>

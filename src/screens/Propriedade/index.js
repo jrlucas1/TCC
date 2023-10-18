@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButtom from '../../components/MyButtom';
-import { TextInput } from './styles';
+import { TextInput, Div } from './styles';
 import { Text } from './styles';
 import { PropriedadesContext } from '../../context/PropriedadesProvider';
 
@@ -72,6 +72,7 @@ const Propriedade = ({ route, navigation }) => {
 
     return (
         <View>
+            <Div>
             <TextInput
                 placeholder="Nome"
                 keyboardType="default"
@@ -102,6 +103,7 @@ const Propriedade = ({ route, navigation }) => {
             />
             <MyButtom text="Salvar" onClick={salvar} />
             {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
+            </Div>
         </View>
     );
 };

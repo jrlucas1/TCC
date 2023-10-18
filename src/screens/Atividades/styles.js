@@ -35,4 +35,5 @@ export const TextInput = styled.TextInput`
   border: 1px solid;
   margin-bottom: 10px;
   border-radius: 25px;
+  text-align: center;
 `;
