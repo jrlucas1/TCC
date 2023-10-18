@@ -85,12 +85,13 @@ export const ChartProvider = ({ children }) => {
         .onSnapshot(snapShot => {
             let soma = 0;
             let animais = 0;
+            let media = 0;
             snapShot.forEach((doc) => {
                 soma = parseFloat(soma) + parseFloat(doc.data().peso);
                 animais++;
-                console.log("The average weight is: " + soma/animais)
+                media = soma/animais;
             })
-            setAverageWeight(soma/animais);
+            setAverageWeight(media.toFixed(2));
         })
     }
 
@@ -103,12 +104,14 @@ export const ChartProvider = ({ children }) => {
         .onSnapshot(snapShot => {
             let soma = 0;
             let animais = 0;
+            let media = 0;
             snapShot.forEach((doc) => {
                 soma = parseFloat(soma) + parseFloat(doc.data().idade);
                 animais++;
-                console.log("The average age is: " + soma/animais)
+                media = soma/animais;
+
             })
-            setAverageAge(soma/animais);
+            setAverageAge(media.toFixed(2));
         })
     }
 
