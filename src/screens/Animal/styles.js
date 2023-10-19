@@ -1,10 +1,14 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export const Text = styled.Text`
   font-size: 48px;
 `;
 export const TextInput = styled.TextInput`
-  width: 80%;
+  width: ${width * 0.8}px;
   margin: 10px auto;
   padding: 10px;
   border: 1px solid;
