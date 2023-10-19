@@ -103,49 +103,76 @@ const Animal = ({ route, navigation }) => {
     return (
         <View>
             <Div>
-            <TextInput
-                placeholder="Nome"
-                keyboardType="default"
-                returnKeyType="next"
-                value={nome}
-                onChangeText={t => setNome(t)}
-            />
-            
-            <ModalSelector
-                    data={dataGender}
-                    initValue="Sexo"
-                    style = {modalStyle}
-                    onChange={(option)=>{setSexo(option.label) 
-                    console.log(sexo)}
-                    } />
-
-            
-            <TextInput
-                placeholder="Idade"
-                keyboardType="default"
-                returnKeyType="next"
-                value={idade}
-                onChangeText={t => setIdade(t)}
-            />
-            <TextInput
-                placeholder="Peso"
-                keyboardType="default"
-                returnKeyType="next"
-                value={peso}
-                onChangeText={t => setPeso(t)}
-            />
-            
-            {sexo === 'F' ? <ModalSelector
-                    data={dataStatus}
-                    initValue="Situação"
-                    style = {modalStyle}
-                    onChange={(option)=>{setSituacao(option.label) 
-                    console.log(situacao)}} />
-                    : null
-            }
-            <MyButtom text="Salvar" onClick={salvar} />
-            <MyButtom text="Voltar" onClick={() => navigation.goBack()} />
-            {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
+                {!uid ? (
+                    <>
+                        <TextInput
+                            placeholder="Nome"
+                            keyboardType="default"
+                            returnKeyType="next"
+                            value={nome}
+                            onChangeText={t => setNome(t)}
+                        />
+                        <ModalSelector
+                            data={dataGender}
+                            initValue="Sexo"
+                            style = {modalStyle}
+                            onChange={(option)=>{setSexo(option.label) 
+                            console.log(sexo)}}
+                        />
+                        <TextInput
+                            placeholder="Idade"
+                            keyboardType="default"
+                            returnKeyType="next"
+                            value={idade}
+                            onChangeText={t => setIdade(t)}
+                        />
+                        <TextInput
+                            placeholder="Peso"
+                            keyboardType="default"
+                            returnKeyType="next"
+                            value={peso}
+                            onChangeText={t => setPeso(t)}
+                        />
+                        {sexo === 'F' ? (
+                            <ModalSelector
+                                data={dataStatus}
+                                initValue="Situação"
+                                style = {modalStyle}
+                                onChange={(option)=>{setSituacao(option.label) 
+                                console.log(situacao)}}
+                            />
+                        ) : null}
+                        <MyButtom text="Salvar" onClick={salvar} />
+                    </>
+                ) : (
+                    <>
+                        <TextInput
+                            placeholder="Idade"
+                            keyboardType="default"
+                            returnKeyType="next"
+                            value={idade}
+                            onChangeText={t => setIdade(t)}
+                        />
+                        <TextInput
+                            placeholder="Peso"
+                            keyboardType="default"
+                            returnKeyType="next"
+                            value={peso}
+                            onChangeText={t => setPeso(t)}
+                        /> 
+                        {sexo === 'F' ? (
+                            <ModalSelector
+                                data={dataStatus}
+                                initValue="Situação"
+                                style = {modalStyle}
+                                onChange={(option)=>{setSituacao(option.label) 
+                                console.log(situacao)}}
+                            />
+                        ) : null}
+                    </>
+                )}
+                <MyButtom text="Voltar" onClick={() => navigation.goBack()} />
+                {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
             </Div>
         </View>
     );

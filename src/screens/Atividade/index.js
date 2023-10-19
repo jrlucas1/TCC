@@ -80,6 +80,7 @@ const Atividade = ({ route, navigation }) => {
 
     return (
         <View>
+            {!uid ?
             <Div>
             <TextInput
                 placeholder="Descrição"
@@ -121,9 +122,20 @@ const Atividade = ({ route, navigation }) => {
                 value={status}
                 onChangeText={t => setStatus(t)}
             />
+            </Div>
+            :   
+            <Div>
+            <TextInput
+                placeholder="Status"
+                placeholderTextColor="#206A5D"
+                keyboardType="default"
+                returnKeyType="next"
+                value={status}
+                onChangeText={t => setStatus(t)}
+            />
+            </Div>}
             <MyButtom text="Salvar" onClick={salvar} />
             {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
-            </Div>
         </View>
     );
 };
