@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import {View, Alert} from 'react-native';
-import MyButtom from '../../components/MyButtom';
+import MyButton from '../../components/MyButton';
 import {Text, TextInput} from './styles';
 import app from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';

@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {View, Alert} from 'react-native';
-import MyButtom from '../../components/MyButtom';
+import MyButton from '../../components/MyButton';
 import {Text, Div} from './styles';
 import auth from '@react-native-firebase/auth';
 import app from '@react-native-firebase/app';
@@ -62,7 +62,6 @@ const Home = ({navigation}) => {
           {dataBar === undefined ? dataA : dataBar}
         width={screenWidth - 50}
         height={220}
-        yAxisLabel="$"
         chartConfig={chartConfig}
         verticalLabelRotation={30}
         fromZero={true}
@@ -86,7 +85,7 @@ const Home = ({navigation}) => {
       <Text> O peso medio do rebanho foi de {averageWeight} kg  </Text>
       <Text> A idade media do rebanho é de {averageAge} meses </Text>
       </Div>
-      <MyButtom text="SignOut" onClick={signOut} />
+      <MyButton text="SignOut" onClick={signOut} />
     </View>
   );
 };

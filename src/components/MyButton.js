@@ -1,18 +1,18 @@
 import React from 'react';
 import {Text, TouchableHighlight, StyleSheet} from 'react-native';
 
-const MyButtom = ({text, onClick}) => {
+const MyButton = ({text, onClick}) => {
   return (
     <TouchableHighlight style={styles.button} onPress={onClick}>
       <Text style={styles.text}>{text}</Text>
     </TouchableHighlight>
   );
 };
-export default MyButtom;
+export default MyButton;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#206A5D',
   },
   button: {
@@ -25,6 +25,5 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 20,
     borderRadius: 30,
-
   },
 });

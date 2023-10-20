@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Alert, DatePickerIOSComponent, Modal, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
-import MyButtom from '../../components/MyButtom';
+import MyButton from '../../components/MyButton';
 import { TextInput, Div } from './styles';
 import { Text } from './styles';
 import { AnimaisContext } from '../../context/AnimaisProvider';
 import ModalSelector from 'react-native-modal-selector'
+import MyButton from '../../components/MyButton';
 
 
 const Animal = ({ route, navigation }) => {
@@ -142,7 +143,7 @@ const Animal = ({ route, navigation }) => {
                                 console.log(situacao)}}
                             />
                         ) : null}
-                        <MyButtom text="Salvar" onClick={salvar} />
+                        <MyButton text="Salvar" onClick={salvar} />
                     </>
                 ) : (
                     <>
@@ -171,8 +172,8 @@ const Animal = ({ route, navigation }) => {
                         ) : null}
                     </>
                 )}
-                <MyButtom text="Voltar" onClick={() => navigation.goBack()} />
-                {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
+                <MyButton text="Voltar" onClick={() => navigation.goBack()} />
+                {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
             </Div>
         </View>
     );

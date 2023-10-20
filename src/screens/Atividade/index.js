@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
-import MyButtom from '../../components/MyButtom';
+import MyButton from '../../components/MyButton';
 import { TextInput, Div} from './styles';
 import { Text } from './styles';
 import { AtividadeContext } from '../../context/AtividadesProvider';
+import MyButton from '../../components/MyButton';
 
 
 const Atividade = ({ route, navigation }) => {
@@ -134,8 +135,8 @@ const Atividade = ({ route, navigation }) => {
                 onChangeText={t => setStatus(t)}
             />
             </Div>}
-            <MyButtom text="Salvar" onClick={salvar} />
-            {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
+            <MyButton text="Salvar" onClick={salvar} />
+            {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
         </View>
     );
 };

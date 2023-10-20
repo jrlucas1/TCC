@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
-import MyButtom from '../../components/MyButtom';
+import MyButton from '../../components/MyButton';
 import { TextInput, Div } from './styles';
 import { Text } from './styles';
 import { PropriedadesContext } from '../../context/PropriedadesProvider';
+import MyButton from '../../components/MyButton';
 
 
 const Propriedade = ({ route, navigation }) => {
@@ -101,8 +102,8 @@ const Propriedade = ({ route, navigation }) => {
                 value={descricao}
                 onChangeText={t => setDescricao(t)}
             />
-            <MyButtom text="Salvar" onClick={salvar} />
-            {uid ? <MyButtom text="Excluir" onClick={excluir} /> : null}
+            <MyButton text="Salvar" onClick={salvar} />
+            {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
             </Div>
         </View>
     );

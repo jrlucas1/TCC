@@ -26,7 +26,7 @@ export const Div = styled.View`
     flex-direction: column;
     backgroundColor: #C5D8A4;
     border-radius: ${width * 0.02}px;
-    padding: ${width * 0.01}px;
+    padding: ${width * 0.015}px;
     align-itens: justify;
 `;
 

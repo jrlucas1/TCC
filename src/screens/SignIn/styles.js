@@ -1,36 +1,37 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export const Div = styled.View`
+  align-items: center;
+  background-color: #c5d8a4;
+  border-radius: 10px;
   flex-direction: column;
-  backgroundColor: #C5D8A4
-  padding: 10px;
-  margin: 25px;
-  align-content: auto;
-  border-radius:10px;
-`
-
-export const Text = styled.Text`
-  font-size: 18px;
-  color: #206A5D;
-  align-self: center;
-  text-align:center;
+  margin: ${height * 0.03}px;
+  padding: ${width * 0.03}px;
 `;
 
-export const TextLogin = styled.Text`
-  font-size: 30px;
-  margin-top: 100px;
-  color: #000;
-  align-self: center;
+export const Text = styled.Text`
+  color: #206a5d;
+  font-size: ${width * 0.05}px;
+  text-align: center;
 `;
 
 export const TextInput = styled.TextInput`
-  width: 80%;
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid;
-  border-radius: 25px;
   background-color: white;
-  text-align:center;
-  color: #206A5D;
-  `;
+  border: 1px solid;
+  border-radius: ${width * 0.05}px;
+  color: #206a5d;
+  margin: ${height * 0.02}px auto;
+  padding: ${width * 0.03}px;
+  text-align: center;
+  width: ${width * 0.8}px;
+`;
 
+export const TextLogin = styled.Text`
+  color: #000;
+  font-size: ${width * 0.08}px;
+  margin-top: ${height * 0.1}px;
+  text-align: center;
+`;

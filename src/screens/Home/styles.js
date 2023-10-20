@@ -1,41 +1,45 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export const Container = styled.SafeAreaView`
-    flex: 1;
-    align-items: center;
-    justify-content: center;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 `;
 export const FlatList = styled.FlatList`
-    width: 95%;
-    height: 100%;
+  width: ${width * 0.95}px;
+  height: ${height * 0.8}px;
 `;
 export const Button = styled.TouchableHighlight`
-    width: 100%;
-    height: 120px;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 10px;
+  width: ${width * 0.95}px;
+  height: ${width * 0.3}px;
+  padding: ${width * 0.05}px;
+  margin-top: ${width * 0.05}px;
+  border-radius: ${width * 0.02}px;
 `;
 export const Text = styled.Text`
-    font-size: 16px;
-    margin-left: 10px;
-    color: #000;
+  font-size: ${width * 0.04}px;
+  margin-left: ${width * 0.02}px;
+  color: #000;
 `;
 
 export const Div = styled.View`
-    backgroundColor: #C5D8A4
-    border-radius: 10px;
-    padding: 5px;
-    align-self: center;
-    margin-top: 20px;
-
+  background-color: #c5d8a4;
+  border-radius: ${width * 0.02}px;
+  padding: ${width * 0.01}px;
+  align-self: center;
+  margin-top: ${width * 0.05}px;
 `;
 
 export const TextInput = styled.TextInput`
-  width: 80%;
-  margin: 10px auto;
-  padding: 10px;
+  width: ${width * 0.8}px;
+  margin: ${width * 0.05}px auto;
+  padding: ${width * 0.05}px;
   border: 1px solid;
-  margin-bottom: 10px;
-  border-radius: 25px;
+  margin-bottom: ${width * 0.05}px;
+  border-radius: ${width * 0.05}px;
+  text-align: center;
+  font-size: ${width * 0.04}px;
 `;

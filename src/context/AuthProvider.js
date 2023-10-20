@@ -9,6 +9,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [role, setRole] = useState('');
     const [propriedade, setPropriedade] = useState('');
     const storeUserSession = async (email, pass) => {
         try {
@@ -100,10 +101,23 @@ export const AuthProvider = ({ children }) => {
                 console.log(errorMessage);
             });
     };
+    
+    const getUserRole = async () => {
+        try {
+            let documento = await firestore()
+                .collection('users')
+                .doc(auth().currentUser.uid)
+                .get();
+            setRole(documento.data().role);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     useEffect(() => {
     if(auth().currentUser){
       getPropriedadesUser();
+      getUserRole();
     }
     }, [auth().currentUser]);
 
@@ -116,7 +130,8 @@ export const AuthProvider = ({ children }) => {
                 signOut,
                 user,
                 resetPassword,
-                propriedade
+                propriedade, 
+                role
             }}
         >
             {children}

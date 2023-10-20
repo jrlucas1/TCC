@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View, Alert } from 'react-native';
-import MyButtom from '../../components/MyButtom';
+import MyButtom from '../../components/MyButton';
 import { Text, TextInput, Div } from './styles';
 import { CommonActions } from '@react-navigation/native';
 import { AuthContext } from '../../context/AuthProvider';
