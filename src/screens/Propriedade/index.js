@@ -5,7 +5,6 @@ import MyButton from '../../components/MyButton';
 import { TextInput, Div } from './styles';
 import { Text } from './styles';
 import { PropriedadesContext } from '../../context/PropriedadesProvider';
-import MyButton from '../../components/MyButton';
 
 
 const Propriedade = ({ route, navigation }) => {

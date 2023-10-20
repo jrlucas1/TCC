@@ -5,7 +5,7 @@ import MyButton from '../../components/MyButton';
 import { TextInput, Div} from './styles';
 import { Text } from './styles';
 import { AtividadeContext } from '../../context/AtividadesProvider';
-import MyButton from '../../components/MyButton';
+
 
 
 const Atividade = ({ route, navigation }) => {

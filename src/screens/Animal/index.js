@@ -6,7 +6,7 @@ import { TextInput, Div } from './styles';
 import { Text } from './styles';
 import { AnimaisContext } from '../../context/AnimaisProvider';
 import ModalSelector from 'react-native-modal-selector'
-import MyButton from '../../components/MyButton';
+
 
 
 const Animal = ({ route, navigation }) => {
