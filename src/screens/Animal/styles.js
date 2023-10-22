@@ -1,31 +1,32 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+const { width, height } = Dimensions.get('window');
 
 export const Text = styled.Text`
-  font-size: 48px;
-`;
-export const TextInput = styled.TextInput`
-  width: ${width * 0.8}px;
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid;
+  font-size: 24px;
+  color: #206A5D;
   margin-bottom: 10px;
-  border-radius: 25px;
-  color: #000;
-  background-color: #fff;
-  text-align: center;
 `;
 
+export const TextInput = styled.TextInput`
+  width: 80%;
+  height: 50px;
+  background-color: #FFF;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  color: #206A5D;
+  border: 1px solid #206A5D;
+`;
 
 export const Div = styled.View`
-flex-direction: column;
-backgroundColor: #C5D8A4;
-border-radius: 10px;
-padding: 10px;
-margin: 10px;
-justify-content: center;
-align-itens: center;
+  flex-direction: column;
+  background-color: #C5D8A4;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
 `;
