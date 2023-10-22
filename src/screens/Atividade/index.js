@@ -123,6 +123,8 @@ const Atividade = ({ route, navigation }) => {
                 value={status}
                 onChangeText={t => setStatus(t)}
             />
+            <MyButton text="Salvar" onClick={salvar} />
+            {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
             </Div>
             :   
             <Div>
@@ -134,9 +136,10 @@ const Atividade = ({ route, navigation }) => {
                 value={status}
                 onChangeText={t => setStatus(t)}
             />
-            </Div>}
             <MyButton text="Salvar" onClick={salvar} />
             {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
+            </Div>}
+            
         </View>
     );
 };

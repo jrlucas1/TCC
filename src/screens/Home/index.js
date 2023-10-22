@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {View, Alert} from 'react-native';
 import MyButton from '../../components/MyButton';
-import {Text, Div} from './styles';
+import {Text, Div, Container} from './styles';
 import auth from '@react-native-firebase/auth';
 import app from '@react-native-firebase/app';
 import { CommonActions } from '@react-navigation/native';
@@ -55,7 +55,7 @@ const Home = ({navigation}) => {
     );
   };
   return (
-    <View>
+    <Container>
       <Div>
         <BarChart
         data=
@@ -86,7 +86,7 @@ const Home = ({navigation}) => {
       <Text> A idade media do rebanho é de {averageAge} meses </Text>
       </Div>
       <MyButton text="SignOut" onClick={signOut} />
-    </View>
+    </Container>
   );
 };
 export default Home;

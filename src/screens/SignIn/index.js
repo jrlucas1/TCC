@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { View, Alert, Image, StyleSheet } from 'react-native';
+import { Alert, Image, StyleSheet } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { AuthContext } from '../../context/AuthProvider';
 import Loading from '../../components/Loading';
 import MyButton from '../../components/MyButton';
-import { Div, Text, TextInput, TextLogin } from './styles';
+import { Div, Text, TextInput, TextLogin, View } from './styles';
+import { Button } from '../Home/styles';
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -15,16 +16,10 @@ const SignIn = ({ navigation }) => {
 
   const styles = StyleSheet.create({
     container: {
-      paddingTop: 50,
-      alignSelf: 'center',
-      marginTop: 50,
-    },
-    forgotPassword: {
-      color: '#206A5D',
-      fontSize: 16,
-      marginTop: 20,
-      textAlign: 'center',
-      textDecorationLine: 'underline',
+      width: 250,
+      height: 250,
+      resizeMode: 'contain',
+      marginTop: -200,
     },
   });
 
@@ -74,9 +69,8 @@ const SignIn = ({ navigation }) => {
         source={require('../../img/Logo.png')}
         style={styles.container}
       />
-      <Div style={{ margin: 10, padding: 10 }}>
         <TextInput
-          placeholder="Email"
+          placeholder="email@exemplo.com"
           placeholderTextColor="#206A5D"
           accessible={true}
           accessibilityLabel="email"
@@ -93,18 +87,16 @@ const SignIn = ({ navigation }) => {
           accessibilityLabel="senha"
           testID="senha"
           secureTextEntry={true}
-          placeholder="Senha"
+          placeholder="senha"
           placeholderTextColor="#206A5D"
           keyboardType="default"
           returnKeyType="go"
           onChangeText={(t) => setPass(t)}
         />
         <MyButton text="Entrar" onClick={entrar} />
-        <MyButton text="Cadastrar novo usuário" onClick={cadastrar} />
-      </Div>
-      <TextLogin style={styles.forgotPassword} onPress={reset}>
-        Esqueceu sua senha?
-      </TextLogin>
+      <Text onPress={reset}>
+        Esqueceu sua senha? Clique aqui para recuperá-la
+      </Text>
     </View>
   );
 };

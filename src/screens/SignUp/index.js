@@ -12,14 +12,14 @@ const SignUp = ({navigation}) => {
   const [pass, setPass] = useState('');
   const [loading, setLoading] = useState(false);
   const {signUp} = useContext(AuthContext);
-  
+  const {propriedade} = useContext(AuthContext);  
   
   const cadastrar = async () => {    
   if(email && pass){
     let user = {};
     user.email = email;
     setLoading(true);
-    if(await signUp(user, pass)){
+    if(await signUp(user, pass, propriedade)){
       setLoading(false);
       navigation.goBack();
     }else{
