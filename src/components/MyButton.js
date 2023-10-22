@@ -13,17 +13,15 @@ export default MyButton;
 const styles = StyleSheet.create({
   text: {
     fontSize: 16,
-    color: '#206A5D',
+    color: '#FFF',
   },
   button: {
-    width: 95,
+    width: '80%',
     height: 50,
+    backgroundColor: '#206A5D',
+    borderRadius: 10,
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center', 
-    alignSelf: 'center',
-    backgroundColor: '#FFF',
-    padding: 10,
-    margin: 20,
-    borderRadius: 30,
+    margin: 10,
   },
 });
