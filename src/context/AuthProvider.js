@@ -60,22 +60,29 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const signUp = async (user, pass) => {
+    const signUp = async (user, pass, propriedade) => {
         try {
-            await auth().createUserWithEmailAndPassword(user.email, pass)
-            let userBeingCreated = auth().currentUser;
-            await firestore()
-                .collection('users')
-                .doc(userBeingCreated.uid)
-                .set(user)
-            await userBeingCreated.sendEmailVerification()
-            Alert.alert('Aviso', 'Um email foi enviado para' + user.email + ' para fazer a verificação.');
-            return true;
+          await auth().createUserWithEmailAndPassword(user.email, pass);
+          let userBeingCreated = auth().currentUser;
+          await firestore()
+            .collection('users')
+            .doc(userBeingCreated.uid)
+            .set({
+              ...user,
+              role: 'peao',
+              propriedade: propriedade,
+            });
+          await userBeingCreated.sendEmailVerification();
+          Alert.alert(
+            'Aviso',
+            'Um email foi enviado para' + user.email + ' para fazer a verificação.'
+          );
+          return true;
         } catch (error) {
-            Alert.alert('Erro: ', error)
-            return false;
+          Alert.alert('Erro: ', error);
+          return false;
         }
-    }
+    };
 
     const signOut = async () => {
         auth().signOut();

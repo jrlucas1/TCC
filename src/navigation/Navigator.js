@@ -78,6 +78,15 @@ const ProprietarioAppStack = () => {
           ),
         }}
       />
+      <Tab.Screen 
+        component={SignUp}
+        name="Funcionario"
+        options={{
+          tabBarIcon: () => (
+            <Icon2 name="account-plus" color="#FFF" size={30} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -120,6 +129,8 @@ const PeaoAppStack = () => {
           ),
         }}
       />
+
+    
     </Tab.Navigator>
   );
 };
