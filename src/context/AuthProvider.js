@@ -129,7 +129,18 @@ export const AuthProvider = ({ children }) => {
                 .where('role', '==', 'peao')
                 .where('propriedade', '==', propriedade)
                 .get();
-            setFuncionarios(funcionarios.docs.map(doc => doc.data()));
+                const funcionariosData = funcionarios.docs.map((doc) => {
+                    const data = doc.data();
+                    return {
+                        uid: doc.id,
+                      email: data.email,
+                      role: data.role,
+                    };
+                  });
+                 
+                  setFuncionarios(funcionariosData);
+
+                  
         } catch (error) {
             console.error(error);
         }
