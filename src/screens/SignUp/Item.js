@@ -1,11 +1,12 @@
 import React from 'react';
-import { Button, Div, TextMenor } from './styles';
+import { Text, Div } from './styles';
 
 const Item = ({ item }) => {
     return (
             <>
                 <Div>
-                    <TextMenor>{item.email}</TextMenor>
+                    <Text>{item.email}</Text>
+                    <Text>{item.role}</Text>
                 </Div>
             </>
     );
