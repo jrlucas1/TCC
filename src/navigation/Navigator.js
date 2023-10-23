@@ -83,7 +83,7 @@ const ProprietarioAppStack = () => {
         name="Funcionario"
         options={{
           tabBarIcon: () => (
-            <Icon2 name="account-plus" color="#FFF" size={30} />
+            <Icon name="people-outline" color="#FFF" size={30} />
           ),
         }}
       />

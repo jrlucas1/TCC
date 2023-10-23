@@ -9,30 +9,26 @@ export const Container = styled.SafeAreaView`
   justify-content: center;
 `;
 
+export const FlatList = styled.FlatList`
+    width: ${width*0.95}px
+`;
 
 export const Div = styled.View`
   flex-direction: column;
   background-color: #C5D8A4;
-  padding: 10px;
-  margin: 25px;
   border-radius: 10px;
-  align-items: center;
+  padding: 10px;
+  margin: 10px;
   justify-content: center;
+  align-items: center;
 `;
 
 export const Text = styled.Text`
-  font-size: 18px;
-  color: #206A5D;
-  text-align: center;
-  margin-bottom: 10px;
+font-size: ${width * 0.04}px;
+margin-left: ${width * 0.02}px;
+color: #000;
 `;
 
-export const TextLogin = styled.Text`
-  font-size: 30px;
-  margin-top: 100px;
-  color: #000;
-  text-align: center;
-`;
 
 export const TextInput = styled.TextInput`
   width: 80%;
@@ -44,7 +40,4 @@ export const TextInput = styled.TextInput`
   border: 1px solid #206A5D;
   text-align: center;
   color: #206A5D;
-`;
-export const FlatList = styled.FlatList`
-    width: ${width*0.95}px
 `;
