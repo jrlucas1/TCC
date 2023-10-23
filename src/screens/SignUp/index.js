@@ -1,58 +1,41 @@
-import React, { useState, useContext } from 'react';
-import { View, Alert } from 'react-native';
-import MyButtom from '../../components/MyButton';
-import { Text, TextInput, Div } from './styles';
-import { CommonActions } from '@react-navigation/native';
-import { AuthContext } from '../../context/AuthProvider';
-import Loading from '../../components/Loading';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+import FuncionarioTab from './FuncionarioTab';
+import AddFuncionarios from './AddFuncionario';
 
-const SignUp = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [loading, setLoading] = useState(false);
-  const {signUp} = useContext(AuthContext);
-  const {propriedade} = useContext(AuthContext);  
-  
-  const cadastrar = async () => {    
-  if(email && pass){
-    let user = {};
-    user.email = email;
-    setLoading(true);
-    if(await signUp(user, pass, propriedade)){
-      setLoading(false);
-      navigation.goBack();
-    }else{
-      console.log()
-    }
-  }else{
-    Alert.alert("O email e a senha não podem ficar em branco!")
-  }
-}
+const Tab = createBottomTabNavigator();
 
-return (
-  <View>
-    <Div>
-    <TextInput
-      placeholder="Email"
-      keyboardType="email-address"
-      returnKeyType="next"
-      onChangeText={t => setEmail(t)}
-    />
-    <TextInput
-      ref={ref => {
-        this.passTextInput = ref;
-      }}
-      secureTextEntry={true}
-      placeholder="Senha"
-      keyboardType="default"
-      returnKeyType="go"
-      onChangeText={t => setPass(t)}
-    />
-    <MyButtom text="Cadastrar" onClick={cadastrar} />
-    </Div>
-</View>
-);
-  };
+const SignUp = () => {
+
+  return (
+    <View style={styles.container}>
+      <Tab.Navigator
+            screenOptions={{
+              initialRouteName: 'PropriedadesTab',
+              headerShown: false,
+              labelStyle: {
+                height: 18,
+                fontSize: 12,
+                margin: 0,
+                fontWeight: 'bold',
+              },
+              showIcon: true,
+            }}
+      >
+        <Tab.Screen name="Funcionários" component={FuncionarioTab} />
+        <Tab.Screen name="Adicionar funcionarios" component={AddFuncionarios} />
+      </Tab.Navigator>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});
 
 export default SignUp;

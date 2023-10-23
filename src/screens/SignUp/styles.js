@@ -1,4 +1,14 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+
+const width = Dimensions.get('window').width;
+
+export const Container = styled.SafeAreaView`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
 
 export const Div = styled.View`
   flex-direction: column;
@@ -34,4 +44,7 @@ export const TextInput = styled.TextInput`
   border: 1px solid #206A5D;
   text-align: center;
   color: #206A5D;
+`;
+export const FlatList = styled.FlatList`
+    width: ${width*0.95}px
 `;

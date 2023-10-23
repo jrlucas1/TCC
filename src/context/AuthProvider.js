@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [role, setRole] = useState('');
     const [propriedade, setPropriedade] = useState('');
+    const [funcionarios, setFuncionarios] = useState([]);
     const storeUserSession = async (email, pass) => {
         try {
             await EncryptedStorage.setItem(
@@ -121,10 +122,25 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const getFuncionarios = async () => {
+        try {
+            let funcionarios = await firestore()
+                .collection('users')
+                .where('role', '==', 'peao')
+                .where('propriedade', '==', propriedade)
+                .get();
+            setFuncionarios(funcionarios.docs.map(doc => doc.data()));
+        } catch (error) {
+            console.error(error);
+        }
+    }
+        
+
     useEffect(() => {
     if(auth().currentUser){
       getPropriedadesUser();
       getUserRole();
+      getFuncionarios();
     }
     }, [auth().currentUser]);
 
@@ -138,7 +154,8 @@ export const AuthProvider = ({ children }) => {
                 user,
                 resetPassword,
                 propriedade, 
-                role
+                role,
+                funcionarios,
             }}
         >
             {children}

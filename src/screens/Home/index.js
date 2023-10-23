@@ -28,11 +28,14 @@ const Home = ({navigation}) => {
   const chartConfig = {
     backgroundGradientFromOpacity: 0.1,
     backgroundGradientTo: "#FFF",
-    backgroundGradientToOpacity: 0.5,
+    backgroundGradientToOpacity: 0.1,
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
+    strokeWidth: 3, // optional, default 3
     barPercentage:1,
-    useShadowColorFromDataset: false // optional
+    useShadowColorFromDataset: false, // optional,
+    formatYLabel: (value) => {
+      return Math.round(value); // Round the value to the nearest integer
+    },
   };
  
   const screenWidth = useWindowDimensions().width;
