@@ -12,11 +12,11 @@ export const AtividadeProvider = ({ children }) => {
     const [errorMessage, setErrorMessage] = useState({});
     const { api } = useContext(ApiContext);
     const {propriedade} = useContext(AuthContext);
+    
     useEffect(() =>{
-            if(propriedade)      
-                if (api) {
-                    getAtividades();
-            }
+        if(propriedade !== '' && api){
+            getAtividades();
+        }
 
     }, [api, propriedade]);
 
@@ -26,7 +26,7 @@ export const AtividadeProvider = ({ children }) => {
 
     const getAtividades = async () => {
         try {
-            console.log(propriedade)
+            
                 const response = await api.get('/atividades/');
                 let data = [];
                 response.data.documents.map((d) => {
