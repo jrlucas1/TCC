@@ -172,6 +172,7 @@ const Animal = ({ route, navigation }) => {
                         ) : null}
                     </>
                 )}
+                <MyButton text="Salvar" onClick={salvar} />
                 <MyButton text="Voltar" onClick={() => navigation.goBack()} />
                 {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
             </Div>
