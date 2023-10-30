@@ -12,25 +12,29 @@ const SignUp = () => {
   return (
     <View style={styles.container}>
       <Tab.Navigator
-        screenOptions={({ route }) => ({
-          headerShown: false,
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+  screenOptions={({ route }) => ({
+    headerShown: false,
+    tabBarIcon: ({ focused, color, size }) => {
+      let iconName;
 
-            if (route.name === 'Funcionários') {
-              iconName = focused ? 'people' : 'people-outline';
-            } else if (route.name === 'Adicionar funcionarios') {
-              iconName = focused ? 'add-circle' : 'add-circle-outline';
-            }
+      if (route.name === 'Funcionários') {
+        iconName = focused ? 'people' : 'people-outline';
+      } else if (route.name === 'Adicionar funcionarios') {
+        iconName = focused ? 'add-circle' : 'add-circle-outline';
+      }
 
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: '#206A5D',
-          inactiveTintColor: 'gray',
-        }}
-      >
+      return <Ionicons name={iconName} size={size} color={color} />;
+    },
+    tabBarActiveTintColor: '#206A5D',
+    tabBarInactiveTintColor: 'gray',
+    tabBarStyle: [
+      {
+        display: 'flex'
+      },
+      null
+    ]
+  })}
+>
         <Tab.Screen name="Funcionários" component={FuncionarioTab} />
         <Tab.Screen
           name="Adicionar funcionarios"

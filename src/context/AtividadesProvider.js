@@ -26,6 +26,7 @@ export const AtividadeProvider = ({ children }) => {
 
     const getAtividades = async () => {
         try {
+            console.log(propriedade)
                 const response = await api.get('/atividades/');
                 let data = [];
                 response.data.documents.map((d) => {
