@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {View, Alert} from 'react-native';
 import MyButton from '../../components/MyButton';
-import {Text, TextInput} from './styles';
+import {Text, TextInput, Div} from './styles';
 import app from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 
@@ -26,6 +26,7 @@ const ResetPassWord = ({navigation}) => {
   };
   return (
     <View>
+      <Div>
       <TextInput
         placeholder="Email"
         keyboardType="email-address"
@@ -33,8 +34,8 @@ const ResetPassWord = ({navigation}) => {
         onChangeText={t => setEmail(t)}
       />
 
-      <MyButtom text="Resetar senha" onClick={reset} />
-
+      <MyButton text="Resetar senha" onClick={reset} />
+      </Div>
       <Text onPress={login}> Voltar ao login </Text>
     </View>
   );
