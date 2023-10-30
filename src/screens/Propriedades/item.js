@@ -8,6 +8,8 @@ const Item = ({ item, onPress }) => {
                 <Div>
                     <TextMenor>{item.nome}</TextMenor>
                     <TextMenor>{item.descricao}</TextMenor>
+                    <TextMenor>{item.latitude}</TextMenor>
+                    <TextMenor>{item.longitude}</TextMenor>
                 </Div>
             </>
         </Button>

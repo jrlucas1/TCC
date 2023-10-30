@@ -25,11 +25,12 @@ const Propriedade = ({ route, navigation }) => {
 
         if (route.params.propriedade) {
             setNome(route.params.propriedade.nome);
-            setLatitude(route.params.propriedade.sexo);
-            setLongitude(route.params.propriedade.idade);
-            setDescricao(route.params.propriedade.peso);
+            setLatitude(route.params.propriedade.latitude);
+            setLongitude(route.params.propriedade.longitude);
+            setDescricao(route.params.propriedade.descricao);
             setUid(route.params.propriedade.uid);
-        } return () => {
+
+            
             console.log('desmontou Propriedade');
         };
 
