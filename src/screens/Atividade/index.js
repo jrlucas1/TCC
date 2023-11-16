@@ -52,7 +52,6 @@ const Atividade = ({ route, navigation }) => {
             atividade.dataSolicitacao = dataSolicitacao;
             atividade.dataFim = dataFim;
             atividade.status = status;
-            console.log(atividade)
             if (!uid){
                 if(await saveAtividade(atividade)){
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
@@ -95,10 +94,8 @@ const Atividade = ({ route, navigation }) => {
       };
     
       const handleConfirm = (date) => {
-        if (currentDateField === 'dataSolicitacao') {
-          setDataSolicitacao(date.toISOString().split('T')[0]);
-        } else if (currentDateField === 'dataFim') {
-          setDataFim(date.toISOString().split('T')[0]);
+        if (currentDateField === 'dataFim') {
+            setDataFim(date.toISOString().split('T')[0]);
         }
         hideDatePicker();
       };

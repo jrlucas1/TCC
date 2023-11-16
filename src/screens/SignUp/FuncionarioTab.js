@@ -15,13 +15,6 @@ const FuncionarioTab = ({ navigation }) => {
     }, [funcionarios]);
 
     console.log(data)
-    const routeAddFuncionario = () => {
-        navigation.dispatch(
-            CommonActions.navigate({
-                name: 'SignUp',
-            }),
-        );
-    };
 
     const renderItem = ({ item }) => (
         <Item item={item}/>
@@ -34,7 +27,6 @@ const FuncionarioTab = ({ navigation }) => {
                 keyExtractor={(item) => item.uid}
                 renderItem={renderItem}
             />
-            <AddFloatButton onClick={routeAddFuncionario} />
         </Container>
     );
 };
