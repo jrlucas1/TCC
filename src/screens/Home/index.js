@@ -9,10 +9,12 @@ import EncryptedStorage from 'react-native-encrypted-storage'
 import {BarChart, PieChart} from 'react-native-chart-kit'
 import { useWindowDimensions } from "react-native";
 import { ChartContext } from '../../context/ChartProvider';
+import { AuthContext } from '../../context/AuthProvider';
 
 
 const Home = ({navigation}) => {
-
+  
+  const {removeUserSession} = useContext(AuthContext);
   const {dataPie, dataBar, averageAge, averageWeight} = useContext(ChartContext);
   const [dataA, setDataA] = useState({
       labels: ["Macho", "Femea"],
@@ -22,6 +24,7 @@ const Home = ({navigation}) => {
         }
       ]
     });
+
 
  
  
@@ -40,23 +43,18 @@ const Home = ({navigation}) => {
  
   const screenWidth = useWindowDimensions().width;
 
-  async function removeUserSession() {
-    try {
-        await EncryptedStorage.removeItem("user_session");
-    } catch (error) {
-    }
-}
+  const signOut = async () => {
+   await removeUserSession();
+   navigation.dispatch(
+    CommonActions.reset({
+      index: 1,
+      routes: [
+        { name: 'AuthStack' }
+      ],
+    })
+   );
+  }
 
-  const signOut = () => {
-    auth().signOut();
-    removeUserSession();
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'AuthStack'}],
-      }),
-    );
-  };
   return (
     <Container>
       <Div>

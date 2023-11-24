@@ -4,6 +4,7 @@ import { Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore'
 import { CommonActions } from '@react-navigation/native';
 import messaging from '@react-native-firebase/messaging'
+import EncryptedStorage from 'react-native-encrypted-storage'
 
 export const AuthContext = createContext({});
 
@@ -26,6 +27,19 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    async function removeUserSession() {
+        try {
+            await auth()
+            .signOut()
+            .then(async () => {
+                await EncryptedStorage.removeItem("user_session");
+                setUser(null);
+            })
+        } catch (error) {
+            console.error("Houve um erro ao remover do cache: " + error)
+    }
+}
+
     const getPropriedadesUser = async() => {
         try{
             let documento =  await firestore()
@@ -38,8 +52,6 @@ export const AuthProvider = ({ children }) => {
         catch(error){
             console.error("AuthProvider: " + error);
         }
-
-
     }
 
     const signIn = async (email, pass) => {
@@ -52,6 +64,8 @@ export const AuthProvider = ({ children }) => {
             } else {
 
                 setUser(auth().currentUser);
+                console.log(auth().currentUser)
+               
                 return true;
             }
         } catch (error) {
@@ -83,17 +97,6 @@ export const AuthProvider = ({ children }) => {
           Alert.alert('Erro: ', error);
           return false;
         }
-    };
-
-    const signOut = async () => {
-        auth().signOut();
-        removeUserSession();
-        navigation.dispatch(
-            CommonActions.reset({
-                index: 0,
-                routes: [{ name: 'AuthStack' }],
-            }),
-        );
     };
 
     const resetPassword = async (email) => {
@@ -161,7 +164,7 @@ export const AuthProvider = ({ children }) => {
             value={{
                 signUp,
                 signIn,
-                signOut,
+                removeUserSession,
                 user,
                 resetPassword,
                 propriedade, 
