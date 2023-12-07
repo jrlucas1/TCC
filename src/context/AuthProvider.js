@@ -2,8 +2,6 @@ import React, { createContext, useState, useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore'
-import { CommonActions } from '@react-navigation/native';
-import messaging from '@react-native-firebase/messaging'
 import EncryptedStorage from 'react-native-encrypted-storage'
 
 export const AuthContext = createContext({});
@@ -13,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [role, setRole] = useState('');
     const [propriedade, setPropriedade] = useState('');
     const [funcionarios, setFuncionarios] = useState([]);
+    
     const storeUserSession = async (email, pass) => {
         try {
             await EncryptedStorage.setItem(
@@ -26,6 +25,16 @@ export const AuthProvider = ({ children }) => {
             console.log("Houve um erro ao salvar no cache")
         }
     }
+
+    async function retrieveUserSession() {
+        try {
+          const session = await EncryptedStorage.getItem('user_session');
+          return session !== null ? JSON.parse(session) : null;
+        } catch (error) {
+          console.error("Preload, retrieveUserSession: " + error);
+          return null;
+        }
+      }
 
     async function removeUserSession() {
         try {
@@ -61,14 +70,11 @@ export const AuthProvider = ({ children }) => {
                 Alert.alert("Verifique sua conta antes de entrar no site");
                 auth.signOut();
                 return false;
-            } else {
-
-                setUser(auth().currentUser);
-                console.log(auth().currentUser)
-               
-                return true;
             }
-        } catch (error) {
+                setUser(auth().currentUser);
+                return true;
+
+             } catch (error) {
             console.error(error);
             Alert.alert('Erro', 'Erro ao entrar: ' + error.message);
             return false;
@@ -90,7 +96,7 @@ export const AuthProvider = ({ children }) => {
           await userBeingCreated.sendEmailVerification();
           Alert.alert(
             'Aviso',
-            'Um email foi enviado para' + user.email + ' para fazer a verificação.'
+            'Um email foi enviado para ' + user.email + ' para fazer a verificação.'
           );
           return true;
         } catch (error) {
@@ -100,17 +106,13 @@ export const AuthProvider = ({ children }) => {
     };
 
     const resetPassword = async (email) => {
-        auth()
-            .sendPasswordResetEmail(email)
-            .then(() => {
-                Alert.alert('Aviso', 'Verifique sua caixa de e-mail.');
-            })
-            .catch(error => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorCode);
-                console.log(errorMessage);
-            });
+        try{
+            auth().sendPasswordResetEmail(email)
+            Alert.alert('Aviso', 'Um email foi enviado para ' + email + ' para resetar a senha.');
+        } catch(error){
+            console.error(error);
+            Alert.alert('Erro', 'Erro ao resetar a senha: ' + error.message);
+        }
     };
     
     const getUserRole = async () => {
@@ -120,6 +122,7 @@ export const AuthProvider = ({ children }) => {
                 .doc(auth().currentUser.uid)
                 .get();
             setRole(documento.data().role);
+            return documento.data().role;
         } catch (error) {
             console.error(error);
         }
@@ -140,16 +143,12 @@ export const AuthProvider = ({ children }) => {
                       role: data.role,
                     };
                   });
-                 
-                  setFuncionarios(funcionariosData);
-
-                  
+                setFuncionarios(funcionariosData);
         } catch (error) {
             console.error(error);
         }
     }
         
-
     useEffect(() => {
     if(auth().currentUser){
       getPropriedadesUser();
@@ -165,11 +164,15 @@ export const AuthProvider = ({ children }) => {
                 signUp,
                 signIn,
                 removeUserSession,
+                retrieveUserSession,
+                storeUserSession,
                 user,
                 resetPassword,
                 propriedade, 
                 role,
+                getUserRole,
                 funcionarios,
+                getFuncionarios
             }}
         >
             {children}

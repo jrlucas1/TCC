@@ -8,19 +8,16 @@ import Loading from '../../components/Loading';
 
 
 const AddFuncionario = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [funcionario, setFuncionario] = useState({
+    email: '',
+    pass: '',
+  });
   const {signUp} = useContext(AuthContext);
   const {propriedade} = useContext(AuthContext);  
   
   const cadastrar = async () => {    
-  if(email && pass){
-    let user = {};
-    user.email = email;
-    setLoading(true);
-    if(await signUp(user, pass, propriedade)){
-      setLoading(false);
+  if(funcionario.email && funcionario.pass){
+    if(await signUp(funcionario.email, pass, propriedade)){
       navigation.goBack();
     }else{
       console.log()
@@ -30,6 +27,10 @@ const AddFuncionario = ({navigation}) => {
   }
 }
 
+const handleChange = (prop, value) => {
+  setFuncionario({ ...funcionario, [prop]: value });
+};
+
 return (
   <View>
     <Div>
@@ -37,7 +38,7 @@ return (
       placeholder="Email"
       keyboardType="email-address"
       returnKeyType="next"
-      onChangeText={t => setEmail(t)}
+      onChangeText={t => handleChange('email', t)}
     />
     <TextInput
       ref={ref => {
@@ -47,7 +48,7 @@ return (
       placeholder="Senha"
       keyboardType="default"
       returnKeyType="go"
-      onChangeText={t => setPass(t)}
+      onChangeText={t => handleChange('pass', t)}
     />
     <MyButtom text="Cadastrar" onClick={cadastrar} />
     </Div>

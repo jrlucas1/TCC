@@ -135,36 +135,14 @@ const PeaoAppStack = () => {
   );
 };
 
-const AppStack = () => {
-  const { role } = useContext(AuthContext);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    setIsAuthenticated(true);
-  }, []);
-
-  if (!isAuthenticated) {
-    return null;
-  }
-
-  if (role === 'proprietario') {
-    return <ProprietarioAppStack />;
-  }
-
-  if (role === 'peao') {
-    return <PeaoAppStack />;
-  }
-
-  return null;
-};
-
 const Navigator = () => {
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="AuthStack" screenOptions={{ headerShown: false }}>
         <Stack.Screen component={AuthStack} name="AuthStack" />
-        <Stack.Screen component={AppStack} name="AppStack" />
+        <Stack.Screen component={ProprietarioAppStack} name="ProprietarioAppStack" />
+        <Stack.Screen component={PeaoAppStack} name="PeaoAppStack" />
         <Stack.Screen component={Animal} name="Animal" />
         <Stack.Screen component={Atividade} name="Atividade" />
         <Stack.Screen component={Propriedade} name="Propriedade" />

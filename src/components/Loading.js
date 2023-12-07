@@ -10,13 +10,13 @@ export const LoadingArea = styled.View`
   bottom: 0;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #C5D8A4;
 `;
 
 export default () => {
   return (
     <LoadingArea>
-      <ActivityIndicator size="large" color={COLORS.primaryDark} />
+      <ActivityIndicator size="large" color={"#206A5D"} />
     </LoadingArea>
   );
 };

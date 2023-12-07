@@ -9,11 +9,12 @@ import { Div, Text, TextInput, TextLogin, View } from './styles';
 import { Button } from '../Home/styles';
 
 const SignIn = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { signIn } = useContext(AuthContext);
-
+  const [user, setUser] = useState({
+    email: '',
+    pass: '',
+  });
+  const { signIn, storeUserSession } = useContext(AuthContext);
+  
   const styles = StyleSheet.create({
     container: {
       width: 250,
@@ -23,45 +24,25 @@ const SignIn = ({ navigation }) => {
     },
   });
 
-  async function storeUserSession(email, pass) {
-    try {
-      await EncryptedStorage.setItem(
-        'user_session',
-        JSON.stringify({
-          email,
-          pass,
-        })
-      );
-    } catch (error) {
-      console.log('Houve um erro ao salvar no cache');
-    }
-  }
 
   const entrar = async () => {
-    if (email && pass) {
-      setLoading(true);
-      if (await signIn(email, pass)) {
-        setLoading(false);
-        storeUserSession(email, pass);
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: 'AppStack' }],
-          })
-        );
-      } else {
+    if (user.email && user.pass) {
+      if(await signIn(user.email, user.pass)){
+      navigation.navigate('Preload');
+      storeUserSession(user.email, user.pass);
+      }  
+    } else {
         Alert.alert('Erro!', 'Houve um erro ao tentar');
-      }
     }
-  };
-
-  const cadastrar = () => {
-    navigation.navigate('SignUp');
   };
 
   const reset = () => {
     navigation.navigate('ResetPassWord');
   };
+
+  const handleChange = (prop, value) => {
+    setUser({ ...user, [prop]: value });
+  }
 
   return (
     <View>
@@ -77,7 +58,7 @@ const SignIn = ({ navigation }) => {
           testID="email"
           keyboardType="email-address"
           returnKeyType="next"
-          onChangeText={(t) => setEmail(t)}
+          onChangeText={(t) => handleChange('email', t)}
         />
         <TextInput
           ref={(ref) => {
@@ -91,7 +72,7 @@ const SignIn = ({ navigation }) => {
           placeholderTextColor="#206A5D"
           keyboardType="default"
           returnKeyType="go"
-          onChangeText={(t) => setPass(t)}
+          onChangeText={(t) => handleChange('pass', t)}
         />
         <MyButton text="Entrar" onClick={entrar} />
       <Text onPress={reset}>

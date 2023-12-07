@@ -7,80 +7,54 @@ import { Text } from './styles';
 import { AnimaisContext } from '../../context/AnimaisProvider';
 import ModalSelector from 'react-native-modal-selector'
 
-
-
 const Animal = ({ route, navigation }) => {
-    const [uid, setUid] = useState('');
-    const [nome, setNome] = useState('');
-    const [sexo, setSexo] = useState('');
-    const [idade, setIdade] = useState('');
-    const [peso, setPeso] = useState('');
-    const [situacao, setSituacao] = useState('');
+    const [animal, setAnimal] = useState({
+        nome: '',
+        sexo: '',
+        idade: '',
+        peso: '',
+        situacao: '',
+    });
     const { saveAnimais } = useContext(AnimaisContext);
     const { deleteAnimais } = useContext(AnimaisContext);
+
+    const handleChange = (prop, value) => {
+        setAnimal({ ...animal, [prop]: value });
+    };
     
-    
-    let index = 0;
 
     const dataGender = [
-        { key: index++, label: 'M' },
-        { key: index++, label: 'F' }
+        { key: 1, label: 'M' },
+        { key: 2, label: 'F' }
     ];
     
     const dataStatus = [
-        { key: index++, label: 'Prenha' },
-        { key: index++, label: 'Vazia' }
+        { key: 1, label: 'Prenha' },
+        { key: 2, label: 'Vazia' }
     ];
 
     const modalStyle = {
-        borderWidth: 2, 
+        borderWidth: 1, 
         borderColor: '#000', 
         borderRadius: 10,
-        marginRight: 40,
-        marginLeft: 40,
         backgroundColor: '#FFF',
         color: '#000',
     }
-
-
-
     
-
     useEffect(() => {
-        setNome('');
-        setSexo('');
-        setIdade('');
-        setPeso('');
-        setSituacao('');
         if (route.params.animal) {
-            setNome(route.params.animal.nome);
-            setSexo(route.params.animal.sexo);
-            setIdade(route.params.animal.idade);
-            setPeso(route.params.animal.peso);
-            setSituacao(route.params.animal.situacao);
-            setUid(route.params.animal.uid);
+           setAnimal(route.params.animal);
         } return () => {
-            console.log('desmontou Animal');
         };
 
     }, [route]);
 
     const salvar = async () => {
-        console.log(nome, sexo, idade, peso, situacao)
-        if (nome && sexo && idade && peso) {
-            let animal = {}
-            animal.uid = uid;
-            animal.nome = nome;
-            animal.sexo = sexo;
-            animal.idade = idade;
-            animal.peso = peso;
-            animal.situacao = situacao;
-            console.log(animal)
+        if (animal.nome && animal.sexo && animal.idade && animal.peso) {
             if (await saveAnimais(animal)) {
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
             }
-
         }
     }
 
@@ -94,7 +68,7 @@ const Animal = ({ route, navigation }) => {
             {
                 text: 'Sim',
                 onPress: async () => {
-                    await deleteAnimais(uid);
+                    await deleteAnimais(animal.uid);
                     navigation.goBack();
                 },
             },
@@ -104,46 +78,47 @@ const Animal = ({ route, navigation }) => {
     return (
         <View>
             <Div>
-                {!uid ? (
+                {!animal.uid ? (
                     <>
                         <TextInput
                             placeholder="Nome"
                             keyboardType="default"
                             returnKeyType="next"
-                            value={nome}
-                            onChangeText={t => setNome(t)}
+                            value={animal.nome}
+                            onChangeText={t => handleChange('nome',t)}
                         />
                         <ModalSelector
                             data={dataGender}
                             initValue="Sexo"
                             style = {modalStyle}
-                            onChange={(option)=>{setSexo(option.label) 
-                            console.log(sexo)}}
+                            onChange={(option)=>{
+                                handleChange('sexo',option.label);
+
+                            }}
                         />
                         <TextInput
                             placeholder="Idade"
                             keyboardType="default"
                             returnKeyType="next"
-                            value={idade}
-                            onChangeText={t => setIdade(t)}
+                            value={animal.idade}
+                            onChangeText={t => handleChange('idade',t)}
                         />
                         <TextInput
                             placeholder="Peso"
                             keyboardType="default"
                             returnKeyType="next"
-                            value={peso}
-                            onChangeText={t => setPeso(t)}
+                            value={animal.peso}
+                            onChangeText={t => handleChange('peso',t)}
                         />
-                        {sexo === 'F' ? (
+                        {animal.sexo === 'F' ? (
                             <ModalSelector
                                 data={dataStatus}
                                 initValue="Situação"
                                 style = {modalStyle}
-                                onChange={(option)=>{setSituacao(option.label) 
-                                console.log(situacao)}}
+                                onChange={(option)=>{handleChange('situacao',option.label) 
+                                }}
                             />
                         ) : null}
-                        <MyButton text="Salvar" onClick={salvar} />
                     </>
                 ) : (
                     <>
@@ -151,22 +126,22 @@ const Animal = ({ route, navigation }) => {
                             placeholder="Idade"
                             keyboardType="default"
                             returnKeyType="next"
-                            value={idade}
-                            onChangeText={t => setIdade(t)}
+                            value={animal.idade}
+                            onChangeText={t => handleChange('idade',t)}
                         />
                         <TextInput
                             placeholder="Peso"
                             keyboardType="default"
                             returnKeyType="next"
-                            value={peso}
-                            onChangeText={t => setPeso(t)}
+                            value={animal.peso}
+                            onChangeText={t => handleChange('peso',t)}
                         /> 
-                        {sexo === 'F' ? (
+                        {animal.sexo === 'F' ? (
                             <ModalSelector
                                 data={dataStatus}
                                 initValue="Situação"
                                 style = {modalStyle}
-                                onChange={(option)=>{setSituacao(option.label) 
+                                onChange={(option)=>{handleChange('situacao',option.label)
                                 console.log(situacao)}}
                             />
                         ) : null}
@@ -174,7 +149,7 @@ const Animal = ({ route, navigation }) => {
                 )}
                 <MyButton text="Salvar" onClick={salvar} />
                 <MyButton text="Voltar" onClick={() => navigation.goBack()} />
-                {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
+                {animal.uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
             </Div>
         </View>
     );

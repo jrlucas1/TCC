@@ -12,10 +12,7 @@ export const AnimaisProvider = ({ children }) => {
     };
     const {propriedade} = useContext(AuthContext);
 
-
-    useEffect(() => {
-       
-        const unsubscribe = 
+      const getAnimais = () => {
             firestore()
             .collection("propriedades")
             .doc(propriedade)
@@ -41,9 +38,8 @@ export const AnimaisProvider = ({ children }) => {
                     console.error('AnimaisProvider, getAnimais: ' + e);
                 },
             );
+    }
 
-        return unsubscribe;
-    });
     const saveAnimais = async (val) => {        
         try{
         await firestore()
@@ -82,6 +78,10 @@ export const AnimaisProvider = ({ children }) => {
                 console.error('AnimalProvider, deleteAnimais: ', e);
             });
     };
+
+    useEffect(() => {
+        getAnimais();
+    }, [animais]);
 
     return (
         <AnimaisContext.Provider

@@ -70,7 +70,6 @@ export const ChartProvider = ({ children }) => {
         .onSnapshot(
             snapShot => {
                 snapShot.forEach((doc) => {
-                    console.log(doc.data().valor)
                 })
             },
         )

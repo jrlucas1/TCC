@@ -3,54 +3,33 @@ import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButton from '../../components/MyButton';
 import { TextInput, Div } from './styles';
-import { Text } from './styles';
 import { PropriedadesContext } from '../../context/PropriedadesProvider';
 
 
 const Propriedade = ({ route, navigation }) => {
-    const [uid, setUid] = useState('');
-    const [nome, setNome] = useState('');
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
-    const [descricao, setDescricao] = useState('');
 
+    const [propriedade, setPropriedade] = useState({
+        uid: '',
+        nome: '',
+        latitude: '',
+        longitude: '',
+        descricao: '',
+    })
 
     const {savePropriedade, deletePropriedade} = useContext(PropriedadesContext);
 
     useEffect(() => {
-        setNome('');
-        setLatitude('');
-        setLongitude('');
-        setDescricao('');
-
-        if (route.params.propriedade) {
-            setNome(route.params.propriedade.nome);
-            setLatitude(route.params.propriedade.latitude);
-            setLongitude(route.params.propriedade.longitude);
-            setDescricao(route.params.propriedade.descricao);
-            setUid(route.params.propriedade.uid);
-
-            
-            console.log('desmontou Propriedade');
+        if (route.params.propriedade){
+            setPropriedade(route.params.propriedade)
         };
-
     }, [route]);
 
     const salvar = async () => {
         if (nome && latitude && longitude && descricao) {
-            let propriedade = {}
-            propriedade.uid = uid;
-            propriedade.nome = nome;
-            propriedade.latitude = latitude;
-            propriedade.longitude = longitude;
-            propriedade.descricao = descricao;
-
-            console.log(propriedade)
             if (await savePropriedade(propriedade)) {
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
             }
-
         }
     }
 
@@ -70,6 +49,11 @@ const Propriedade = ({ route, navigation }) => {
             },
         ]);
     }
+    
+    const handleChange = (prop, value) => {
+        setAtividade({ ...atividade, [prop]: value });
+    };
+
 
     return (
         <View>
@@ -79,28 +63,28 @@ const Propriedade = ({ route, navigation }) => {
                 keyboardType="default"
                 returnKeyType="next"
                 value={nome}
-                onChangeText={t => setNome(t)}
+                onChangeText={t => handleChange('nome',t)}
             />
             <TextInput
                 placeholder="Latitude"
                 keyboardType="default"
                 returnKeyType="next"
                 value={latitude}
-                onChangeText={t => setLatitude(t)}
+                onChangeText={t => handleChange('latitude', t)}
             />
             <TextInput
                 placeholder="Longitude"
                 keyboardType="default"
                 returnKeyType="next"
                 value={longitude}
-                onChangeText={t => setLongitude(t)}
+                onChangeText={t => handleChange('longitude', t)}
             />
             <TextInput
                 placeholder="Descricao"
                 keyboardType="default"
                 returnKeyType="next"
                 value={descricao}
-                onChangeText={t => setDescricao(t)}
+                onChangeText={t => handleChange('descricao',t)}
             />
             <MyButton text="Salvar" onClick={salvar} />
             {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}

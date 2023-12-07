@@ -1,19 +1,15 @@
-import React, {useEffect, useState, useContext} from 'react';
-import {View, Alert} from 'react-native';
+import React, {useState, useContext} from 'react';
 import MyButton from '../../components/MyButton';
 import {Text, Div, Container} from './styles';
-import auth from '@react-native-firebase/auth';
-import app from '@react-native-firebase/app';
 import { CommonActions } from '@react-navigation/native';
-import EncryptedStorage from 'react-native-encrypted-storage'
 import {BarChart, PieChart} from 'react-native-chart-kit'
 import { useWindowDimensions } from "react-native";
 import { ChartContext } from '../../context/ChartProvider';
 import { AuthContext } from '../../context/AuthProvider';
 
-
 const Home = ({navigation}) => {
   
+  const screenWidth = useWindowDimensions().width;
   const {removeUserSession} = useContext(AuthContext);
   const {dataPie, dataBar, averageAge, averageWeight} = useContext(ChartContext);
   const [dataA, setDataA] = useState({
@@ -24,9 +20,6 @@ const Home = ({navigation}) => {
         }
       ]
     });
-
-
- 
  
   const chartConfig = {
     backgroundGradientFromOpacity: 0.1,
@@ -41,8 +34,6 @@ const Home = ({navigation}) => {
     },
   };
  
-  const screenWidth = useWindowDimensions().width;
-
   const signOut = async () => {
    await removeUserSession();
    navigation.dispatch(
@@ -70,21 +61,19 @@ const Home = ({navigation}) => {
       </Div>
 
       <Div>
-      <PieChart
-      data={dataPie}
-      width={screenWidth - 50}
-      height={230}
-      chartConfig={chartConfig}
-      accessor={"population"}
-      backgroundColor={"transparent"}
-      center={[5, 10]}
-      />
-      
+        <PieChart
+        data={dataPie}
+        width={screenWidth - 50}
+        height={230}
+        chartConfig={chartConfig}
+        accessor={"population"}
+        backgroundColor={"transparent"}
+        center={[5, 10]}
+        />
       </Div>
-     
       <Div>
-      <Text> O peso medio do rebanho foi de {averageWeight} kg  </Text>
-      <Text> A idade media do rebanho é de {averageAge} meses </Text>
+        <Text> O peso medio do rebanho foi de {averageWeight} kg  </Text>
+        <Text> A idade media do rebanho é de {averageAge} meses </Text>
       </Div>
       <MyButton text="SignOut" onClick={signOut} />
     </Container>

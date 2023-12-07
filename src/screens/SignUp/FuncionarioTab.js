@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { CommonActions } from '@react-navigation/native';
-
 import { Container, FlatList } from './styles';
 import Item from './Item';
-import AddFloatButton from '../../components/AddFloatButton';
 import { AuthContext } from '../../context/AuthProvider';
 
 const FuncionarioTab = ({ navigation }) => {
     const [data, setData] = useState([]);
-    const { funcionarios } = useContext(AuthContext);
-
+    const { getFuncionarios, funcionarios } = useContext(AuthContext);
     useEffect(() => {
         setData(funcionarios);
     }, [funcionarios]);

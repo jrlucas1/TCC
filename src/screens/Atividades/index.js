@@ -4,35 +4,20 @@ import { AtividadeContext } from '../../context/AtividadesProvider';
 import Item from './Item';
 import { Container, FlatList, TextInput } from './styles';
 import AddFloatButton from '../../components/AddFloatButton';
-
+import { Picker } from '@react-native-picker/picker';
+import {filters} from './filters';
 
 const Atividades = ({ navigation }) => {
     const [data, setData] = useState([]);
     const { atividades } = useContext(AtividadeContext);
     const [atividadesTemp, setAtividadesTemp] = useState([]);
+    const [filtro, setFiltro] = useState('filterByDesc');
     const [search, setSearch] = useState("");
 
     useEffect(() => {
         setData(atividades);
     }, [atividades]);
 
-    const filterByName = value => {
-
-        if (value !== '') {
-            let a = [];
-            atividades.filter(atividade => {
-                if (atividade.desc[0].toLowerCase().includes(value.toLowerCase())){
-                    a.push(atividade);
-                }
-            })
-            if (a.length > 0) {
-                console.log(atividadesTemp)
-                setAtividadesTemp(a);
-            }
-        } else {
-            setAtividadesTemp([]);
-        }
-    }
     const routeCourse = (item) => {
         navigation.dispatch(
             CommonActions.navigate({
@@ -55,10 +40,30 @@ const Atividades = ({ navigation }) => {
         <Item item={item} onPress={() => routeCourse(item)} />
     );
 
+    const applyFilter = (filterName, data, value) => {
+        if (filters[filterName])
+          setAtividadesTemp(filters[filterName](data, value));
+        return data;
+    };
+
     return (
         <Container>
-            <TextInput placeholder="Search"
-                onChangeText={filterByName} />
+            <TextInput
+                placeholder="Search"
+                onChangeText={text => {
+                setSearch(text);
+                applyFilter(filtro, data, text);
+                }}
+            />
+                  <Picker style={{ height: 50, width: 150 }}
+                    selectedValue={filtro}
+                    onValueChange={itemValue => {
+                    setFiltro(itemValue);
+                    }}
+                    >
+                <Picker.Item label="Descricao" value="filterByDesc" />
+                <Picker.Item label="Data" value="filterByDate" />
+            </Picker>
             <FlatList
                 data={atividadesTemp.length > 0 ? atividadesTemp : data}
                 renderItem={renderItem}

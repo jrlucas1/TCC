@@ -3,67 +3,40 @@ import { Alert, ToastAndroid , Button} from 'react-native';
 import { View } from 'react-native';
 import MyButton from '../../components/MyButton';
 import { TextInput, Div} from './styles';
-import { Text } from './styles';
 import { AtividadeContext } from '../../context/AtividadesProvider';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-
-
 const Atividade = ({ route, navigation }) => {
-    const [uid, setUid] = useState('');
-    const [desc, setDesc] = useState('');
-    const [valor, setValor] = useState('');
-    const [dataSolicitacao, setDataSolicitacao] = useState('');
-    const [dataFim, setDataFim] = useState('');
-    const [status, setStatus] = useState('');
+
+    const [atividade, setAtividade] = useState({
+        desc: '',
+        valor: '',
+        dataSolicitacao: '',
+        dataFim: '',
+        status: '',
+    });
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [currentDateField, setCurrentDateField] = useState(null);
-
-    const { saveAtividade, deleteAtividade, updateAtividade } = useContext(AtividadeContext);
+    const { saveAtividade, deleteAtividade } = useContext(AtividadeContext);
     
+    const handleChange = (prop, value) => {
+        setAtividade({ ...atividade, [prop]: value });
+    };
 
     useEffect(() => {
-        setDesc('');
-        setValor('');
-        const currentDate = new Date();
-        const formattedDate = currentDate.toISOString().split('T')[0];
-        setDataSolicitacao(formattedDate);
-        setDataFim('');
-        setStatus('');
         if (route.params.atividade) {
-            setDesc(route.params.atividade.desc);
-            setValor(route.params.atividade.valor);
-            setDataSolicitacao(route.params.atividade.dataSolicitacao);
-            setDataFim(route.params.atividade.dataFim);
-            setStatus(route.params.atividade.status);
-            setUid(route.params.atividade.uid);
+            setAtividade(route.params.atividade);
         } return () => {
-            console.log('desmontou Atividade');
-        };
+        }
 
     }, [route]);
 
     const salvar = async () => {
-        if (desc && valor && dataSolicitacao && status) {
-            let atividade = {}
-            atividade.uid = uid;
-            atividade.desc = desc;
-            atividade.valor = valor;
-            atividade.dataSolicitacao = dataSolicitacao;
-            atividade.dataFim = dataFim;
-            atividade.status = status;
-            if (!uid){
-                if(await saveAtividade(atividade)){
+        if (atividade.desc && atividade.valor && atividade.dataSolicitacao && atividade.status) {
+            if(await saveAtividade(atividade)){
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
-                }
-            }else{
-                if(await updateAtividade(atividade)){
-                    ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
-                    navigation.goBack();
-                }
             }
-
         }
     }
 
@@ -95,30 +68,30 @@ const Atividade = ({ route, navigation }) => {
     
       const handleConfirm = (date) => {
         if (currentDateField === 'dataFim') {
-            setDataFim(date.toISOString().split('T')[0]);
+            atividade.dataFim = date.toISOString().split('T')[0];
         }
         hideDatePicker();
       };
 
     return (
         <View>
-            {!uid ?
+            {!atividade.uid ?
             <Div>
             <TextInput
                 placeholder="Descrição"
                 placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
-                value={desc}
-                onChangeText={t => setDesc(t)}
+                value={atividade.desc}
+                onChangeText={t => handleChange('desc', t)}
             />
             <TextInput
                 placeholder="Valor"
                 placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
-                value={valor}
-                onChangeText={t => setValor(t)}
+                value={atividade.valor}
+                onChangeText={t => handleChange('valor', t)}
             />
             
             <TextInput
@@ -126,11 +99,11 @@ const Atividade = ({ route, navigation }) => {
                 placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
-                value={status}
-                onChangeText={t => setStatus(t)}
+                value={atividade.status}
+                onChangeText={t => handleChange('status', t)}
             />
             <MyButton text="Salvar" onClick={salvar} />
-            {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
+            {atividade.uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
             </Div>
             :   
             <Div>
@@ -139,8 +112,8 @@ const Atividade = ({ route, navigation }) => {
                 placeholderTextColor="#206A5D"
                 keyboardType="default"
                 returnKeyType="next"
-                value={status}
-                onChangeText={t => setStatus(t)}
+                value={atividade.status}
+                onChangeText={t => handleChange('status', t)}
             />
             <Button title="Data fim" onPress={() => showDatePicker('dataFim')} />
             <DateTimePickerModal
@@ -150,7 +123,7 @@ const Atividade = ({ route, navigation }) => {
                 onCancel={hideDatePicker}
             />
             <MyButton text="Salvar" onClick={salvar} />
-            {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
+            {atividade.uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
             </Div>}
             
         </View>
