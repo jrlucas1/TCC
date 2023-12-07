@@ -146,8 +146,6 @@ export const ChartProvider = ({ children }) => {
                 ]
             })
             
-            console.log("Macho: " + macho + " Femea: " + femea)
-            
         }, (e) => {
             console.log(e);
         }

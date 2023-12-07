@@ -12,7 +12,8 @@ export const AnimaisProvider = ({ children }) => {
     };
     const {propriedade} = useContext(AuthContext);
 
-      const getAnimais = () => {
+    const getAnimais = async () => {
+        try{
             firestore()
             .collection("propriedades")
             .doc(propriedade)
@@ -33,12 +34,11 @@ export const AnimaisProvider = ({ children }) => {
                         data.push(val)
                     });
                     setAnimais(data);
-                },
-                (e) => {
-                    console.error('AnimaisProvider, getAnimais: ' + e);
-                },
-            );
-    }
+                },);
+        } catch(error){
+            console.log("AnimaisProvider, getAnimais:" + error);
+        }
+    };
 
     const saveAnimais = async (val) => {        
         try{
@@ -47,16 +47,7 @@ export const AnimaisProvider = ({ children }) => {
             .doc(propriedade)
             .collection('animais')
             .doc(val.uid)
-            .set(
-                {
-                    nome: val.nome,
-                    sexo: val.sexo,
-                    idade: val.idade,
-                    peso: val.peso,
-                    situacao: val.situacao
-                },
-                { merge: true },
-            )
+            .set(val, { merge: true })
                 return true;
         }catch(error){
             console.log("AnimaisProvider, saveAnimais:" + error);
@@ -65,18 +56,19 @@ export const AnimaisProvider = ({ children }) => {
     };
 
     const deleteAnimais = async (val) => {
-        firestore()
+       try{
+        await firestore()
             .collection('propriedades')
             .doc(propriedade)
             .collection('animais')
-            .doc(val)
-            .delete()
-            .then(() => {
-                showToast('Animal excluído.');
-            })
-            .catch((e) => {
-                console.error('AnimalProvider, deleteAnimais: ', e);
-            });
+            .doc(val.uid)
+            .delete();
+            showToast('Animal excluído com sucesso!');
+            return true;
+        }catch(error){
+            console.log("AnimaisProvider, deleteAnimais:" + error);
+            return false;
+       }
     };
 
     useEffect(() => {

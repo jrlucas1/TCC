@@ -12,7 +12,7 @@ const Atividades = ({ navigation }) => {
     const { atividades } = useContext(AtividadeContext);
     const [atividadesTemp, setAtividadesTemp] = useState([]);
     const [filtro, setFiltro] = useState('filterByDesc');
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         setData(atividades);

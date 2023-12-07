@@ -9,7 +9,6 @@ export const AtividadeContext = createContext({});
 
 export const AtividadeProvider = ({ children }) => {
     const [atividades, setAtividades] = useState([]);
-    const [errorMessage, setErrorMessage] = useState({});
     const { api } = useContext(ApiContext);
     const {propriedade} = useContext(AuthContext);
     
@@ -40,15 +39,10 @@ export const AtividadeProvider = ({ children }) => {
                         data.push(val)
                     });
                     setAtividades(data);
-                },
-                (e) => {
-                    console.error('AtividadeProvider, getAtividades: ' + e);
-                },
+                }
             );
         } catch (response) {
-            setErrorMessage(response);
-            console.log('Erro ao buscar via API.');
-            console.log(response);
+            console.log('getAtividades:' + response);
         }
     };
 
@@ -59,23 +53,11 @@ export const AtividadeProvider = ({ children }) => {
             .doc(propriedade)
             .collection('atividades')
             .doc(val.uid)
-            .set(
-            {
-                    desc: val.desc ,
-                    valor: val.valor ,
-                    dataSolicitacao: val.dataSolicitacao ,
-                    dataFim: val.dataFim ,
-                    status: val.status,
-                },
-                {merge: true},
-            );
+            .set(val,{merge: true});
             showToast('Dados salvos.');
-            getAtividades();
-            return true;
         } catch (response) {
             setErrorMessage(response);
-            console.log('Erro ao saveAtividade.');
-            console.log(response);
+            console.log('Erro ao saveAtividade:' + response);
             return false;
         }
     };

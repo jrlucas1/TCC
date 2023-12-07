@@ -1,12 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Alert, Image, StyleSheet } from 'react-native';
-import { CommonActions } from '@react-navigation/native';
-import EncryptedStorage from 'react-native-encrypted-storage';
 import { AuthContext } from '../../context/AuthProvider';
-import Loading from '../../components/Loading';
 import MyButton from '../../components/MyButton';
-import { Div, Text, TextInput, TextLogin, View } from './styles';
-import { Button } from '../Home/styles';
+import { Text, TextInput, View } from './styles';
 
 const SignIn = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -26,14 +22,13 @@ const SignIn = ({ navigation }) => {
 
 
   const entrar = async () => {
-    if (user.email && user.pass) {
       if(await signIn(user.email, user.pass)){
       navigation.navigate('Preload');
       storeUserSession(user.email, user.pass);
-      }  
-    } else {
-        Alert.alert('Erro!', 'Houve um erro ao tentar');
-    }
+      }
+      
+      if (user.email === '' || user.pass === '') 
+        Alert.alert('Erro!', 'Preencha todos os campos!');
   };
 
   const reset = () => {

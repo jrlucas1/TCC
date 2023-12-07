@@ -15,7 +15,6 @@ const Propriedade = ({ route, navigation }) => {
         longitude: '',
         descricao: '',
     })
-
     const {savePropriedade, deletePropriedade} = useContext(PropriedadesContext);
 
     useEffect(() => {
@@ -25,7 +24,7 @@ const Propriedade = ({ route, navigation }) => {
     }, [route]);
 
     const salvar = async () => {
-        if (nome && latitude && longitude && descricao) {
+        if (propriedade.nome && propriedade.latitude && propriedade.longitude && propriedade.descricao) {
             if (await savePropriedade(propriedade)) {
                 ToastAndroid.show('Dados salvos!', ToastAndroid.SHORT);
                 navigation.goBack();
@@ -53,7 +52,6 @@ const Propriedade = ({ route, navigation }) => {
     const handleChange = (prop, value) => {
         setAtividade({ ...atividade, [prop]: value });
     };
-
 
     return (
         <View>

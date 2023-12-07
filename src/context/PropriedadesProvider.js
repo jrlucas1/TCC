@@ -44,16 +44,9 @@ export const PropriedadesProvider = ({ children }) => {
         await firestore()
             .collection('propriedades')
             .doc(val.uid)
-            .set(
-                {
-                    nome: val.nome,
-                    latitude: val.latitude,
-                    longitude: val.longitude,
-                    descricao: val.descricao,
-                },
-                { merge: true },
-            )
-                return true;
+            .set(val,{ merge: true })
+
+            showToast('Dados salvos.');
         }catch(error){
             console.log("PropriedadesProvider, savePropriedades:" + error);
             return false;
@@ -61,16 +54,16 @@ export const PropriedadesProvider = ({ children }) => {
     };
 
     const deletePropriedade = async (val) => {
-        firestore()
+       try{
+        await firestore()
             .collection('propriedades')
-            .doc(val)
+            .doc(val.uid)
             .delete()
-            .then(() => {
-                showToast('Propriedade excluída.');
-            })
-            .catch((e) => {
-                console.error('PropriedadesProvider, deletePropriedades: ', e);
-            });
+            showToast('Dados excluídos.');
+       }catch(error){
+           console.log("PropriedadesProvider, deletePropriedades:" + error);
+           return false;
+       }
     };
 
     return (

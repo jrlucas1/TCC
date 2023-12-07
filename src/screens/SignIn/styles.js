@@ -13,18 +13,18 @@ export const View = styled.View`
 export const Text = styled.Text`
   font-size: 16px;
   color: #206A5D;
-text-decoration-line: underline;
+  text-decoration-line: underline;
 `;
 
 export const TextInput = styled.TextInput`
-width: 80%;
-height: 50px;
-background-color: #FFF;
-border-radius: 10px;
-padding: 10px;
-margin: 10px;
-font-size: 16px;
-color: #206A5D; 
+  width: 80%;
+  height: 50px;
+  background-color: #FFF;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  color: #206A5D;
 `;
 
 export const TextLogin = styled.Text`

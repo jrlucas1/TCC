@@ -19,12 +19,9 @@ const AddFuncionario = ({navigation}) => {
   if(funcionario.email && funcionario.pass){
     if(await signUp(funcionario.email, pass, propriedade)){
       navigation.goBack();
-    }else{
-      console.log()
     }
-  }else{
-    Alert.alert("O email e a senha não podem ficar em branco!")
   }
+  Alert.alert('Erro', 'Preencha todos os campos.');
 }
 
 const handleChange = (prop, value) => {
