@@ -1,7 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { ToastAndroid } from 'react-native';
 import firestore from '@react-native-firebase/firestore'
-import { ApiContext } from '../context/ApiProvider';
 import { AuthContext } from './AuthProvider';
 
 
@@ -9,7 +7,6 @@ export const AtividadeContext = createContext({});
 
 export const AtividadeProvider = ({ children }) => {
     const [atividades, setAtividades] = useState([]);
-    const { api } = useContext(ApiContext);
     const {propriedade} = useContext(AuthContext);
     
     useEffect(() =>{
