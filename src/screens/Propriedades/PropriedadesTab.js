@@ -12,7 +12,7 @@ const PropriedadesTab = ({ navigation }) => {
 
     useEffect(() => {
         setData(propriedades);
-    
+
     }, [propriedades]);
 
     const routePropriedade = (item) => {

@@ -12,28 +12,28 @@ export const MessagingProvider = ({ children }) => {
     const [nav, setNav] = useState("");
 
     useEffect(() => {
-        if(auth().currentUser){
+        if (auth().currentUser) {
             firestore()
-                 .collection('users')
-                 .doc(auth().currentUser.uid)
-                 .get()
-                 .then(documentSnapshot => {
-                     if (documentSnapshot.data().perfil === "peão") {
-                         messaging().subscribeToTopic('peao');
-                         messaging().unsubscribeFromTopic('proprietario');
-                     }
-                     else if (documentSnapshot.data().perfil === "proprietário") {
-                         messaging().subscribeToTopic('proprietario');
-                         messaging().unsubscribeFromTopic('peao');
-                     }
-                 });
-         }
+                .collection('users')
+                .doc(auth().currentUser.uid)
+                .get()
+                .then(documentSnapshot => {
+                    if (documentSnapshot.data().perfil === "peão") {
+                        messaging().subscribeToTopic('peao');
+                        messaging().unsubscribeFromTopic('proprietario');
+                    }
+                    else if (documentSnapshot.data().perfil === "proprietário") {
+                        messaging().subscribeToTopic('proprietario');
+                        messaging().unsubscribeFromTopic('peao');
+                    }
+                });
+        }
     }, [auth().currentUser]);
 
 
 
     async function saveTokenToDatabase(token) {
-        
+
         const userId = auth().currentUser.uid;
         await firestore()
             .collection('users')
@@ -44,14 +44,14 @@ export const MessagingProvider = ({ children }) => {
     }
 
     useEffect(() => {
-       if(auth().currentUser){
-        messaging()
-            .getToken()
-            .then(token => {
-                return saveTokenToDatabase(token);
-            });
-        console.log("Token renovado!")
-    }
+        if (auth().currentUser) {
+            messaging()
+                .getToken()
+                .then(token => {
+                    return saveTokenToDatabase(token);
+                });
+            console.log("Token renovado!")
+        }
     }, [auth().currentUser]);
 
     useEffect(() => {
@@ -66,11 +66,11 @@ export const MessagingProvider = ({ children }) => {
 
     messaging().setBackgroundMessageHandler(async remoteMessage => {
         console.log('Message handled in the background!', remoteMessage)
-        if(remoteMessage)
+        if (remoteMessage)
             setNav(remoteMessage.data.route);
     });
 
-    function onMessage(navigation){
+    function onMessage(navigation) {
         messaging().onMessage(async remoteMessage => {
             console.log(
                 'Notification recebida com o app aberto (activity na tela): ',
@@ -80,7 +80,7 @@ export const MessagingProvider = ({ children }) => {
                 switch (remoteMessage.data.route) {
                     case 'proprietario':
                         Alert.alert('admin', 'Tópico: ' + remoteMessage.data.route, [
-                            { text: 'ir', onPress: () => { navigation.navigate("Animais")}},
+                            { text: 'ir', onPress: () => { navigation.navigate("Animais") } },
                             { text: 'não', onPress: () => { } },
                         ]);
                         break;

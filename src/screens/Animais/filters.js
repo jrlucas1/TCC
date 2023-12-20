@@ -1,7 +1,7 @@
-export const filters = { 
-    filterBySexo : (data, value)  => {
+export const filters = {
+  filterBySexo: (data, value) => {
     if (value !== '') {
-      return data.filter(animal => 
+      return data.filter(animal =>
         animal.sexo.toLowerCase().startsWith(value.toLowerCase())
       );
     } else {
@@ -9,23 +9,23 @@ export const filters = {
     }
   },
 
- filterByName : (data, value) => {
+  filterByName: (data, value) => {
     if (value !== '') {
-        return data.filter(animal => 
-      animal.nome.toLowerCase().startsWith(value.toLowerCase())
-    );
+      return data.filter(animal =>
+        animal.nome.toLowerCase().startsWith(value.toLowerCase())
+      );
 
     } else {
       return [];
     }
-},
-filterByWeight : (data, value) => {
+  },
+  filterByWeight: (data, value) => {
     if (value !== '') {
-    return data.filter(animal =>
+      return data.filter(animal =>
         animal.peso >= value
-    );
-  } else {
-    return
+      );
+    } else {
+      return
+    }
   }
-}
 }

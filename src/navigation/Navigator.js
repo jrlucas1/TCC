@@ -78,7 +78,7 @@ const ProprietarioAppStack = () => {
           ),
         }}
       />
-      <Tab.Screen 
+      <Tab.Screen
         component={SignUp}
         name="Funcionario"
         options={{
@@ -130,7 +130,7 @@ const PeaoAppStack = () => {
         }}
       />
 
-    
+
     </Tab.Navigator>
   );
 };

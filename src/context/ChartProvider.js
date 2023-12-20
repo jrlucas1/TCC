@@ -59,103 +59,103 @@ export const ChartProvider = ({ children }) => {
                     console.error('ChartProviders, getAnimalsState: ' + e);
                 },
             );
-        }
+    }
 
     const getTotalExpenses = () => {
         firestore()
-        .collection("propriedades")
-        .doc(propriedade)
-        .collection("atividades")
-        .orderBy("valor")
-        .onSnapshot(
-            snapShot => {
-                snapShot.forEach((doc) => {
-                })
-            },
-        )
+            .collection("propriedades")
+            .doc(propriedade)
+            .collection("atividades")
+            .orderBy("valor")
+            .onSnapshot(
+                snapShot => {
+                    snapShot.forEach((doc) => {
+                    })
+                },
+            )
     }
 
     const getAverageWeight = () => {
         firestore()
-        .collection("propriedades")
-        .doc(propriedade)
-        .collection("animais")
-        .orderBy("nome")
-        .onSnapshot(snapShot => {
-            let soma = 0;
-            let animais = 0;
-            let media = 0;
-            snapShot.forEach((doc) => {
-                soma = parseFloat(soma) + parseFloat(doc.data().peso);
-                animais++;
-                media = soma/animais;
+            .collection("propriedades")
+            .doc(propriedade)
+            .collection("animais")
+            .orderBy("nome")
+            .onSnapshot(snapShot => {
+                let soma = 0;
+                let animais = 0;
+                let media = 0;
+                snapShot.forEach((doc) => {
+                    soma = parseFloat(soma) + parseFloat(doc.data().peso);
+                    animais++;
+                    media = soma / animais;
+                })
+                setAverageWeight(media.toFixed(2));
             })
-            setAverageWeight(media.toFixed(2));
-        })
     }
 
     const getAverageAge = () => {
         firestore()
-        .collection("propriedades")
-        .doc(propriedade)
-        .collection("animais")
-        .orderBy("nome")
-        .onSnapshot(snapShot => {
-            let soma = 0;
-            let animais = 0;
-            let media = 0;
-            snapShot.forEach((doc) => {
-                soma = parseFloat(soma) + parseFloat(doc.data().idade);
-                animais++;
-                media = soma/animais;
+            .collection("propriedades")
+            .doc(propriedade)
+            .collection("animais")
+            .orderBy("nome")
+            .onSnapshot(snapShot => {
+                let soma = 0;
+                let animais = 0;
+                let media = 0;
+                snapShot.forEach((doc) => {
+                    soma = parseFloat(soma) + parseFloat(doc.data().idade);
+                    animais++;
+                    media = soma / animais;
 
+                })
+                setAverageAge(media.toFixed(2));
             })
-            setAverageAge(media.toFixed(2));
-        })
     }
 
     const getAnimalsPerGender = () => {
         firestore()
-        .collection("propriedades")
-        .doc(propriedade)
-        .collection("animais")
-        .orderBy("nome")
-        .onSnapshot(snapShot => {
-            let data = {};
-            let macho = 0;
-            let femea = 0;
-            snapShot.forEach((doc) => {
-                switch (doc.data().sexo){
-                    case doc.data().sexo = "M":
-                        macho++;
-                        break;
-                    case doc.data().sexo = "F":
-                        femea++;
-                        break;
-                    default:
-                        break;
-                }
-            })
-           
-            setDataBar({
-                labels: ["Macho", "Fêmea"],
-                datasets: [
-                    {
-                        data: [macho, femea]
+            .collection("propriedades")
+            .doc(propriedade)
+            .collection("animais")
+            .orderBy("nome")
+            .onSnapshot(snapShot => {
+                let data = {};
+                let macho = 0;
+                let femea = 0;
+                snapShot.forEach((doc) => {
+                    switch (doc.data().sexo) {
+                        case doc.data().sexo = "M":
+                            macho++;
+                            break;
+                        case doc.data().sexo = "F":
+                            femea++;
+                            break;
+                        default:
+                            break;
                     }
-                ]
-            })
-            
-        }, (e) => {
-            console.log(e);
-        }
-    );
-}
+                })
+
+                setDataBar({
+                    labels: ["Macho", "Fêmea"],
+                    datasets: [
+                        {
+                            data: [macho, femea]
+                        }
+                    ]
+                })
+
+            }, (e) => {
+                console.log(e);
+            }
+            );
+    }
 
 
-    
+
     useEffect(() => {
-    
+
         getAnimalsState();
         getTotalExpenses();
         getAverageWeight();

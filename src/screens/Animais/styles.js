@@ -35,12 +35,12 @@ export const Div = styled.View`
 `;
 
 export const TextInput = styled.TextInput`
-width: ${width * 0.8}px;
-margin: ${width * 0.05}px auto;
-padding: ${width * 0.02}px;
-border: 1px solid #000;
-margin-bottom: ${width * 0.05}px;
-border-radius: ${width * 0.05}px;
-align-items: center;
-justify-content: center;
+  width: ${width * 0.8}px;
+  margin: ${width * 0.05}px auto;
+  padding: ${width * 0.02}px;
+  border: 1px solid #000;
+  margin-bottom: ${width * 0.05}px;
+  border-radius: ${width * 0.05}px;
+  align-items: center;
+  justify-content: center;
 `;

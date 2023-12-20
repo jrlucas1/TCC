@@ -47,8 +47,8 @@ const MapProprideadesTap = () => {
                 initialRegion={{
                     latitude: -31.766108372781073,
                     longitude: -52.35215652734042,
-                    latitudeDelta: 0.015, 
-                    longitudeDelta: 0.0121, 
+                    latitudeDelta: 0.015,
+                    longitudeDelta: 0.0121,
                 }}>
                 {markers.map((marker) => {
                     return (

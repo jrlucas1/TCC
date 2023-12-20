@@ -1,10 +1,11 @@
-import React, { useState, useContext, useEffect, useCallback} from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButton from '../../components/MyButton';
 import { TextInput, Div } from './styles';
 import { AnimaisContext } from '../../context/AnimaisProvider';
 import ModalSelector from 'react-native-modal-selector'
+import { debounce } from 'lodash';
 
 const Animal = ({ route, navigation }) => {
     const [animal, setAnimal] = useState({
@@ -27,33 +28,32 @@ const Animal = ({ route, navigation }) => {
     const handleChange = useCallback((prop, value) => {
         debouncedChange(prop, value);
     }
-    , []);
+        , []);
 
 
     const dataGender = [
         { key: 1, label: 'M' },
         { key: 2, label: 'F' }
     ];
-    
+
     const dataStatus = [
         { key: 1, label: 'Prenha' },
         { key: 2, label: 'Vazia' }
     ];
 
     const modalStyle = {
-        borderWidth: 1, 
-        borderColor: '#000', 
+        borderWidth: 1,
+        borderColor: '#000',
         borderRadius: 10,
         backgroundColor: '#FFF',
         color: '#000',
     }
-    
+
     useEffect(() => {
         if (route.params.animal) {
-           setAnimal(route.params.animal);
-        } return () => {
-        };
-
+            setAnimal(route.params.animal);
+            console.log(route.params.animal)
+        }
     }, [route]);
 
     const salvar = async () => {
@@ -92,14 +92,14 @@ const Animal = ({ route, navigation }) => {
                             keyboardType="default"
                             returnKeyType="next"
                             value={animal.nome}
-                            onChangeText={t => handleChange('nome',t)}
+                            onChangeText={t => handleChange('nome', t)}
                         />
                         <ModalSelector
                             data={dataGender}
                             initValue="Sexo"
-                            style = {modalStyle}
-                            onChange={(option)=>{
-                                handleChange('sexo',option.label);
+                            style={modalStyle}
+                            onChange={(option) => {
+                                handleChange('sexo', option.label);
 
                             }}
                         />
@@ -108,21 +108,22 @@ const Animal = ({ route, navigation }) => {
                             keyboardType="default"
                             returnKeyType="next"
                             value={animal.idade}
-                            onChangeText={t => handleChange('idade',t)}
+                            onChangeText={t => handleChange('idade', t)}
                         />
                         <TextInput
                             placeholder="Peso"
                             keyboardType="default"
                             returnKeyType="next"
                             value={animal.peso}
-                            onChangeText={t => handleChange('peso',t)}
+                            onChangeText={t => handleChange('peso', t)}
                         />
                         {animal.sexo === 'F' ? (
                             <ModalSelector
                                 data={dataStatus}
                                 initValue="Situação"
-                                style = {modalStyle}
-                                onChange={(option)=>{handleChange('situacao',option.label) 
+                                style={modalStyle}
+                                onChange={(option) => {
+                                    handleChange('situacao', option.label)
                                 }}
                             />
                         ) : null}
@@ -134,22 +135,24 @@ const Animal = ({ route, navigation }) => {
                             keyboardType="default"
                             returnKeyType="next"
                             value={animal.idade}
-                            onChangeText={t => handleChange('idade',t)}
+                            onChangeText={t => handleChange('idade', t)}
                         />
                         <TextInput
                             placeholder="Peso"
                             keyboardType="default"
                             returnKeyType="next"
                             value={animal.peso}
-                            onChangeText={t => handleChange('peso',t)}
-                        /> 
+                            onChangeText={t => handleChange('peso', t)}
+                        />
                         {animal.sexo === 'F' ? (
                             <ModalSelector
                                 data={dataStatus}
                                 initValue="Situação"
-                                style = {modalStyle}
-                                onChange={(option)=>{handleChange('situacao',option.label)
-                                console.log(situacao)}}
+                                style={modalStyle}
+                                onChange={(option) => {
+                                    handleChange('situacao', option.label)
+                                    console.log(situacao)
+                                }}
                             />
                         ) : null}
                     </>

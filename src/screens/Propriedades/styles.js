@@ -10,11 +10,11 @@ export const Container = styled.SafeAreaView`
     justify-content: center;
 `;
 export const FlatList = styled.FlatList`
-    width: ${width*0.95}px
+    width: ${width * 0.95}px
 `;
 export const Button = styled.TouchableHighlight`
-    width: ${width*0.95}px;
-    height: ${width*0.35}px;
+    width: ${width * 0.95}px;
+    height: ${width * 0.35}px;
     padding: ${width * 0.03}px;
 `;
 export const TextMenor = styled.Text`

@@ -5,7 +5,8 @@ import { AuthContext } from '../../context/AuthProvider';
 
 const FuncionarioTab = ({ navigation }) => {
     const [data, setData] = useState([]);
-    const { getFuncionarios, funcionarios } = useContext(AuthContext);
+    const { funcionarios } = useContext(AuthContext);
+
     useEffect(() => {
         setData(funcionarios);
     }, [funcionarios]);
@@ -13,7 +14,7 @@ const FuncionarioTab = ({ navigation }) => {
     console.log(data)
 
     const renderItem = ({ item }) => (
-        <Item item={item}/>
+        <Item item={item} />
     );
 
     return (

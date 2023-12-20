@@ -14,56 +14,56 @@ export const PropriedadesProvider = ({ children }) => {
 
 
     useEffect(() => {
-        const unsubscribe = 
+        const unsubscribe =
             firestore()
-            .collection('propriedades')
-            .orderBy('nome')
-            .onSnapshot(
-                snapShot => {
-                    let data = [];
-                    snapShot.forEach((doc) => {
-                        const val = ({
-                            uid: doc.id,
-                            nome: doc.data().nome,
-                            latitude: doc.data().latitude,
-                            longitude: doc.data().longitude,
-                            descricao: doc.data().descricao,
+                .collection('propriedades')
+                .orderBy('nome')
+                .onSnapshot(
+                    snapShot => {
+                        let data = [];
+                        snapShot.forEach((doc) => {
+                            const val = ({
+                                uid: doc.id,
+                                nome: doc.data().nome,
+                                latitude: doc.data().latitude,
+                                longitude: doc.data().longitude,
+                                descricao: doc.data().descricao,
+                            });
+                            data.push(val)
                         });
-                        data.push(val)
-                    });
-                    setPropriedades(data);
-                },
-                (e) => {
-                    console.error('PropriedadesProvider, getPropriedades: ' + e);
-                },
-            );
+                        setPropriedades(data);
+                    },
+                    (e) => {
+                        console.error('PropriedadesProvider, getPropriedades: ' + e);
+                    },
+                );
         return unsubscribe;
     });
-    const savePropriedade = async (val) => {        
-        try{
-        await firestore()
-            .collection('propriedades')
-            .doc(val.uid)
-            .set(val,{ merge: true })
+    const savePropriedade = async (val) => {
+        try {
+            await firestore()
+                .collection('propriedades')
+                .doc(val.uid)
+                .set(val, { merge: true })
 
             showToast('Dados salvos.');
-        }catch(error){
+        } catch (error) {
             console.log("PropriedadesProvider, savePropriedades:" + error);
             return false;
         }
     };
 
     const deletePropriedade = async (val) => {
-       try{
-        await firestore()
-            .collection('propriedades')
-            .doc(val.uid)
-            .delete()
+        try {
+            await firestore()
+                .collection('propriedades')
+                .doc(val.uid)
+                .delete()
             showToast('Dados excluídos.');
-       }catch(error){
-           console.log("PropriedadesProvider, deletePropriedades:" + error);
-           return false;
-       }
+        } catch (error) {
+            console.log("PropriedadesProvider, deletePropriedades:" + error);
+            return false;
+        }
     };
 
     return (

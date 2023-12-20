@@ -7,33 +7,33 @@ export const AtividadeContext = createContext({});
 
 export const AtividadeProvider = ({ children }) => {
     const [atividades, setAtividades] = useState([]);
-    const {propriedade} = useContext(AuthContext);
-    
-    useEffect(() =>{
+    const { propriedade } = useContext(AuthContext);
+
+    useEffect(() => {
         getAtividades();
     }, [atividades]);
 
 
     const getAtividades = async () => {
         try {
-           const snapshot = await firestore()
-              .collection('propriedades')
+            const snapshot = await firestore()
+                .collection('propriedades')
                 .doc(propriedade)
                 .collection('atividades')
                 .get();
 
-                let data = [];
-                snapshot.forEach((doc) => {
-                    const val = {
-                        uid: doc.id,
-                        desc: doc.data().desc,
-                        valor: doc.data().valor,
-                        dataSolicitacao: doc.data().dataSolicitacao,
-                        dataFim: doc.data().dataFim,
-                        status: doc.data().status,
-                    }
-                    data.push(val);
-                });
+            let data = [];
+            snapshot.forEach((doc) => {
+                const val = {
+                    uid: doc.id,
+                    desc: doc.data().desc,
+                    valor: doc.data().valor,
+                    dataSolicitacao: doc.data().dataSolicitacao,
+                    dataFim: doc.data().dataFim,
+                    status: doc.data().status,
+                }
+                data.push(val);
+            });
             setAtividades(data);
         } catch (response) {
             console.log('getAtividades:' + response);
@@ -43,11 +43,11 @@ export const AtividadeProvider = ({ children }) => {
     const saveAtividade = async (val) => {
         try {
             firestore()
-            .collection('propriedades')
-            .doc(propriedade)
-            .collection('atividades')
-            .doc(val.uid)
-            .set(val,{merge: true});
+                .collection('propriedades')
+                .doc(propriedade)
+                .collection('atividades')
+                .doc(val.uid)
+                .set(val, { merge: true });
             showToast('Dados salvos.');
         } catch (response) {
             setErrorMessage(response);

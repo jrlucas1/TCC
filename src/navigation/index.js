@@ -9,17 +9,17 @@ import { ChartProvider } from '../context/ChartProvider';
 export default function Providers() {
     return (
         <AuthProvider>
-                    <AnimaisProvider>
-                        <AtividadeProvider>
-                            <PropriedadesProvider>
-                                <MessagingProvider>
-                                    <ChartProvider>
-                                        <Navigator />
-                                    </ChartProvider>
-                                </MessagingProvider>
-                            </PropriedadesProvider>
-                        </AtividadeProvider>
-                    </AnimaisProvider>
+            <AnimaisProvider>
+                <AtividadeProvider>
+                    <PropriedadesProvider>
+                        <MessagingProvider>
+                            <ChartProvider>
+                                <Navigator />
+                            </ChartProvider>
+                        </MessagingProvider>
+                    </PropriedadesProvider>
+                </AtividadeProvider>
+            </AnimaisProvider>
         </AuthProvider>
     )
 }
