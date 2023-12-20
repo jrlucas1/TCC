@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Alert, DatePickerIOSComponent, Modal, ToastAndroid } from 'react-native';
+import React, { useState, useContext, useEffect, useCallback} from 'react';
+import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButton from '../../components/MyButton';
 import { TextInput, Div } from './styles';
-import { Text } from './styles';
 import { AnimaisContext } from '../../context/AnimaisProvider';
 import ModalSelector from 'react-native-modal-selector'
 
@@ -15,13 +14,21 @@ const Animal = ({ route, navigation }) => {
         peso: '',
         situacao: '',
     });
-    const { saveAnimais } = useContext(AnimaisContext);
-    const { deleteAnimais } = useContext(AnimaisContext);
+    const { saveAnimais, deleteAnimais } = useContext(AnimaisContext);
 
-    const handleChange = (prop, value) => {
-        setAnimal({ ...animal, [prop]: value });
-    };
-    
+    const debouncedChange = useCallback(
+        debounce((prop, value) => {
+            console.log("Prop:" + prop, " Value:" + value);
+            setAnimal((prevState) => ({ ...prevState, [prop]: value }));
+        }, 500),
+        []
+    );
+
+    const handleChange = useCallback((prop, value) => {
+        debouncedChange(prop, value);
+    }
+    , []);
+
 
     const dataGender = [
         { key: 1, label: 'M' },

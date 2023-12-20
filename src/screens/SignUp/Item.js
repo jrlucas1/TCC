@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import { Text, Div } from './styles';
 
 const Item = ({ item }) => {
@@ -11,4 +11,4 @@ const Item = ({ item }) => {
             </>
     );
 };
-export default Item;
+export default memo(Item);

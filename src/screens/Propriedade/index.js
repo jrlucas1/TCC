@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Alert, ToastAndroid } from 'react-native';
 import { View } from 'react-native';
 import MyButton from '../../components/MyButton';
 import { TextInput, Div } from './styles';
 import { PropriedadesContext } from '../../context/PropriedadesProvider';
-
+import debounce from 'lodash/debounce';
 
 const Propriedade = ({ route, navigation }) => {
 
@@ -15,10 +15,10 @@ const Propriedade = ({ route, navigation }) => {
         longitude: '',
         descricao: '',
     })
-    const {savePropriedade, deletePropriedade} = useContext(PropriedadesContext);
+    const { savePropriedade, deletePropriedade } = useContext(PropriedadesContext);
 
     useEffect(() => {
-        if (route.params.propriedade){
+        if (route.params.propriedade) {
             setPropriedade(route.params.propriedade)
         };
     }, [route]);
@@ -48,44 +48,54 @@ const Propriedade = ({ route, navigation }) => {
             },
         ]);
     }
-    
-    const handleChange = (prop, value) => {
-        setAtividade({ ...atividade, [prop]: value });
-    };
+
+    const debouncedChange = useCallback(
+        debounce((field, value) => {
+            console.log("Field:" + field, " Value:" + value);
+            setPropriedade((prevState) => ({ ...prevState, [field]: value }));
+        }, 500),
+        []
+    );
+
+    const handleChange = useCallback((field, value) => {
+        debouncedChange(field, value);
+    }
+        , []);
+
 
     return (
         <View>
             <Div>
-            <TextInput
-                placeholder="Nome"
-                keyboardType="default"
-                returnKeyType="next"
-                value={nome}
-                onChangeText={t => handleChange('nome',t)}
-            />
-            <TextInput
-                placeholder="Latitude"
-                keyboardType="default"
-                returnKeyType="next"
-                value={latitude}
-                onChangeText={t => handleChange('latitude', t)}
-            />
-            <TextInput
-                placeholder="Longitude"
-                keyboardType="default"
-                returnKeyType="next"
-                value={longitude}
-                onChangeText={t => handleChange('longitude', t)}
-            />
-            <TextInput
-                placeholder="Descricao"
-                keyboardType="default"
-                returnKeyType="next"
-                value={descricao}
-                onChangeText={t => handleChange('descricao',t)}
-            />
-            <MyButton text="Salvar" onClick={salvar} />
-            {uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
+                <TextInput
+                    placeholder="Nome"
+                    keyboardType="default"
+                    returnKeyType="next"
+                    value={propriedade.nome}
+                    onChangeText={t => handleChange('nome', t)}
+                />
+                <TextInput
+                    placeholder="Latitude"
+                    keyboardType="default"
+                    returnKeyType="next"
+                    value={propriedade.latitude}
+                    onChangeText={t => handleChange('latitude', t)}
+                />
+                <TextInput
+                    placeholder="Longitude"
+                    keyboardType="default"
+                    returnKeyType="next"
+                    value={propriedade.longitude}
+                    onChangeText={t => handleChange('longitude', t)}
+                />
+                <TextInput
+                    placeholder="Descricao"
+                    keyboardType="default"
+                    returnKeyType="next"
+                    value={propriedade.descricao}
+                    onChangeText={t => handleChange('descricao', t)}
+                />
+                <MyButton text="Salvar" onClick={salvar} />
+                {propriedade.uid ? <MyButton text="Excluir" onClick={excluir} /> : null}
             </Div>
         </View>
     );

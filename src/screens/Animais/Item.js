@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import { Button, Div, TextMenor } from './styles';
 
 const Item = ({ item, onPress }) => {
@@ -20,4 +20,4 @@ const Item = ({ item, onPress }) => {
         
     );
 };
-export default Item;
+export default memo(Item);

@@ -5,7 +5,7 @@ import Item from './Item';
 import { Container, FlatList, TextInput } from './styles';
 import AddFloatButton from '../../components/AddFloatButton';
 import { Picker } from '@react-native-picker/picker';
-import {filters} from './filters';
+import { filters } from './filters';
 
 const Atividades = ({ navigation }) => {
     const [data, setData] = useState([]);
@@ -16,7 +16,7 @@ const Atividades = ({ navigation }) => {
 
     useEffect(() => {
         setData(atividades);
-    }, [atividades]);
+    }, []);
 
     const routeCourse = (item) => {
         navigation.dispatch(
@@ -42,7 +42,7 @@ const Atividades = ({ navigation }) => {
 
     const applyFilter = (filterName, data, value) => {
         if (filters[filterName])
-          setAtividadesTemp(filters[filterName](data, value));
+            setAtividadesTemp(filters[filterName](data, value));
         return data;
     };
 
@@ -51,16 +51,16 @@ const Atividades = ({ navigation }) => {
             <TextInput
                 placeholder="Search"
                 onChangeText={text => {
-                setSearch(text);
-                applyFilter(filtro, data, text);
+                    setSearch(text);
+                    applyFilter(filtro, data, text);
                 }}
             />
-                  <Picker style={{ height: 50, width: 150 }}
-                    selectedValue={filtro}
-                    onValueChange={itemValue => {
+            <Picker style={{ height: 50, width: 150 }}
+                selectedValue={filtro}
+                onValueChange={itemValue => {
                     setFiltro(itemValue);
-                    }}
-                    >
+                }}
+            >
                 <Picker.Item label="Descricao" value="filterByDesc" />
                 <Picker.Item label="Data" value="filterByDate" />
             </Picker>

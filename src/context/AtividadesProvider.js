@@ -10,34 +10,31 @@ export const AtividadeProvider = ({ children }) => {
     const {propriedade} = useContext(AuthContext);
     
     useEffect(() =>{
-            getAtividades();
+        getAtividades();
     }, [atividades]);
 
 
     const getAtividades = async () => {
         try {
-            firestore()
-            .collection("propriedades")
-            .doc(propriedade)
-            .collection("atividades")
-            .orderBy("desc")
-            .onSnapshot(
-                snapShot => {
-                    let data = [];
-                    snapShot.forEach((doc) => {
-                        const val = {
-                            uid: doc.id,
-                            desc: doc.data().desc,
-                            valor: doc.data().valor,
-                            dataSolicitacao: doc.data().dataSolicitacao,
-                            dataFim: doc.data().dataFim,
-                            status: doc.data().status
-                        };
-                        data.push(val)
-                    });
-                    setAtividades(data);
-                }
-            );
+           const snapshot = await firestore()
+              .collection('propriedades')
+                .doc(propriedade)
+                .collection('atividades')
+                .get();
+
+                let data = [];
+                snapshot.forEach((doc) => {
+                    const val = {
+                        uid: doc.id,
+                        desc: doc.data().desc,
+                        valor: doc.data().valor,
+                        dataSolicitacao: doc.data().dataSolicitacao,
+                        dataFim: doc.data().dataFim,
+                        status: doc.data().status,
+                    }
+                    data.push(val);
+                });
+            setAtividades(data);
         } catch (response) {
             console.log('getAtividades:' + response);
         }

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore'
@@ -49,20 +49,24 @@ export const AuthProvider = ({ children }) => {
     }
 }
 
-    const getPropriedadesUser = async() => {
-        try{
-            let documento =  await firestore()
-            .collection('users')
-           .doc(auth().currentUser.uid)
-           .get();
-           
-           setPropriedade(documento.data().propriedade);
-        }
-        catch(error){
-            console.error("AuthProvider: " + error);
-        }
+const getPropriedadesUser = async() => {
+    try{
+      const currentUser = auth().currentUser;
+      if (!currentUser) {
+        throw new Error('No current user');
+      }
+  
+      let documento =  await firestore()
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+      
+      setPropriedade(documento.data().propriedade);
     }
-
+    catch(error){
+      console.error("AuthProvider: " + error);
+    }
+  }
     const signIn = async (email, pass) => {
         try {
             await auth().signInWithEmailAndPassword(email, pass)
@@ -155,25 +159,31 @@ export const AuthProvider = ({ children }) => {
       getUserRole();
       getFuncionarios();
     }
-    }, [auth().currentUser]);
+    }, []);
+
+    const value = {
+        user,
+        role,
+        propriedade,
+        funcionarios,
+        signIn,
+        signUp,
+        resetPassword,
+        storeUserSession,
+        retrieveUserSession,
+        removeUserSession,
+        setUser,
+        setRole,
+        setPropriedade,
+        setFuncionarios,
+        getUserRole,
+        getFuncionarios,
+    }
 
 
     return (
         <AuthContext.Provider
-            value={{
-                signUp,
-                signIn,
-                removeUserSession,
-                retrieveUserSession,
-                storeUserSession,
-                user,
-                resetPassword,
-                propriedade, 
-                role,
-                getUserRole,
-                funcionarios,
-                getFuncionarios
-            }}
+            value={value}
         >
             {children}
         </AuthContext.Provider>
